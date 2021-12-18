@@ -22,14 +22,14 @@ public class GaussJordanCalc {
 
     public void Eliminate(int n) {
         for (int k = 1; k <= n; k++) {
-            initGauss.methodsUtilities.Pivoting(initGauss.A, initGauss.B, initGauss.s, n, k);
+            initGauss.methodsUtilities.Pivoting(initGauss, k);
             if ((initGauss.A[k][k].divide(initGauss.s[k], 20, RoundingMode.DOWN)).abs().compareTo(initGauss.tol) < 0) {
                 initGauss.er = -1;
                 return;
             }
             for (int i = 1; i <= n; i++) {
                 if (i == k) continue;
-                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], 20, RoundingMode.DOWN).stripTrailingZeros();
+                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], 20, RoundingMode.DOWN);
                 for (int j = 1; j <= n; j++) {
                     initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]));
                 }

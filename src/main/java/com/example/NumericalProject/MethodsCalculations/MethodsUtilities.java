@@ -4,39 +4,78 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class MethodsUtilities {
-    public void Pivoting(BigDecimal[][] A, BigDecimal[] B, BigDecimal[] s, int n, int k) {
+    public void Pivoting(InitGauss initGauss, int k) {
         int p = k;
         BigDecimal dummy;
-        BigDecimal z = (A[k][k].divide(s[k], 10, RoundingMode.DOWN)).abs();
-        for (int i = k + 1; i <= n; i++) {
-            dummy = (A[i][k].divide(s[i], 10, RoundingMode.DOWN)).abs();
+        BigDecimal z = (initGauss.A[k][k].divide(initGauss.s[k], 20, RoundingMode.DOWN)).abs();
+        for (int i = k + 1; i <= initGauss.n; i++) {
+            dummy = (initGauss.A[i][k].divide(initGauss.s[i], 20, RoundingMode.DOWN)).abs();
             if (dummy.compareTo(z) > 0) {
                 z = dummy;
                 p = i;
             }
         }
         if (p != k) {
-            for (int i = k; i <= n; i++) {
-                dummy = A[p][i];
-                A[p][i] = A[k][i];
-                A[k][i] = dummy;
+            for (int i = k; i <= initGauss.n; i++) {
+                dummy = initGauss.A[p][i];
+                initGauss.A[p][i] = initGauss.A[k][i];
+                initGauss.A[k][i] = dummy;
             }
-            dummy = B[p];
-            B[p] = B[k];
-            B[k] = dummy;
-            dummy = s[p];
-            s[p] = s[k];
-            s[k] = dummy;
+            dummy = initGauss.B[p];
+            initGauss.B[p] = initGauss.B[k];
+            initGauss.B[k] = dummy;
+            dummy = initGauss.s[p];
+            initGauss.s[p] = initGauss.s[k];
+            initGauss.s[k] = dummy;
         }
     }
-    public void Substitute(BigDecimal[][] A, BigDecimal[] B, BigDecimal[] x, int n) {
-        x[n] = B[n].divide(A[n][n], 10, RoundingMode.DOWN);
-        for (int i = n - 1; i >= 1; i--) {
-            BigDecimal sum = BigDecimal.valueOf(0);
-            for (int j = i + 1; j <= n; j++) {
-                sum = sum.add(A[i][j].multiply(x[j]));
+
+    public void LUPivoting(InitGauss initGauss, int k) {
+        int p = k;
+        BigDecimal dummy;
+        BigDecimal z = (initGauss.A[initGauss.o[k].intValue()][k].divide(initGauss.s[initGauss.o[k].intValue()], 20, RoundingMode.DOWN)).abs();
+        for (int i = k + 1; i <= initGauss.n; i++) {
+            dummy = (initGauss.A[initGauss.o[i].intValue()][k].divide(initGauss.s[initGauss.o[i].intValue()], 20, RoundingMode.DOWN)).abs();
+            if (dummy.compareTo(z) > 0) {
+                z = dummy;
+                p = i;
             }
-            x[i] = (B[i].subtract(sum)).divide(A[i][i], 10, RoundingMode.DOWN);
         }
+        dummy = initGauss.o[p];
+        initGauss.o[p] = initGauss.o[k];
+        initGauss.o[k] = dummy;
+    }
+
+    public void BackwardSubstitute(InitGauss initGauss) {
+        initGauss.x[initGauss.n] = initGauss.B[initGauss.n].divide(initGauss.A[initGauss.n][initGauss.n], 20, RoundingMode.DOWN);
+        for (int i = initGauss.n - 1; i >= 1; i--) {
+            BigDecimal sum = BigDecimal.valueOf(0);
+            for (int j = i + 1; j <= initGauss.n; j++) {
+                sum = sum.add(initGauss.A[i][j].multiply(initGauss.x[j]));
+            }
+            initGauss.x[i] = (initGauss.B[i].subtract(sum)).divide(initGauss.A[i][i], 20, RoundingMode.DOWN);
+        }
+    }
+
+    public void LUSubstitute(InitGauss initGauss) {
+        initGauss.y[initGauss.o[1].intValue()] = initGauss.B[initGauss.o[1].intValue()];
+        for (int i = 2; i <= initGauss.n; i++) {
+            BigDecimal sum = initGauss.B[initGauss.o[i].intValue()];
+            for (int j = 1; j <= i - 1; j++) {
+                sum = sum.subtract(initGauss.A[initGauss.o[i].intValue()][j].multiply(initGauss.y[initGauss.o[j].intValue()]));
+            }
+            initGauss.y[initGauss.o[i].intValue()] = sum;
+        }
+        initGauss.print.VectorToString(initGauss.tol, initGauss.y, initGauss.n);
+
+        initGauss.x[initGauss.n] = initGauss.y[initGauss.o[initGauss.n].intValue()].divide(initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n], 20, RoundingMode.DOWN);
+        for (int i = initGauss.n - 1; i >= 1; i--) {
+            BigDecimal sum = BigDecimal.ZERO;
+            for (int j = i + 1; j <= initGauss.n; j++) {
+                sum = sum.add(initGauss.A[initGauss.o[i].intValue()][j].multiply(initGauss.x[j]));
+            }
+            initGauss.x[i] = (initGauss.y[initGauss.o[i].intValue()].subtract(sum)).divide(initGauss.A[initGauss.o[i].intValue()][i], 20, RoundingMode.DOWN);
+        }
+        initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
     }
 }

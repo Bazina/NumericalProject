@@ -15,21 +15,21 @@ public class NaiveGaussCalc {
         initGauss.gauss();
         Eliminate(initGauss.n);
         if (initGauss.er != -1) {
-            initGauss.methodsUtilities.Substitute(initGauss.A, initGauss.B, initGauss.x, initGauss.n);
+            initGauss.methodsUtilities.BackwardSubstitute(initGauss);
             initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
         }
     }
 
     public void Eliminate(int n) {
         for (int k = 1; k <= n - 1; k++) {
-            initGauss.methodsUtilities.Pivoting(initGauss.A, initGauss.B, initGauss.s, n, k);
+            initGauss.methodsUtilities.Pivoting(initGauss, k);
             if ((initGauss.A[k][k].divide(initGauss.s[k], 20, RoundingMode.DOWN)).abs().compareTo(initGauss.tol) < 0) {
                 initGauss.er = -1;
                 return;
             }
             for (int i = k + 1; i <= n; i++) {
                 if (i == k) continue;
-                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], 20, RoundingMode.DOWN).stripTrailingZeros();
+                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], 20, RoundingMode.DOWN);
                 for (int j = k; j <= n; j++) {
                     initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]));
                 }
