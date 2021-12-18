@@ -26,7 +26,7 @@ public class MainController implements Initializable {
     private AnchorPane opacityPane, drawerPane , MethodPane , UserManualPane;
 
     @FXML
-    private JFXButton NaiveButton , JordanButton , UserButton ;
+    private JFXButton NaiveButton , JordanButton , LUButton ,JacobiButton , SeidelButton , UserButton ;
 
     private AnchorPane CurrentMethodPane ;
 
@@ -48,6 +48,11 @@ public class MainController implements Initializable {
         JordanButton.setOnMouseClicked(e -> {
             MethodPane.getChildren().remove(0);
             CurrentMethodPane = MakePane("/Methods/GaussJordan.fxml");
+            MethodPane.getChildren().add(CurrentMethodPane) ;
+        });
+        LUButton.setOnMouseClicked(e -> {
+            MethodPane.getChildren().remove(0);
+            CurrentMethodPane = MakePane("/Methods/LUDecomposition.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
 
