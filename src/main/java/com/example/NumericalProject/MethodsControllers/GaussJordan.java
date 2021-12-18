@@ -24,5 +24,7 @@ public class GaussJordan implements Initializable {
     public void Calculate(){
         System.out.println("Gauss Jordan");
         System.out.println(SigFigs.getText());
+        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(new InitGauss(new Print(), new MethodsUtilities()));
+        gaussJordanCalc.GaussJordan();
     }
 }

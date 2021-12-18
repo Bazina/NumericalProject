@@ -6,7 +6,6 @@ import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Print;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -25,6 +24,8 @@ public class NaiveGauss implements Initializable {
     public void Calculate(){
         System.out.println("Naive Gauss");
         System.out.println(SigFigs.getText());
+        NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(new InitGauss(new Print(), new MethodsUtilities()));
+        naiveGaussCalc.NaiveGauss();
     }
 
 }
