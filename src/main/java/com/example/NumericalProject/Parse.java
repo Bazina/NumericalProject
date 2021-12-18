@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Parse {
-    public static void main(String[] args) {
+    public static Map<String, ArrayList<BigDecimal>> ToEquations(String[] Input) {
+
         Map<String, ArrayList<BigDecimal>> linearEqn = new HashMap<>();
         Set<String> variablesSet = new HashSet<>();
-        String[] Eqns = new String[]{"-6x - 4y-9z=0", "3y - 6z = -9", "3x + 7y - 100z = 55"};
-        for (String Eqn : Eqns) {
+
+        for (String Eqn : Input) {
             var y = Eqn.split("[0-9+-= ]+");
             for (String x : y) {
                 if (!Objects.equals(x, "")) {
@@ -17,7 +18,7 @@ public class Parse {
             }
         }
         ArrayList<BigDecimal> B = new ArrayList<>();
-        for (String Eqn : Eqns) {
+        for (String Eqn : Input) {
             if (Eqn.contains("-")) Eqn = EqnHandler(Eqn);
             for (String variable : variablesSet) {
                 if (!Eqn.contains(variable)) {
@@ -50,13 +51,7 @@ public class Parse {
                 linearEqn.put(variable, old);
             }
         }
-        for (Map.Entry<String, ArrayList<BigDecimal>> entry : linearEqn.entrySet()) {
-            ArrayList<BigDecimal> nums = entry.getValue();
-            System.out.println(entry.getKey());
-            for (BigDecimal num : nums) {
-                System.out.println(num);
-            }
-        }
+        return linearEqn;
     }
 
     public static String EqnHandler(String x) {

@@ -30,10 +30,6 @@ public class Utilities {
         TranslateTransition translateTransition1=new TranslateTransition(Duration.seconds(time),Node);
         translateTransition1.setByX(XVal);
         translateTransition1.play();
-
-        translateTransition1.setOnFinished(e ->{
-            closing = false ;
-        });
     }
 
     public static void RotateTransition(double time, double From, double To, Node Node){
