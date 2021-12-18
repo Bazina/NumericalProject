@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.LUDecomposition">
+<AnchorPane fx:id="NaivePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.GaussSeidel">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="15.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="LU Decomposition">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Gauss Seidel">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -30,28 +30,27 @@
                <font>
                   <Font size="20.0" />
                </font></TextArea>
-            <HBox prefHeight="36.0" prefWidth="350.0">
+            <HBox prefHeight="48.0" prefWidth="350.0">
                <children>
-                  <Label prefHeight="47.0" prefWidth="151.0" text="Output Form:">
+                  <Label prefHeight="50.0" prefWidth="140.0" text="Initial Guesses :">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="Forms" focusColor="#064663" prefHeight="46.0" prefWidth="230.0" promptText="Choose One, Please" unFocusColor="#064663" viewOrder="1.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="45.0" prefWidth="350.0">
-               <children>
-                  <Label prefHeight="41.0" prefWidth="264.0" text="No Of Significt Figures:">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="SigFigs" prefHeight="45.0" prefWidth="200.0">
+                  <TextField fx:id="InitialGuess" prefHeight="43.0" prefWidth="200.0" promptText="eg: 1 2 2">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="350.0">
+               <children>
+                  <JFXComboBox fx:id="ChosenCondition" focusColor="#064663" prefHeight="36.0" prefWidth="140.0" promptText="Stopping Condition" unFocusColor="#064663" viewOrder="1.0" />
+                  <TextField fx:id="Condition" prefHeight="43.0" prefWidth="200.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font></TextField>
                </children>
             </HBox>
             <JFXButton fx:id="Calc" onMouseClicked="#Calculate" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #6998AB;" text="Calculate">

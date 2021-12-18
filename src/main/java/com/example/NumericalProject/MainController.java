@@ -33,7 +33,6 @@ public class MainController implements Initializable {
     @FXML
     private DialogPane UserManual ;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -53,6 +52,16 @@ public class MainController implements Initializable {
         LUButton.setOnMouseClicked(e -> {
             MethodPane.getChildren().remove(0);
             CurrentMethodPane = MakePane("/Methods/LUDecomposition.fxml");
+            MethodPane.getChildren().add(CurrentMethodPane) ;
+        });
+        JacobiButton.setOnMouseClicked(e -> {
+            MethodPane.getChildren().remove(0);
+            CurrentMethodPane = MakePane("/Methods/JacobiIteration.fxml");
+            MethodPane.getChildren().add(CurrentMethodPane) ;
+        });
+        SeidelButton.setOnMouseClicked(e -> {
+            MethodPane.getChildren().remove(0);
+            CurrentMethodPane = MakePane("/Methods/GaussSeidel.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
 

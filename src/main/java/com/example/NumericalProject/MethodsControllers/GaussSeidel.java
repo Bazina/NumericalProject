@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class JacobiIteration implements Initializable {
+public class GaussSeidel implements Initializable {
     @FXML
     private JFXComboBox<String> ChosenCondition ;
     @FXML
