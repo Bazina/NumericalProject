@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -10,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.NumericalProject.MethodsControllers.GaussJordan">
+<AnchorPane fx:id="NaivePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.LUDecomposition">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="50.0" prefWidth="350.0" text="Gauss Jordan">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Jacobi Iteration">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -27,22 +29,13 @@
             <TextArea prefHeight="261.0" prefWidth="350.0">
                <font>
                   <Font size="20.0" />
-               </font>
-            </TextArea>
-            <HBox prefHeight="37.0" prefWidth="350.0">
+               </font></TextArea>
+            <HBox prefHeight="36.0" prefWidth="350.0">
                <children>
-                  <Label prefHeight="58.0" prefWidth="326.0" text="No Of Significt Figures:">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextArea prefHeight="63.0" prefWidth="312.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextArea>
+                  <JFXComboBox fx:id="Forms" focusColor="#064663" prefHeight="46.0" prefWidth="230.0" promptText="Choose One, Please" unFocusColor="#064663" viewOrder="1.0" />
                </children>
             </HBox>
+            <JFXTextField />
             <JFXButton fx:id="Calc" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #6998AB;" text="Calculate">
                <VBox.margin>
                   <Insets top="40.0" />

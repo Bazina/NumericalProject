@@ -58,17 +58,17 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="LU Decomposition">
+                  <JFXButton fx:id="LUButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="LU Decomposition">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Jacobi Iteration">
+                  <JFXButton fx:id="JacobiButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Jacobi Iteration">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Gauss-Seidel">
+                  <JFXButton fx:id="SeidelButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Gauss-Seidel">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
