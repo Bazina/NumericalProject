@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MainController">
+
+   <children>
+      <AnchorPane fx:id="MethodPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <AnchorPane prefHeight="714.0" prefWidth="800.0" style="-fx-background-color: #064663;" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="exit" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="755.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@Images/button.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <JFXButton fx:id="UserButton" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #6998AB;" text="User Manual" AnchorPane.bottomAnchor="550.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane fx:id="UserManualPane" layoutX="50.0" layoutY="50.0" prefHeight="650.0" prefWidth="750.0">
+         <children>
+            <DialogPane fx:id="UserManual" contentText="- Write  2x+y+5z=3b         as   2 1 5 3&#10;&#9;       x+y+3z=2b               1 1 3 2&#10;&#9;     3x+4y+z=b&#9;  &#9;        3 4 1 1&#10;&#10;- Number of variables must equal the number of equations.&#10;&#10;- Coefficients must be numbers (0 or non-existing is allowed)." expanded="true" headerText="Manual Usage" layoutX="166.0" layoutY="191.0" prefHeight="209.0" prefWidth="418.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="191.0">
+               <buttonTypes>
+                  <ButtonType fx:constant="OK" />
+               </buttonTypes>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </DialogPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="opacityPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <AnchorPane fx:id="drawerPane" layoutX="60.0" layoutY="58.0" prefHeight="650.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0">
+         <children>
+            <VBox prefHeight="650.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXButton fx:id="NaiveButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Naive Gauss">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="JordanButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Gauss-Jourdan">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="LU Decomposition">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Jacobi Iteration">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Gauss-Seidel">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="60.0" prefHeight="650.0" prefWidth="50.0" style="-fx-background-color: #EFEFEF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <VBox layoutY="-50.0" prefHeight="302.0" prefWidth="50.0" spacing="10.0">
+               <children>
+                  <ImageView fx:id="menu" fitHeight="50.0" fitWidth="196.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@Images/menu.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/NG.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/GJ.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/LU.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/iteration2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/iteration.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
