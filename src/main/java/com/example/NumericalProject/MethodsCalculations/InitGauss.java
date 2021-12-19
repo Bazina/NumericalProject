@@ -27,9 +27,8 @@ public class InitGauss {
     }
 
     public void gauss() {
-        int i, j = 1;
-        //n = linearEqns.get("B").size();
-        n = 3;
+        int i, j;
+        n = linearEqns.get("B").size();
         A = new BigDecimal[n + 1][n + 1];
         U = new BigDecimal[n + 1][n + 1];
         L = new BigDecimal[n + 1][n + 1];
@@ -39,11 +38,6 @@ public class InitGauss {
         y = new BigDecimal[n + 1];
         o = new BigDecimal[n + 1];
 
-        A = new BigDecimal[][]{{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
-                {BigDecimal.ZERO, BigDecimal.valueOf(5), BigDecimal.valueOf(-1), BigDecimal.valueOf(1)},
-                {BigDecimal.ZERO, BigDecimal.valueOf(2), BigDecimal.valueOf(8), BigDecimal.valueOf(-1)},
-                {BigDecimal.ZERO, BigDecimal.valueOf(-1), BigDecimal.valueOf(1), BigDecimal.valueOf(4)}};
-        B = new BigDecimal[]{BigDecimal.ZERO, BigDecimal.valueOf(10), BigDecimal.valueOf(11), BigDecimal.valueOf(3)};
 
         for (i = 0; i <= n; i++) {
             for (j = 0; j <= n; j++) {
@@ -53,26 +47,26 @@ public class InitGauss {
         B[0] = BigDecimal.ZERO;
 
         i = 1;
-        //for (BigDecimal num : linearEqns.get("B")) {
-        //    B[i] = num;
-        //    i++;
-        //}
+        for (BigDecimal num : linearEqns.get("B")) {
+            B[i] = num;
+            i++;
+        }
 
         i = 1;
         j = 1;
-        //for (Map.Entry<String, ArrayList<BigDecimal>> entry : linearEqns.entrySet()) {
-        //    ArrayList<BigDecimal> nums = entry.getValue();
-        //    if (Objects.equals(entry.getKey(), "B")) continue;
-        //    for (BigDecimal num : nums) {
-        //        A[i][j] = num;
-        //        i++;
-        //        if (j == n + 1) j = 1;
-        //        if (i == n + 1) {
-        //            j++;
-        //            i = 1;
-        //        }
-        //    }
-        //}
+        for (Map.Entry<String, ArrayList<BigDecimal>> entry : linearEqns.entrySet()) {
+            ArrayList<BigDecimal> nums = entry.getValue();
+            if (Objects.equals(entry.getKey(), "B")) continue;
+            for (BigDecimal num : nums) {
+                A[i][j] = num;
+                i++;
+                if (j == n + 1) j = 1;
+                if (i == n + 1) {
+                    j++;
+                    i = 1;
+                }
+            }
+        }
 
         for (i = 0; i <= n; i++) {
             for (j = 0; j <= n; j++) {
