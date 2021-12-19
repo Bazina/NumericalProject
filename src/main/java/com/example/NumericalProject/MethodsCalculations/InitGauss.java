@@ -21,9 +21,9 @@ public class InitGauss {
     public void gauss() {
         n = 3;
         A = new BigDecimal[][]{{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
-                {BigDecimal.ZERO, BigDecimal.valueOf(4), BigDecimal.valueOf(12), BigDecimal.valueOf(-16)},
-                {BigDecimal.ZERO, BigDecimal.valueOf(12), BigDecimal.valueOf(37), BigDecimal.valueOf(-43)},
-                {BigDecimal.ZERO, BigDecimal.valueOf(-16), BigDecimal.valueOf(-43), BigDecimal.valueOf(98)}};
+                {BigDecimal.ZERO, BigDecimal.valueOf(6), BigDecimal.valueOf(15), BigDecimal.valueOf(55)},
+                {BigDecimal.ZERO, BigDecimal.valueOf(15), BigDecimal.valueOf(55), BigDecimal.valueOf(225)},
+                {BigDecimal.ZERO, BigDecimal.valueOf(55), BigDecimal.valueOf(225), BigDecimal.valueOf(979)}};
         U = new BigDecimal[][]{{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
                 {BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
                 {BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
