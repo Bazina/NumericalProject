@@ -108,7 +108,7 @@ public class MainController implements Initializable {
 
                 Utilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
                 Utilities.TranslateTransition(0.5 , -600 , drawerPane);
-                Utilities.RotateTransition(0.3 , 90 , 0 , menu);
+                Utilities.RotateTransition(0.4 , 90 , 0 , menu);
 
             }else{
 
@@ -116,7 +116,7 @@ public class MainController implements Initializable {
                 Utilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
                 opacityPane.setVisible(true);
                 Utilities.TranslateTransition(0.5 , 600 , drawerPane);
-                Utilities.RotateTransition(0.3 , 0 , 90 , menu);
+                Utilities.RotateTransition(0.4 , 0 , 90 , menu);
 
             }
         });
@@ -125,7 +125,7 @@ public class MainController implements Initializable {
 
             Utilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
             Utilities.TranslateTransition(0.5 , -600 , drawerPane);
-            Utilities.RotateTransition(0.3 , 90 , 0 , menu);
+            Utilities.RotateTransition(0.4 , 90 , 0 , menu);
 
         });
     }

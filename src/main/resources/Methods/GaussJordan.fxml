@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextArea prefHeight="261.0" prefWidth="350.0">
+            <TextArea fx:id="Equations" prefHeight="261.0" prefWidth="350.0">
                <font>
                   <Font size="20.0" />
                </font>

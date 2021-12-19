@@ -29,9 +29,5 @@ public class LUDecomposition implements Initializable {
         System.out.println("LU Decomposition");
         System.out.println(Forms.getValue());
         System.out.println(SigFigs.getText());
-        if (Forms.getValue().equalsIgnoreCase("doolittle")) {
-            LUDecompDoolittleCalc luDecompDoolittleCalc = new LUDecompDoolittleCalc(new InitGauss(new Print(), new MethodsUtilities()));
-            luDecompDoolittleCalc.LUDecompDoolittle();
-        }
     }
 }

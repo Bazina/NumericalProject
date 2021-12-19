@@ -4,6 +4,8 @@ import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.util.Duration;
 
 public class Utilities {
