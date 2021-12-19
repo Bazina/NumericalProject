@@ -23,6 +23,27 @@ public class InitGauss {
     }
 
     public void gauss() {
+        //n = linearEqns.get("B").size() - 1;
+        //A = new BigDecimal[n + 1][n + 1];
+        //U = new BigDecimal[n + 1][n + 1];
+        //L = new BigDecimal[n + 1][n + 1];
+        //B = new BigDecimal[n + 1];
+        //s = new BigDecimal[n + 1];
+        //x = new BigDecimal[n + 1];
+        //y = new BigDecimal[n + 1];
+        //o = new BigDecimal[n + 1];
+        //for (Map.Entry<String, ArrayList<BigDecimal>> entry : linearEqns.entrySet()) {
+        //    ArrayList<BigDecimal> nums = entry.getValue();
+        //    System.out.println(entry.getKey());
+        //    for (BigDecimal num : nums) {
+        //        for (int i = 0; i <= n; i++) {
+        //            for (int j = 0; j <= n; j++) {
+        //                if (j == 0 || i == 0) A[i][j] = BigDecimal.ZERO;
+        //                else A[i][j] = num;
+        //            }
+        //        }
+        //    }
+        //}
         n = 3;
         A = new BigDecimal[][]{{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO},
                 {BigDecimal.ZERO, BigDecimal.valueOf(6), BigDecimal.valueOf(15), BigDecimal.valueOf(55)},
