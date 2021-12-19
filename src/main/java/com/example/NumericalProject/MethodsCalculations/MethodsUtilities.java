@@ -2,6 +2,7 @@ package com.example.NumericalProject.MethodsCalculations;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 
 public class MethodsUtilities {
     public void Pivoting(InitGauss initGauss, int k) {
@@ -45,6 +46,41 @@ public class MethodsUtilities {
         initGauss.o[p] = initGauss.o[k];
         initGauss.o[k] = dummy;
     }
+
+    private boolean transformToDominant(int r, boolean[] V, int[] R, InitGauss initGauss) {
+        if (r == initGauss.A.length) {
+            BigDecimal[][] T = new BigDecimal[initGauss.n + 1][initGauss.n + 1];
+            for (int i = 1; i <= R.length; i++) {
+                if (initGauss.n + 1 >= 0) System.arraycopy(initGauss.A[R[i]], 1, T[i], 1, initGauss.n + 1);
+            }
+            initGauss.A = T;
+            return true;
+        }
+        for (int i = 1; i <= initGauss.n; i++) {
+            if (V[i])
+                continue;
+            BigDecimal sum = BigDecimal.ZERO;
+            for (int j = 1; j <= initGauss.n; j++)
+                sum = sum.add(initGauss.A[i][j].abs());
+            if (initGauss.A[i][r].abs().multiply(BigDecimal.valueOf(2)).compareTo(sum) > 0) {
+                // diagonally dominant?
+                V[i] = true;
+                R[r] = i;
+                if (transformToDominant(r + 1, V, R, initGauss))
+                    return true;
+                V[i] = false;
+            }
+        }
+        return false;
+    }
+
+    public boolean makeDominant(InitGauss initGauss) {
+        boolean[] visited = new boolean[initGauss.A.length];
+        int[] rows = new int[initGauss.A.length];
+        Arrays.fill(visited, false);
+        return transformToDominant(0, visited, rows, initGauss);
+    }
+
 
     public void BackwardSubstitute(InitGauss initGauss) {
         initGauss.x[initGauss.n] = initGauss.B[initGauss.n].divide(initGauss.A[initGauss.n][initGauss.n], 20, RoundingMode.DOWN);

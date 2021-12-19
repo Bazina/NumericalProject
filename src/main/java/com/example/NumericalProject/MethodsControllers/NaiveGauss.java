@@ -9,7 +9,6 @@ import com.example.NumericalProject.Print;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
@@ -26,8 +25,6 @@ public class NaiveGauss implements Initializable {
     private TextArea Equations ;
     @FXML
     private Text Output;
-    @FXML
-    private AnchorPane NaivePane;
 
     Map<String, ArrayList<BigDecimal>> dummy = null;
     private int Figures ;
@@ -44,11 +41,11 @@ public class NaiveGauss implements Initializable {
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
         try {
-            dummy = Parse.ToEquations(Equations.getText().split("\n")) ;
-        }catch (Exception e){
-            InputHandler.WrongInput("Wrong Data" , "Please Write Right Equations");
+            dummy = Parse.ToEquations(Equations.getText().split("\n"));
+        } catch (Exception e) {
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
         }
-        Figures = Integer.parseInt((SigFigs.getText().strip())) ;
+        Figures = Integer.parseInt((SigFigs.getText().strip()));
 
         InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
         initGauss.setSigFigs(Figures);
