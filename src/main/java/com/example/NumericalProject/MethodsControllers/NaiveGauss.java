@@ -40,9 +40,12 @@ public class NaiveGauss implements Initializable {
         System.out.println(SigFigs.getText());
         System.out.println(Equations.getText());
 
-        if(InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
+        Map<String, ArrayList<BigDecimal>> dummy = null;
 
-
+        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
+        InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+        NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(initGauss);
+        naiveGaussCalc.NaiveGauss();
     }
 
 }
