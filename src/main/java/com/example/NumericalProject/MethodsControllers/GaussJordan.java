@@ -30,7 +30,5 @@ public class GaussJordan implements Initializable {
         System.out.println(Equations.getText());
 
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
-        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(new InitGauss(new Print(), new MethodsUtilities()));
-        gaussJordanCalc.GaussJordan();
     }
 }

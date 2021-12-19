@@ -27,23 +27,22 @@ import java.util.ResourceBundle;
 public class NaiveGauss implements Initializable {
 
     @FXML
-    private TextField SigFigs;
+    private TextField SigFigs ;
     @FXML
-    private TextArea Equations;
+    private TextArea Equations ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void Calculate() {
+    public void Calculate(){
         System.out.println("Naive Gauss");
         System.out.println(SigFigs.getText());
         System.out.println(Equations.getText());
 
-        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
+        if(InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
-        NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(new InitGauss(new Print(), new MethodsUtilities()));
-        naiveGaussCalc.NaiveGauss();
+
     }
 
 }

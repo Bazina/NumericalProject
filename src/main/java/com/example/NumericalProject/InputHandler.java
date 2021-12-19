@@ -1,5 +1,6 @@
 package com.example.NumericalProject;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -23,16 +24,29 @@ public class InputHandler {
     }
 
     public static Boolean SigsFigs(TextField SigFigs){
+        double num ;
         if(SigFigs.getText().strip().equalsIgnoreCase("")){
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true;
         }
         try {
-            int num = Integer.parseInt(SigFigs.getText().strip()) ;
+            num = Double.parseDouble(SigFigs.getText().strip()) ;
         }catch (Exception e){
             WrongInput("Wrong Data" , "Please Number Of Significant Figures");
             return true ;
         }
+        if(num % 1 != 0){
+            WrongInput("Wrong Data" , "Please Write an Integer in Significant Figures");
+            return true;
+        }
         return false ;
+    }
+
+    public static Boolean ComboBox(JFXComboBox<String> Select , String msg){
+        if(Select.getValue() == null){
+            WrongInput("Missing Data" , msg);
+            return true;
+        }
+        return true;
     }
 }
