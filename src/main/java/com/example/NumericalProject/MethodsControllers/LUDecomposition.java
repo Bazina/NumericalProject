@@ -1,7 +1,7 @@
 package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.MethodsCalculations.InitGauss;
-import com.example.NumericalProject.MethodsCalculations.LUDecompDoolittleCalc;
+import com.example.NumericalProject.MethodsCalculations.LUDecompCalc;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
 import com.example.NumericalProject.Print;
 import com.jfoenix.controls.JFXComboBox;
@@ -29,9 +29,7 @@ public class LUDecomposition implements Initializable {
         System.out.println("LU Decomposition");
         System.out.println(Forms.getValue());
         System.out.println(SigFigs.getText());
-        if (Forms.getValue().equalsIgnoreCase("doolittle")) {
-            LUDecompDoolittleCalc luDecompDoolittleCalc = new LUDecompDoolittleCalc(new InitGauss(new Print(), new MethodsUtilities()));
-            luDecompDoolittleCalc.LUDecompDoolittle();
-        }
+        LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(new InitGauss(new Print(), new MethodsUtilities()));
+        luDecompDoolittleCalc.LUDecomp(Forms.getValue());
     }
 }

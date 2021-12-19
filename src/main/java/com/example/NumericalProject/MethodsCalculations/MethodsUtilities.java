@@ -49,12 +49,36 @@ public class MethodsUtilities {
     public void BackwardSubstitute(InitGauss initGauss) {
         initGauss.x[initGauss.n] = initGauss.B[initGauss.n].divide(initGauss.A[initGauss.n][initGauss.n], 20, RoundingMode.DOWN);
         for (int i = initGauss.n - 1; i >= 1; i--) {
-            BigDecimal sum = BigDecimal.valueOf(0);
+            BigDecimal sum = BigDecimal.ZERO;
             for (int j = i + 1; j <= initGauss.n; j++) {
                 sum = sum.add(initGauss.A[i][j].multiply(initGauss.x[j]));
             }
             initGauss.x[i] = (initGauss.B[i].subtract(sum)).divide(initGauss.A[i][i], 20, RoundingMode.DOWN);
         }
+    }
+
+    public void LUBackwardSubstitute(InitGauss initGauss) {
+        initGauss.x[initGauss.n] = initGauss.y[initGauss.n].divide(initGauss.U[initGauss.n][initGauss.n], 20, RoundingMode.DOWN);
+        for (int i = initGauss.n - 1; i >= 1; i--) {
+            BigDecimal sum = BigDecimal.ZERO;
+            for (int j = i + 1; j <= initGauss.n; j++) {
+                sum = sum.add(initGauss.U[i][j].multiply(initGauss.x[j]));
+            }
+            initGauss.x[i] = (initGauss.y[i].subtract(sum)).divide(initGauss.U[i][i], 20, RoundingMode.DOWN);
+        }
+        initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
+    }
+
+    public void LUForwardSubstitute(InitGauss initGauss) {
+        initGauss.y[1] = initGauss.B[1].divide(initGauss.L[1][1], 20, RoundingMode.DOWN);
+        for (int i = 2; i <= initGauss.n; i++) {
+            BigDecimal sum = initGauss.B[i];
+            for (int j = 1; j <= i - 1; j++) {
+                sum = sum.subtract(initGauss.L[i][j].multiply(initGauss.y[j]));
+            }
+            initGauss.y[i] = sum.divide(initGauss.L[i][i], 20, RoundingMode.DOWN);
+        }
+        initGauss.print.VectorToString(initGauss.tol, initGauss.y, initGauss.n);
     }
 
     public void LUSubstitute(InitGauss initGauss) {
