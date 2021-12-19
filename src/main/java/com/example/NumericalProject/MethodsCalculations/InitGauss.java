@@ -30,8 +30,8 @@ public class InitGauss {
         int i, j;
         n = linearEqns.get("B").size();
         A = new BigDecimal[n + 1][n + 1];
-        U = new BigDecimal[n + 1][n + 1];
         L = new BigDecimal[n + 1][n + 1];
+        U = new BigDecimal[n + 1][n + 1];
         B = new BigDecimal[n + 1];
         s = new BigDecimal[n + 1];
         x = new BigDecimal[n + 1];
