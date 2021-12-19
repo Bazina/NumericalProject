@@ -1,6 +1,7 @@
 package com.example.NumericalProject.MethodsCalculations;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class LUDecompCalc {
@@ -15,6 +16,11 @@ public class LUDecompCalc {
         switch (type.toLowerCase()) {
             case "doolittle" -> DoolittleDecompose();
             case "crout" -> CroutDecompose();
+            case "cholesky" -> CholeskyDecompose();
+        }
+        if (initGauss.er != -1) {
+            initGauss.print.MatrixToString(initGauss.tol, initGauss.L, initGauss.n);
+            initGauss.print.MatrixToString(initGauss.tol, initGauss.U, initGauss.n);
         }
     }
 
@@ -78,8 +84,42 @@ public class LUDecompCalc {
                 initGauss.U[j][i] = (initGauss.A[j][i].subtract(sum)).divide(initGauss.L[j][j], 20, RoundingMode.DOWN);
             }
         }
-        initGauss.print.MatrixToString(initGauss.tol, initGauss.L, initGauss.n);
-        initGauss.print.MatrixToString(initGauss.tol, initGauss.U, initGauss.n);
+        if (initGauss.er != -1) {
+            initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
+            initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
+        }
+    }
+
+    public void CholeskyDecompose() {
+        MathContext mc = new MathContext(20);
+        for (int i = 1; i <= initGauss.n; i++) {
+            for (int j = 1; j <= initGauss.n; j++) {
+                if (initGauss.A[i][j].compareTo(initGauss.A[j][i]) != 0) {
+                    System.out.println("Not Symmetric");
+                    return;
+                }
+            }
+        }
+        for (int i = 1; i <= initGauss.n; i++) {
+            for (int j = 1; j <= i + 1; j++) {
+                BigDecimal sum = BigDecimal.ZERO;
+                if (j == i) {
+                    for (int k = 1; k <= j; k++) {
+                        sum = sum.add(initGauss.L[j][k].multiply(initGauss.L[j][k]));
+                    }
+                    initGauss.L[j][j] = (initGauss.A[j][j].subtract(sum)).sqrt(mc);
+                } else {
+                    for (int k = 1; k <= j; k++) {
+                        sum = sum.add(initGauss.L[i][k].multiply(initGauss.L[j][k]));
+                    }
+                    initGauss.L[i][j] = (initGauss.A[i][j].subtract(sum)).divide(initGauss.L[j][j], 20, RoundingMode.DOWN);
+                }
+            }
+        }
+        for (int i = 1; i <= initGauss.n; i++)
+            for (int j = 1; j <= initGauss.n; j++)
+                initGauss.U[i][j] = initGauss.L[j][i];
+
         if (initGauss.er != -1) {
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);

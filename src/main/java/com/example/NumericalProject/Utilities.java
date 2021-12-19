@@ -4,15 +4,13 @@ import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.stage.Modality;
 import javafx.util.Duration;
 
 public class Utilities {
-    static boolean closing = false ;
+    static boolean closing = false;
 
     public static void FadeTransition(double time, double From, double To, Node Node) {
-        if(closing) return;
+        if (closing) return;
 
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(time), Node);
         fadeTransition.setFromValue(From);
@@ -20,31 +18,27 @@ public class Utilities {
         fadeTransition.play();
 
         if (Node.isVisible()) {
-            fadeTransition.setOnFinished(e -> {
-                Node.setVisible(false);
-            });
+            fadeTransition.setOnFinished(e -> Node.setVisible(false));
         }
     }
 
-    public static void TranslateTransition(double time, double XVal, Node Node){
-        if(closing) return;
+    public static void TranslateTransition(double time, double XVal, Node Node) {
+        if (closing) return;
 
-        TranslateTransition translateTransition1=new TranslateTransition(Duration.seconds(time),Node);
+        TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(time), Node);
         translateTransition1.setByX(XVal);
         translateTransition1.play();
     }
 
-    public static void RotateTransition(double time, double From, double To, Node Node){
-        if(closing) return;
-        closing = true ;
+    public static void RotateTransition(double time, double From, double To, Node Node) {
+        if (closing) return;
+        closing = true;
 
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(time) , Node) ;
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(time), Node);
         rotateTransition.setFromAngle(From);
         rotateTransition.setToAngle(To);
         rotateTransition.play();
 
-        rotateTransition.setOnFinished(e ->{
-            closing = false ;
-        });
+        rotateTransition.setOnFinished(e -> closing = false);
     }
 }

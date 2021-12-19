@@ -12,7 +12,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 
 import java.io.IOException;
 import java.net.URL;
