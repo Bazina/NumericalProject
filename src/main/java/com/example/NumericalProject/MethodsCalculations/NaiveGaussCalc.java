@@ -18,6 +18,7 @@ public class NaiveGaussCalc {
             initGauss.methodsUtilities.BackwardSubstitute(initGauss);
             initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
         }
+        System.out.println(initGauss.print.printer);
     }
 
     public void Eliminate(InitGauss initGauss) {
