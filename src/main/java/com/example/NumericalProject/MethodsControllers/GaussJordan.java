@@ -10,7 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GaussJordan implements Initializable {
@@ -28,9 +31,11 @@ public class GaussJordan implements Initializable {
         System.out.println("Gauss Jordan");
         System.out.println(SigFigs.getText());
         System.out.println(Equations.getText());
+        Map<String, ArrayList<BigDecimal>> dummy = null;
 
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
-        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(new InitGauss(new Print(), new MethodsUtilities()));
+        InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
         gaussJordanCalc.GaussJordan();
     }
 }

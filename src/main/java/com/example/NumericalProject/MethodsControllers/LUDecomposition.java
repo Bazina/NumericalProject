@@ -10,7 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class LUDecomposition implements Initializable {
@@ -29,7 +32,9 @@ public class LUDecomposition implements Initializable {
         System.out.println("LU Decomposition");
         System.out.println(Forms.getValue());
         System.out.println(SigFigs.getText());
-        LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(new InitGauss(new Print(), new MethodsUtilities()));
+        Map<String, ArrayList<BigDecimal>> dummy = null;
+        InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+        LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(initGauss);
         luDecompDoolittleCalc.LUDecomp(Forms.getValue());
     }
 }
