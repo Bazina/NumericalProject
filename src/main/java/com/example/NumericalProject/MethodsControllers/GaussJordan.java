@@ -1,12 +1,9 @@
 package com.example.NumericalProject.MethodsControllers;
 
-import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
-import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.Print;
-import com.jfoenix.controls.JFXButton;
+import com.example.NumericalProject.InputHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -15,6 +12,8 @@ import java.util.ResourceBundle;
 public class GaussJordan implements Initializable {
     @FXML
     private TextField SigFigs ;
+    @FXML
+    private TextArea Equations ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -24,7 +23,8 @@ public class GaussJordan implements Initializable {
     public void Calculate(){
         System.out.println("Gauss Jordan");
         System.out.println(SigFigs.getText());
-        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(new InitGauss(new Print(), new MethodsUtilities()));
-        gaussJordanCalc.GaussJordan();
+        System.out.println(Equations.getText());
+
+        if(InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
     }
 }

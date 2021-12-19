@@ -4,6 +4,8 @@ import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.util.Duration;
 
 public class Utilities {
@@ -30,10 +32,6 @@ public class Utilities {
         TranslateTransition translateTransition1=new TranslateTransition(Duration.seconds(time),Node);
         translateTransition1.setByX(XVal);
         translateTransition1.play();
-
-        translateTransition1.setOnFinished(e ->{
-            closing = false ;
-        });
     }
 
     public static void RotateTransition(double time, double From, double To, Node Node){
