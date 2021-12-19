@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="NaivePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.JacobiIteration">
+<AnchorPane fx:id="NaivePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.JacobiIteration">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>

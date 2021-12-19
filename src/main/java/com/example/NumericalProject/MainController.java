@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,18 +24,23 @@ public class MainController implements Initializable {
     private ImageView exit , menu ;
 
     @FXML
-    private AnchorPane opacityPane, drawerPane , MethodPane , UserManualPane;
+    private AnchorPane opacityPane, drawerPane , MethodPane , UserManualPane , CurrentMethodPane;
 
     @FXML
     private JFXButton NaiveButton , JordanButton , LUButton ,JacobiButton , SeidelButton , UserButton , LastButton;
 
-    private AnchorPane CurrentMethodPane ;
-
     @FXML
     private DialogPane UserManual ;
 
+    @FXML
+    private ScrollPane Scroll ;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Scroll.resize(Scroll.getWidth(),1000000);
 
         CurrentMethodPane = MakePane("/Methods/NaiveGauss.fxml");
         MethodPane.getChildren().add(CurrentMethodPane) ;

@@ -19,8 +19,8 @@ public class LUDecompCalc {
             case "cholesky" -> CholeskyDecompose();
         }
         if (initGauss.er != -1) {
-            initGauss.print.MatrixToString(initGauss.tol, initGauss.L, initGauss.n);
-            initGauss.print.MatrixToString(initGauss.tol, initGauss.U, initGauss.n);
+            initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.L, initGauss.n);
+            initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.U, initGauss.n);
         }
     }
 
@@ -46,8 +46,8 @@ public class LUDecompCalc {
                 for (int j = k + 1; j <= initGauss.n; j++) {
                     initGauss.A[initGauss.o[i].intValue()][j] = initGauss.A[initGauss.o[i].intValue()][j].subtract(factor.multiply(initGauss.A[initGauss.o[k].intValue()][j]));
                 }
-                initGauss.print.MatrixToString(initGauss.tol, initGauss.A, initGauss.n);
-                initGauss.print.VectorToString(initGauss.tol, initGauss.B, initGauss.n);
+                initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.A, initGauss.n);
+                initGauss.print.VectorToString(initGauss.SigFigs, initGauss.B, initGauss.n);
             }
         }
         if (((initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n].abs()).divide(initGauss.s[initGauss.o[initGauss.n].intValue()], 20, RoundingMode.DOWN)).compareTo(initGauss.tol) < 0) {
@@ -55,7 +55,7 @@ public class LUDecompCalc {
         }
         if (initGauss.er != -1) {
             initGauss.methodsUtilities.LUSubstitute(initGauss);
-            initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
         }
     }
 

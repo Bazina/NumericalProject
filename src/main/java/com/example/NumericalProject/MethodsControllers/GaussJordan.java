@@ -1,6 +1,5 @@
 package com.example.NumericalProject.MethodsControllers;
 
-import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
 import com.example.NumericalProject.MethodsCalculations.InitGauss;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
@@ -33,7 +32,6 @@ public class GaussJordan implements Initializable {
         System.out.println(Equations.getText());
         Map<String, ArrayList<BigDecimal>> dummy = null;
 
-        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
         InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
         GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
         gaussJordanCalc.GaussJordan();

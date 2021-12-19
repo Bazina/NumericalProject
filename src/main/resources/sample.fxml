@@ -5,16 +5,20 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MainController">
-
+<AnchorPane maxHeight="1.7976931348623157E308" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MainController">
    <children>
-      <AnchorPane fx:id="MethodPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <ScrollPane fx:id="Scroll" layoutX="50.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <content>
+            <AnchorPane fx:id="MethodPane" maxWidth="1.7976931348623157E308" prefHeight="650.0" prefWidth="750.0" />
+         </content>
+      </ScrollPane>
       <AnchorPane prefHeight="714.0" prefWidth="800.0" style="-fx-background-color: #064663;" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="exit" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="755.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -22,8 +26,9 @@
                   <Image url="@Images/button.png" />
                </image>
             </ImageView>
-         </children></AnchorPane>
-      <JFXButton fx:id="UserButton" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #6998AB;" text="User Manual" AnchorPane.bottomAnchor="550.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="UserButton" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #6998AB;" text="User Manual" AnchorPane.bottomAnchor="560.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

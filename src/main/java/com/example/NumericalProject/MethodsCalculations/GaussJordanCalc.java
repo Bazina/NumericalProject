@@ -16,7 +16,7 @@ public class GaussJordanCalc {
         Eliminate(initGauss.n);
         if (initGauss.er != -1) {
             if (initGauss.n >= 0) System.arraycopy(initGauss.B, 1, initGauss.x, 1, initGauss.n);
-            initGauss.print.VectorToString(initGauss.tol, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
         }
     }
 
@@ -34,8 +34,8 @@ public class GaussJordanCalc {
                     initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]));
                 }
                 initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]));
-                initGauss.print.MatrixToString(initGauss.tol, initGauss.A, n);
-                initGauss.print.VectorToString(initGauss.tol, initGauss.B, n);
+                initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.A, n);
+                initGauss.print.VectorToString(initGauss.SigFigs, initGauss.B, n);
             }
         }
         if (initGauss.A[n][n].divide(initGauss.s[n], 20, RoundingMode.DOWN).abs().compareTo(initGauss.tol) < 0) {
@@ -49,7 +49,7 @@ public class GaussJordanCalc {
                 if (i == j) initGauss.A[i][j] = BigDecimal.valueOf(1);
             }
         }
-        initGauss.print.MatrixToString(initGauss.tol, initGauss.A, initGauss.n);
-        initGauss.print.VectorToString(initGauss.tol, initGauss.B, initGauss.n);
+        initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.A, initGauss.n);
+        initGauss.print.VectorToString(initGauss.SigFigs, initGauss.B, initGauss.n);
     }
 }

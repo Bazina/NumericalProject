@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 
 public class InputHandler {
-    private static void WrongInput(String title ,String msg){
+    public static void WrongInput(String title ,String msg){
         Alert.AlertType type = Alert.AlertType.WARNING ;
         Alert alert = new Alert(type , msg) ;
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -20,6 +20,7 @@ public class InputHandler {
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true ;
         }
+
         return false ;
     }
 
