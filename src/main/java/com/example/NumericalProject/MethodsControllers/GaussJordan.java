@@ -1,13 +1,17 @@
 package com.example.NumericalProject.MethodsControllers;
 
+import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
 import com.example.NumericalProject.MethodsCalculations.InitGauss;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
+import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
+import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -16,10 +20,17 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GaussJordan implements Initializable {
+
+    Map<String, ArrayList<BigDecimal>> dummy = null;
     @FXML
     private TextField SigFigs;
     @FXML
     private TextArea Equations;
+    @FXML
+    private Text Output;
+
+    private InitGauss initGauss;
+    private int Figures;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,13 +38,28 @@ public class GaussJordan implements Initializable {
     }
 
     public void Calculate() {
-        System.out.println("Gauss Jordan");
-        System.out.println(SigFigs.getText());
-        System.out.println(Equations.getText());
-        Map<String, ArrayList<BigDecimal>> dummy = null;
 
-        InitGauss initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-        GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
-        gaussJordanCalc.GaussJordan();
+        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
+
+        try {
+            dummy = Parse.ToEquations(Equations.getText().split("\n"));
+        } catch (Exception e) {
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            return;
+        }
+        Figures = Integer.parseInt((SigFigs.getText().strip()));
+
+        try {
+            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+            initGauss.setSigFigs(Figures);
+            GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
+            gaussJordanCalc.GaussJordan();
+        } catch (Exception e) {
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            return ;
+        }
+
+        Output.setText(initGauss.getPrint().getPrinter());
     }
+
 }
