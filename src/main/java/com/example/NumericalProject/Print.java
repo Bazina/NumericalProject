@@ -16,7 +16,7 @@ public class Print{
                 if (A[i][j].abs().compareTo(BigDecimal.valueOf(0.001)) < 0) {
                     printer = printer.concat(BigDecimal.valueOf(0).toPlainString() + "\t");
                 } else {
-                    printer = printer.concat(A[i][j].setScale(5, RoundingMode.DOWN).stripTrailingZeros().toPlainString() + "\t");
+                    printer = printer.concat(A[i][j].setScale(initGauss.getSigFigs(), RoundingMode.DOWN).stripTrailingZeros().toPlainString() + "\t");
                 }
                 if (j == initGauss.getN()) printer = printer.concat("\t|");
             }
@@ -31,7 +31,7 @@ public class Print{
             if (B[i].abs().compareTo(BigDecimal.valueOf(0.001)) < 0) {
                 printer = printer.concat(BigDecimal.valueOf(0).toPlainString() + "  ");
             } else {
-                printer = printer.concat(B[i].setScale(5, RoundingMode.DOWN).stripTrailingZeros().toPlainString());
+                printer = printer.concat(B[i].setScale(initGauss.getSigFigs(), RoundingMode.DOWN).stripTrailingZeros().toPlainString());
             }
         }
         printer = printer.concat("]\n");

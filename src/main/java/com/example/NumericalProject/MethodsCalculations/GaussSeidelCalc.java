@@ -31,11 +31,11 @@ public class GaussSeidelCalc {
             for (int i = 1; i <= initGauss.n; i++) {
                 BigDecimal sum = initGauss.B[i]; // b_n
                 for (int j = 1; j <= initGauss.n; j++) {
-                    if (j != i) sum = sum.subtract(initGauss.A[i][j].multiply(initGauss.x[j]));
+                    if (j != i) sum = sum.subtract(initGauss.A[i][j].multiply(initGauss.x[j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
                 // Update xi to use in the next
                 // row calculation
-                initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], 3, RoundingMode.DOWN).multiply(sum);
+                initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN).multiply(sum).setScale(initGauss.SigFigs, RoundingMode.DOWN);
             }
 
             initGauss.print.VectorToString(initGauss, initGauss.x);

@@ -109,4 +109,8 @@ public class InitGauss {
     public int getN() {
         return n;
     }
+
+    public int getSigFigs() {
+        return SigFigs;
+    }
 }

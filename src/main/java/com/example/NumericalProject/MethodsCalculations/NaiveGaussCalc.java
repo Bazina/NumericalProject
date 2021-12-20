@@ -33,11 +33,11 @@ public class NaiveGaussCalc {
             }
             for (int i = k + 1; i <= initGauss.n; i++) {
                 if (i == k) continue;
-                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], initGauss.SigFigs, RoundingMode.DOWN);
+                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], initGauss.SigFigs, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 for (int j = k; j <= initGauss.n; j++) {
-                    initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]));
+                    initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
-                initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]));
+                initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 initGauss.print.MatrixToString(initGauss, initGauss.A);
                 initGauss.print.VectorToString(initGauss, initGauss.B);
             }

@@ -41,10 +41,10 @@ public class LUDecompCalc {
                 return;
             }
             for (int i = k + 1; i <= initGauss.n; i++) {
-                BigDecimal factor = initGauss.A[initGauss.o[i].intValue()][k].divide(initGauss.A[initGauss.o[k].intValue()][k], 20, RoundingMode.DOWN);
+                BigDecimal factor = initGauss.A[initGauss.o[i].intValue()][k].divide(initGauss.A[initGauss.o[k].intValue()][k], 20, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 initGauss.A[initGauss.o[i].intValue()][k] = factor;
                 for (int j = k + 1; j <= initGauss.n; j++) {
-                    initGauss.A[initGauss.o[i].intValue()][j] = initGauss.A[initGauss.o[i].intValue()][j].subtract(factor.multiply(initGauss.A[initGauss.o[k].intValue()][j]));
+                    initGauss.A[initGauss.o[i].intValue()][j] = initGauss.A[initGauss.o[i].intValue()][j].subtract(factor.multiply(initGauss.A[initGauss.o[k].intValue()][j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
                 initGauss.print.MatrixToString(initGauss, initGauss.A);
                 initGauss.print.VectorToString(initGauss, initGauss.B);
@@ -54,7 +54,19 @@ public class LUDecompCalc {
             initGauss.er = -1;
         }
         if (initGauss.er != -1) {
-            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
+            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
+                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
+                return;
+            for (int i = 1; i <= initGauss.n; i++) {
+                for (int j = 1; j <= initGauss.n; j++) {
+                    if (j > i) initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    else if (j < i) initGauss.L[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    else {
+                        initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        initGauss.L[i][j] = BigDecimal.ONE;
+                    }
+                }
+            }
             initGauss.methodsUtilities.LUSubstitute(initGauss);
             initGauss.print.VectorToString(initGauss, initGauss.x);
         }
@@ -70,87 +82,85 @@ public class LUDecompCalc {
             for (int i = j; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
                 for (int k = 1; k <= j; k++) {
-                    sum = sum.add(initGauss.L[i][k].multiply(initGauss.U[k][j]));
+                    sum = sum.add(initGauss.L[i][k].multiply(initGauss.U[k][j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
-                initGauss.L[i][j] = initGauss.A[i][j].subtract(sum);
+                initGauss.L[i][j] = initGauss.A[i][j].subtract(sum).setScale(initGauss.SigFigs, RoundingMode.DOWN);
             }
             for (int i = j + 1; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
                 for (int k = 1; k <= initGauss.n; k++) {
-                    sum = sum.add(initGauss.L[j][k].multiply(initGauss.U[k][i]));
+                    sum = sum.add(initGauss.L[j][k].multiply(initGauss.U[k][i])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
                 if (initGauss.L[j][j].compareTo(BigDecimal.ZERO) == 0) {
                     initGauss.er = -1;
                 }
-                initGauss.U[j][i] = (initGauss.A[j][i].subtract(sum)).divide(initGauss.L[j][j], 20, RoundingMode.DOWN);
+                initGauss.U[j][i] = (initGauss.A[j][i].subtract(sum)).divide(initGauss.L[j][j], initGauss.SigFigs, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
             }
         }
         if (initGauss.er != -1) {
-            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
+            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
+                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
+                return;
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
     }
 
     public void CholeskyDecompose() {
-        MathContext mc = new MathContext(20);
+        MathContext mc = new MathContext(initGauss.SigFigs);
         for (int i = 1; i <= initGauss.n; i++) {
             for (int j = 1; j <= initGauss.n; j++) {
                 if (initGauss.A[i][j].compareTo(initGauss.A[j][i]) != 0) {
-                    System.out.println("Not Symmetric");
+                    initGauss.print.setPrinter("Not Symmetric");
                     return;
                 }
             }
         }
         for (int i = 1; i <= initGauss.n; i++) {
+            String newPrinter = initGauss.print.getPrinter();
             for (int j = 1; j <= i; j++) {
                 BigDecimal sum = BigDecimal.ZERO;
                 if (j == i) {
+                    newPrinter = newPrinter.concat("Sum = ");
                     for (int k = 1; k <= j; k++) {
-                        sum = sum.add(initGauss.L[j][k].multiply(initGauss.L[j][k]));
+                        sum = sum.add(initGauss.L[j][k].multiply(initGauss.L[j][k])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        if (k != j)
+                            newPrinter = newPrinter.concat("(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
+                                    + "(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + " + ");
+                        else
+                            newPrinter = newPrinter.concat("(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
+                                    + "(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + "\n");
                     }
                     initGauss.L[j][j] = (initGauss.A[j][j].subtract(sum)).sqrt(mc);
+                    newPrinter = newPrinter.concat("L(" + j + j + ") = " + "Sqrt(" + initGauss.A[j][j].toPlainString() + " - " + sum.toPlainString() + ")" + "\n");
                 } else {
                     for (int k = 1; k <= j; k++) {
-                        sum = sum.add(initGauss.L[i][k].multiply(initGauss.L[j][k]));
+                        sum = sum.add(initGauss.L[i][k].multiply(initGauss.L[j][k])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        if (k != j)
+                            newPrinter = newPrinter.concat("(L(" + i + k + ") = " + initGauss.L[i][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
+                                    + "(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + " + ");
+                        else
+                            newPrinter = newPrinter.concat("(L(" + i + k + ") = " + initGauss.L[i][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
+                                    + "(L(" + j + k + ") = " + initGauss.L[j][k].setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + "\n");
                     }
-                    initGauss.L[i][j] = (initGauss.A[i][j].subtract(sum)).divide(initGauss.L[j][j], 20, RoundingMode.DOWN);
+                    initGauss.L[i][j] = (initGauss.A[i][j].subtract(sum)).divide(initGauss.L[j][j], initGauss.SigFigs, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    newPrinter = newPrinter.concat("( " + initGauss.A[i][j] + " - " + sum + " )" + " / " + initGauss.L[j][j] + "\n");
                 }
+                initGauss.print.setPrinter(newPrinter);
             }
         }
         for (int i = 1; i <= initGauss.n; i++)
             for (int j = 1; j <= initGauss.n; j++)
-                initGauss.U[i][j] = initGauss.L[j][i];
+                initGauss.U[i][j] = initGauss.L[j][i].setScale(initGauss.SigFigs, RoundingMode.DOWN);
 
         if (initGauss.er != -1) {
-            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
+            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
+                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
+                return;
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
     }
 
-    public String CheckConsistencyLU() {
-        BigDecimal[][] tempA = initGauss.A.clone();
-        BigDecimal[] tempB = initGauss.B.clone();
-        String newPrinter = initGauss.print.getPrinter();
-        initGauss.A = initGauss.L.clone();
-        String checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
-        String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-        initGauss.print.setPrinter(newPrinter2);
-        if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
-            initGauss.A = tempA;
-            return checkConsistency;
-        }
-        else {
-            initGauss.A = initGauss.U.clone();
-            initGauss.B = initGauss.y.clone();
-            checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
-            newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-            initGauss.print.setPrinter(newPrinter2);
-            initGauss.A = tempA;
-            initGauss.B = tempB;
-            if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return checkConsistency;
-        }
-        return "Unique Solution";
-    }
+
 }
