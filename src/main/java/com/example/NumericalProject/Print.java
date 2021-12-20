@@ -23,7 +23,7 @@ public class Print{
     }
 
     public void VectorToString(int SigFig, BigDecimal[] B, int n) {
-        printer = printer.concat("\n" + "B = [");
+        printer = printer.concat("\n" + "[");
         for (int i = 1; i <= n; i++) {
             if (i != 1) printer = printer.concat(", ");
             if (B[i].abs().compareTo(BigDecimal.valueOf(0.001)) < 0) {
