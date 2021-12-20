@@ -22,6 +22,7 @@ public class LUDecompCalc {
         if (initGauss.er != -1) {
             initGauss.print.MatrixToString(initGauss, initGauss.L);
             initGauss.print.MatrixToString(initGauss, initGauss.U);
+            initGauss.print.VectorToString(initGauss, initGauss.x);
         }
     }
 
@@ -78,7 +79,6 @@ public class LUDecompCalc {
                     initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
                 return;
             initGauss.methodsUtilities.LUSubstitute(initGauss);
-            initGauss.print.VectorToString(initGauss, initGauss.x);
         }
     }
 

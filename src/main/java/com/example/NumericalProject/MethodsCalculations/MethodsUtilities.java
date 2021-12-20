@@ -86,8 +86,8 @@ public class MethodsUtilities {
         for (int i = 1; i <= initGauss.n; i++) {
             Zeros = 0;
             for (int j = 1; j <= initGauss.n; j++) {
-                if (initGauss.A[i][j].compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0) Zeros++;
-                if (Zeros == initGauss.n && initGauss.B[i].compareTo(BigDecimal.ZERO) == 0) return "Infinity Solutions";
+                if (initGauss.A[i][j].abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0) Zeros++;
+                if (Zeros == initGauss.n && initGauss.B[i].abs().compareTo(BigDecimal.ZERO) == 0) return "Infinity Solutions";
                 else if (Zeros == initGauss.n) return "No Solution";
             }
         }

@@ -24,7 +24,6 @@ public class Parse {
         ArrayList<BigDecimal> B = new ArrayList<>();
         for (String Eqn : Input) {
             ArrayList<BigDecimal> old;
-            Eqn = EqnHandler(Eqn);
             for (String variable : variablesSet) {
                 if (!Eqn.contains(variable)) {
                     if (linearEqn.get(variable) != null) old = linearEqn.get(variable);
