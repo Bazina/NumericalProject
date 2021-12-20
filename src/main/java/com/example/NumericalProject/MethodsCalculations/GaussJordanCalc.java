@@ -27,26 +27,32 @@ public class GaussJordanCalc {
     public void Eliminate(int n) {
         for (int k = 1; k <= n; k++) {
             initGauss.methodsUtilities.Pivoting(initGauss, k);
-            if ((initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs().compareTo(initGauss.tol) < 0) {
+            if ((initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs()
+                    .compareTo(initGauss.tol) < 0) {
                 initGauss.er = -1;
                 return;
             }
             for (int i = 1; i <= n; i++) {
                 if (i == k) continue;
-                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], initGauss.SigFigs, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], initGauss.SigFigs, RoundingMode.DOWN)
+                        .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 for (int j = 1; j <= n; j++) {
-                    initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]))
+                            .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
-                initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]))
+                        .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 initGauss.print.MatrixToString(initGauss, initGauss.A);
                 initGauss.print.VectorToString(initGauss, initGauss.B);
             }
         }
-        if (initGauss.A[n][n].divide(initGauss.s[n], initGauss.SigFigs, RoundingMode.DOWN).abs().compareTo(initGauss.tol) < 0) {
+        if (initGauss.A[n][n].divide(initGauss.s[n], initGauss.SigFigs, RoundingMode.DOWN).abs()
+                .compareTo(initGauss.tol) < 0) {
             initGauss.er = -1;
         }
         for (int i = 1; i <= n; i++) {
-            initGauss.B[i] = initGauss.B[i].divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+            initGauss.B[i] = initGauss.B[i].divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN)
+                    .setScale(initGauss.SigFigs, RoundingMode.DOWN);
         }
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
