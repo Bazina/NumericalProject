@@ -56,7 +56,6 @@ public class NaiveGauss implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
-
         Output.setText(initGauss.getPrint().getPrinter());
     }
 

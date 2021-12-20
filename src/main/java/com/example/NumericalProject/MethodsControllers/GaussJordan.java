@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GaussJordan implements Initializable {
@@ -34,6 +35,7 @@ public class GaussJordan implements Initializable {
     }
 
     public void Calculate() {
+        int figures = 0;
 
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
@@ -43,12 +45,12 @@ public class GaussJordan implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        int figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
         InitGauss initGauss;
         try {
             initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            initGauss.setSigFigs(figures);
+            if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
             GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {
