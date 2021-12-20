@@ -9,21 +9,29 @@ public class Parse {
         Map<String, ArrayList<BigDecimal>> linearEqn = new HashMap<>();
         Set<String> variablesSet = new HashSet<>();
 
-        for (String Eqn : Input) {
-            var y = Eqn.split("[0-9+-= ]+");
-            for (String x : y) {
-                if (!Objects.equals(x, "")) {
-                    variablesSet.add(x);
+        for (int i = 0; i < Input.length; i++) {
+            Input[i] = EqnHandler(Input[i]);
+            String[] Eqn = Input[i].split(" \\+ | = |-");
+            for (String s : Eqn) {
+                var y = s.split("(?=\\D)(?<=\\d)");
+                for (String x : y) {
+                    if (x.matches(".*[a-zA-Z]+.*")) {
+                        variablesSet.add(x);
+                    }
                 }
             }
         }
         ArrayList<BigDecimal> B = new ArrayList<>();
         for (String Eqn : Input) {
+            ArrayList<BigDecimal> old;
             Eqn = EqnHandler(Eqn);
             for (String variable : variablesSet) {
                 if (!Eqn.contains(variable)) {
-                    ArrayList<BigDecimal> old = new ArrayList<>();
                     if (linearEqn.get(variable) != null) old = linearEqn.get(variable);
+                    else {
+                        old = new ArrayList<>();
+                        linearEqn.put(variable, old);
+                    }
                     old.add(BigDecimal.valueOf(0));
                 }
             }
@@ -35,7 +43,7 @@ public class Parse {
                 String variable;
                 BigDecimal num;
 
-                if (newValue.length == 1 && !newValue[0].matches("[a-zA-Z]") && !newValue[0].contains("-")) continue;
+                if (newValue.length == 1 && !newValue[0].matches(".*[a-zA-Z]+.*")) continue;
                 else if (newValue.length != 1) {
                     variable = newValue[1];
                     if (newValue[0].equals("-")) num = BigDecimal.valueOf(-1);
@@ -48,10 +56,12 @@ public class Parse {
                     num = BigDecimal.valueOf(1);
                 }
 
-                ArrayList<BigDecimal> old = new ArrayList<>();
                 if (linearEqn.get(variable) != null) old = linearEqn.get(variable);
+                else {
+                    old = new ArrayList<>();
+                    linearEqn.put(variable, old);
+                }
                 old.add(num);
-                linearEqn.put(variable, old);
             }
         }
         return linearEqn;
