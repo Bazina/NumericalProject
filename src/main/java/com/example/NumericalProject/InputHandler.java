@@ -45,6 +45,6 @@ public class InputHandler {
             WrongInput("Missing Data" , msg);
             return true;
         }
-        return true;
+        return false;
     }
 }

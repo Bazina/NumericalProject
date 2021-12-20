@@ -12,6 +12,7 @@ public class LUDecompCalc {
     }
 
     public void LUDecomp(String type) {
+        System.out.println("HERE");
         initGauss.gauss();
         switch (type.toLowerCase()) {
             case "doolittle" -> DoolittleDecompose();

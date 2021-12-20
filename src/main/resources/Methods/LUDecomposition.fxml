@@ -11,17 +11,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.LUDecomposition">
+<AnchorPane prefHeight="650.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.NumericalProject.MethodsControllers.LUDecomposition">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="650.0" prefWidth="250.0" spacing="15.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="574.0" prefWidth="350.0" spacing="15.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="LU Decomposition">
+            <Label alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="LU Decomposition">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -54,7 +55,7 @@
                   </TextField>
                </children>
             </HBox>
-            <JFXButton fx:id="Calc" onMouseClicked="#Calculate" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #6998AB;" text="Calculate">
+            <JFXButton onMouseClicked="#Calculate" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #6998AB;" text="Calculate">
                <VBox.margin>
                   <Insets top="40.0" />
                </VBox.margin>
@@ -67,5 +68,10 @@
             </JFXButton>
          </children>
       </VBox>
+      <Text fx:id="Output" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="750.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
