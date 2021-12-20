@@ -16,7 +16,7 @@ public class InputHandler {
     }
 
     public static Boolean TextArea(TextArea Equations){
-        if(Equations.getText().strip().equalsIgnoreCase("")){
+        if(Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().split("\n").length == 1){
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true ;
         }
