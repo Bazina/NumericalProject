@@ -26,10 +26,7 @@ public class InputHandler {
 
     public static Boolean SigsFigs(TextField SigFigs){
         double num ;
-        if(SigFigs.getText().strip().equalsIgnoreCase("")){
-            WrongInput("Missing Data" , "Please Write All Inputs");
-            return true;
-        }
+        if (SigFigs.getText().equals("")) return false;
         try {
             num = Double.parseDouble(SigFigs.getText().strip()) ;
         }catch (Exception e){

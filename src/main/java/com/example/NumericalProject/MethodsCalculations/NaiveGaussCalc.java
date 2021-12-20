@@ -14,9 +14,13 @@ public class NaiveGaussCalc {
     public void NaiveGauss() {
         initGauss.gauss();
         Eliminate(initGauss);
+        String checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+        String newPrinter = initGauss.print.getPrinter().concat("\n" + checkConsistency + "\n");
+        initGauss.print.setPrinter(newPrinter);
+        if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return;
         if (initGauss.er != -1) {
             initGauss.methodsUtilities.BackwardSubstitute(initGauss);
-            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss, initGauss.x);
         }
     }
 
@@ -34,8 +38,8 @@ public class NaiveGaussCalc {
                     initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]));
                 }
                 initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]));
-                initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.A, initGauss.n);
-                initGauss.print.VectorToString(initGauss.SigFigs, initGauss.B, initGauss.n);
+                initGauss.print.MatrixToString(initGauss, initGauss.A);
+                initGauss.print.VectorToString(initGauss, initGauss.B);
             }
         }
         if (initGauss.A[initGauss.n][initGauss.n].divide(initGauss.s[initGauss.n], initGauss.SigFigs, RoundingMode.DOWN).abs().compareTo(initGauss.tol) < 0) {

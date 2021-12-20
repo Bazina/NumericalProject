@@ -19,8 +19,8 @@ public class LUDecompCalc {
             case "cholesky" -> CholeskyDecompose();
         }
         if (initGauss.er != -1) {
-            initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.L, initGauss.n);
-            initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.U, initGauss.n);
+            initGauss.print.MatrixToString(initGauss, initGauss.L);
+            initGauss.print.MatrixToString(initGauss, initGauss.U);
         }
     }
 
@@ -46,16 +46,17 @@ public class LUDecompCalc {
                 for (int j = k + 1; j <= initGauss.n; j++) {
                     initGauss.A[initGauss.o[i].intValue()][j] = initGauss.A[initGauss.o[i].intValue()][j].subtract(factor.multiply(initGauss.A[initGauss.o[k].intValue()][j]));
                 }
-                initGauss.print.MatrixToString(initGauss.SigFigs, initGauss.A, initGauss.n);
-                initGauss.print.VectorToString(initGauss.SigFigs, initGauss.B, initGauss.n);
+                initGauss.print.MatrixToString(initGauss, initGauss.A);
+                initGauss.print.VectorToString(initGauss, initGauss.B);
             }
         }
         if (((initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n].abs()).divide(initGauss.s[initGauss.o[initGauss.n].intValue()], 20, RoundingMode.DOWN)).compareTo(initGauss.tol) < 0) {
             initGauss.er = -1;
         }
         if (initGauss.er != -1) {
+            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
             initGauss.methodsUtilities.LUSubstitute(initGauss);
-            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss, initGauss.x);
         }
     }
 
@@ -85,6 +86,7 @@ public class LUDecompCalc {
             }
         }
         if (initGauss.er != -1) {
+            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
@@ -121,8 +123,34 @@ public class LUDecompCalc {
                 initGauss.U[i][j] = initGauss.L[j][i];
 
         if (initGauss.er != -1) {
+            if (CheckConsistencyLU().equals("No Solution") || CheckConsistencyLU().equals("Infinity Solutions")) return;
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
+    }
+
+    public String CheckConsistencyLU() {
+        BigDecimal[][] tempA = initGauss.A.clone();
+        BigDecimal[] tempB = initGauss.B.clone();
+        String newPrinter = initGauss.print.getPrinter();
+        initGauss.A = initGauss.L.clone();
+        String checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+        String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
+        initGauss.print.setPrinter(newPrinter2);
+        if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
+            initGauss.A = tempA;
+            return checkConsistency;
+        }
+        else {
+            initGauss.A = initGauss.U.clone();
+            initGauss.B = initGauss.y.clone();
+            checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+            newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
+            initGauss.print.setPrinter(newPrinter2);
+            initGauss.A = tempA;
+            initGauss.B = tempB;
+            if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return checkConsistency;
+        }
+        return "Unique Solution";
     }
 }

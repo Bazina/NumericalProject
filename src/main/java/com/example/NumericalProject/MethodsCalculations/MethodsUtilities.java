@@ -78,9 +78,21 @@ public class MethodsUtilities {
         boolean[] visited = new boolean[initGauss.A.length];
         int[] rows = new int[initGauss.A.length];
         Arrays.fill(visited, false);
-        return transformToDominant(0, visited, rows, initGauss);
+        return !transformToDominant(0, visited, rows, initGauss);
     }
 
+    public String CheckConsistency(InitGauss initGauss) {
+        int Zeros;
+        for (int i = 1; i <= initGauss.n; i++) {
+            Zeros = 0;
+            for (int j = 1; j <= initGauss.n; j++) {
+                if (initGauss.A[i][j].compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0) Zeros++;
+                if (Zeros == initGauss.n && initGauss.B[i].compareTo(BigDecimal.ZERO) == 0) return "Infinity Solutions";
+                else if (Zeros == initGauss.n) return "No Solution";
+            }
+        }
+        return "Unique Solution";
+    }
 
     public void BackwardSubstitute(InitGauss initGauss) {
         initGauss.x[initGauss.n] = initGauss.B[initGauss.n].divide(initGauss.A[initGauss.n][initGauss.n], 20, RoundingMode.DOWN);
@@ -102,7 +114,7 @@ public class MethodsUtilities {
             }
             initGauss.x[i] = (initGauss.y[i].subtract(sum)).divide(initGauss.U[i][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+        initGauss.print.VectorToString(initGauss, initGauss.x);
     }
 
     public void LUForwardSubstitute(InitGauss initGauss) {
@@ -114,7 +126,7 @@ public class MethodsUtilities {
             }
             initGauss.y[i] = sum.divide(initGauss.L[i][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss.SigFigs, initGauss.y, initGauss.n);
+        initGauss.print.VectorToString(initGauss, initGauss.y);
     }
 
     public void LUSubstitute(InitGauss initGauss) {
@@ -126,7 +138,7 @@ public class MethodsUtilities {
             }
             initGauss.y[initGauss.o[i].intValue()] = sum;
         }
-        initGauss.print.VectorToString(initGauss.SigFigs, initGauss.y, initGauss.n);
+        initGauss.print.VectorToString(initGauss, initGauss.y);
 
         initGauss.x[initGauss.n] = initGauss.y[initGauss.o[initGauss.n].intValue()].divide(initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n], 20, RoundingMode.DOWN);
         for (int i = initGauss.n - 1; i >= 1; i--) {
@@ -136,6 +148,6 @@ public class MethodsUtilities {
             }
             initGauss.x[i] = (initGauss.y[initGauss.o[i].intValue()].subtract(sum)).divide(initGauss.A[initGauss.o[i].intValue()][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+        initGauss.print.VectorToString(initGauss, initGauss.x);
     }
 }

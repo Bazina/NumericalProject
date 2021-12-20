@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NaiveGauss implements Initializable {
@@ -27,14 +28,13 @@ public class NaiveGauss implements Initializable {
     private TextArea Equations;
     @FXML
     private Text Output;
-    private InitGauss initGauss;
-    private int Figures;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     public void Calculate() {
+        int figures = 0;
 
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
@@ -44,11 +44,12 @@ public class NaiveGauss implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        Figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
+        InitGauss initGauss;
         try {
             initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            initGauss.setSigFigs(Figures);
+            if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
             NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(initGauss);
             naiveGaussCalc.NaiveGauss();
         } catch (Exception e) {

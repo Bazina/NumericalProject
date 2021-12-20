@@ -12,6 +12,12 @@ public class GaussSeidelCalc {
 
     public void GaussSeidelInit() {
         initGauss.gauss();
+        if (initGauss.methodsUtilities.makeDominant(initGauss)) {
+            initGauss.print.setPrinter(
+                    "The system isn't diagonally dominant: "
+                            + "The method cannot guarantee convergence.");
+            return;
+        }
         GaussSeidelIterations();
         if (initGauss.er != -1) {
             System.out.println(initGauss.print.getPrinter());
@@ -32,7 +38,7 @@ public class GaussSeidelCalc {
                 initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], 3, RoundingMode.DOWN).multiply(sum);
             }
 
-            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss, initGauss.x);
 
             iterations++;
             if (iterations == 1) continue;

@@ -12,6 +12,12 @@ public class JacobiCalc {
 
     public void JacobiInit() {
         initGauss.gauss();
+        if (initGauss.methodsUtilities.makeDominant(initGauss)) {
+            initGauss.print.setPrinter(
+                    "The system isn't diagonally dominant: "
+                            + "The method cannot guarantee convergence.");
+            return;
+        }
         JacobiIterations();
         if (initGauss.er != -1) {
             System.out.println(initGauss.print.getPrinter());
@@ -32,7 +38,7 @@ public class JacobiCalc {
                 initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], 5, RoundingMode.DOWN).multiply(sum);
             }
 
-            initGauss.print.VectorToString(initGauss.SigFigs, initGauss.x, initGauss.n);
+            initGauss.print.VectorToString(initGauss, initGauss.x);
 
             iterations++;
             previousX = initGauss.x.clone();

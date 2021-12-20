@@ -4,7 +4,6 @@ import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
 import com.example.NumericalProject.MethodsCalculations.InitGauss;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
 import javafx.fxml.FXML;
@@ -29,9 +28,6 @@ public class GaussJordan implements Initializable {
     @FXML
     private Text Output;
 
-    private InitGauss initGauss;
-    private int Figures;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -47,11 +43,12 @@ public class GaussJordan implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        Figures = Integer.parseInt((SigFigs.getText().strip()));
+        int figures = Integer.parseInt((SigFigs.getText().strip()));
 
+        InitGauss initGauss;
         try {
             initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            initGauss.setSigFigs(Figures);
+            initGauss.setSigFigs(figures);
             GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {

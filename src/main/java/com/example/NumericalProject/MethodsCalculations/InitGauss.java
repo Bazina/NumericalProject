@@ -13,7 +13,7 @@ public class InitGauss {
     protected final MethodsUtilities methodsUtilities;
     protected final Map<String, ArrayList<BigDecimal>> linearEqns;
 
-    protected int SigFigs;
+    protected int SigFigs = 4;
     protected BigDecimal tol = BigDecimal.valueOf(0.0001);
     protected double er = 0;
     protected BigDecimal[][] A, U, L;
@@ -90,8 +90,8 @@ public class InitGauss {
                 }
             }
         }
-        print.MatrixToString(SigFigs, A, n);
-        print.VectorToString(SigFigs, B, n);
+        print.MatrixToString(this, A);
+        print.VectorToString(this, B);
     }
 
     public Print getPrint() {
@@ -104,5 +104,9 @@ public class InitGauss {
 
     public void setSigFigs(int sigFigs) {
         SigFigs = sigFigs;
+    }
+
+    public int getN() {
+        return n;
     }
 }
