@@ -62,7 +62,7 @@ public class GaussSeidelCalc {
                 }
             }
 
-            if (stop || iterations == initGauss.Iterations - 1) break;
+            if (stop || iterations == initGauss.Iterations) break;
             previousX = initGauss.x.clone();
         }
     }
