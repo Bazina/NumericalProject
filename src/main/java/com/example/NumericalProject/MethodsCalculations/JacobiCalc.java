@@ -47,11 +47,12 @@ public class JacobiCalc {
             }
 
             iterations++;
-            newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
+            if (iterations == 1) newPrinter = "";
+            if (iterations != initGauss.Iterations + 1)
+                newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
             initGauss.print.setPrinter(newPrinter);
             initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
 
-            previousX = initGauss.x.clone();
             if (iterations == 1) continue;
 
             boolean stop = true;
@@ -62,7 +63,9 @@ public class JacobiCalc {
                     break;
                 }
             }
-            if (stop || iterations == initGauss.Iterations) break;
+
+            if (stop || iterations == initGauss.Iterations + 1) break;
+            previousX = initGauss.x.clone();
         }
     }
 }
