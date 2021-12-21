@@ -89,20 +89,32 @@ public class LUDecompCalc {
         }
 
         for (int j = 1; j <= initGauss.n; j++) {
+            String newPrinter = initGauss.print.getPrinter();
             for (int i = j; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
+                newPrinter = newPrinter.concat("Sum = ");
                 for (int k = 1; k <= j; k++) {
                     sum = sum.add(initGauss.L[i][k].multiply(initGauss.U[k][j]))
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    if (k != j)
+                        newPrinter = newPrinter.concat("L(" + i + k + ")" + " * " + "U(" + k + j + ")" + " + ");
+                    else
+                        newPrinter = newPrinter.concat("L(" + i + k + ")" + " * " + "U(" + k + j + ")" + "\n");
                 }
                 initGauss.L[i][j] = initGauss.A[i][j].subtract(sum)
                         .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                newPrinter = newPrinter.concat("L(" + i + j + ") = " + "U(" + i + j + ")" + " - " + sum + "\n");
             }
             for (int i = j + 1; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
+                newPrinter = newPrinter.concat("Sum = ");
                 for (int k = 1; k <= initGauss.n; k++) {
                     sum = sum.add(initGauss.L[j][k].multiply(initGauss.U[k][i]))
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    if (k != j)
+                        newPrinter = newPrinter.concat("L(" + j + k + ")" + " * " + "U(" + k + j + ")" + " + ");
+                    else
+                        newPrinter = newPrinter.concat("L(" + j + k + ")" + " * " + "U(" + k + j + ")" + "\n");
                 }
                 if (initGauss.L[j][j].compareTo(BigDecimal.ZERO) == 0) {
                     initGauss.er = -1;
@@ -110,6 +122,8 @@ public class LUDecompCalc {
                 initGauss.U[j][i] = (initGauss.A[j][i].subtract(sum))
                         .divide(initGauss.L[j][j], initGauss.SigFigs, RoundingMode.DOWN)
                         .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                newPrinter = newPrinter.concat("U(" + j + i + ") = " + "( " + initGauss.A[j][i] + " - " + sum + " )"
+                        + " / " + initGauss.L[j][j] + "\n");
             }
         }
         if (initGauss.er != -1) {
@@ -138,18 +152,12 @@ public class LUDecompCalc {
                 if (j == i) {
                     newPrinter = newPrinter.concat("Sum = ");
                     for (int k = 1; k <= j; k++) {
-                        sum = sum.add(initGauss.L[j][k]
-                                .multiply(initGauss.L[j][k])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        sum = sum.add(initGauss.L[j][k].multiply(initGauss.L[j][k]))
+                                .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                         if (k != j)
-                            newPrinter = newPrinter.concat("(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
-                                    + "(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + " + ");
+                            newPrinter = newPrinter.concat("L(" + j + k + ")" + " * " + "L(" + j + k + ")" + " + ");
                         else
-                            newPrinter = newPrinter.concat("(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
-                                    + "(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + "\n");
+                            newPrinter = newPrinter.concat("L(" + j + k + ")" + " * " + "L(" + j + k + ")" + "\n");
                     }
                     initGauss.L[j][j] = (initGauss.A[j][j].subtract(sum)).sqrt(mc);
                     newPrinter = newPrinter.concat("L(" + j + j + ") = " + "Sqrt(" +
@@ -159,21 +167,15 @@ public class LUDecompCalc {
                         sum = sum.add(initGauss.L[i][k].multiply(initGauss.L[j][k]))
                                 .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                         if (k != j)
-                            newPrinter = newPrinter.concat("(L(" + i + k + ") = " + initGauss.L[i][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
-                                    + "(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + " + ");
+                            newPrinter = newPrinter.concat("L(" + i + k + ")" + " * " + "L(" + j + k + ")" + " + ");
                         else
-                            newPrinter = newPrinter.concat("(L(" + i + k + ") = " + initGauss.L[i][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")"
-                                    + "(L(" + j + k + ") = " + initGauss.L[j][k]
-                                    .setScale(initGauss.SigFigs, RoundingMode.DOWN).toPlainString() + ")" + "\n");
+                            newPrinter = newPrinter.concat("L(" + i + k + ")" + " * " + "L(" + j + k + ")" + "\n");
                     }
                     initGauss.L[i][j] = (initGauss.A[i][j].subtract(sum))
                             .divide(initGauss.L[j][j], initGauss.SigFigs, RoundingMode.DOWN)
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                    newPrinter = newPrinter.concat("( " + initGauss.A[i][j] + " - " + sum + " )" + " / "
-                            + initGauss.L[j][j] + "\n");
+                    newPrinter = newPrinter.concat("L(" + i + j + ") = " + "( " + initGauss.A[i][j] + " - "
+                            + sum + " )" + " / " + initGauss.L[j][j] + "\n");
 
                 }
                 initGauss.print.setPrinter(newPrinter);

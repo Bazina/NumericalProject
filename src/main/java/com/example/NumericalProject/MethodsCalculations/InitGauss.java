@@ -13,7 +13,7 @@ public class InitGauss {
     protected final MethodsUtilities methodsUtilities;
     protected final Map<String, ArrayList<BigDecimal>> linearEqns;
 
-    protected int SigFigs = 4;
+    protected int SigFigs = 4, Iterations;
     protected BigDecimal tol = BigDecimal.valueOf(0.0001);
     protected double er = 0;
     protected BigDecimal[][] A, U, L;
