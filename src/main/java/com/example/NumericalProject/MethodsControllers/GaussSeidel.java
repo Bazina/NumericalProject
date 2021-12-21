@@ -86,7 +86,6 @@ public class GaussSeidel implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
-
         Output.setText(initGauss.getPrint().getPrinter());
     }
 }

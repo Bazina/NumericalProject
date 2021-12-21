@@ -38,7 +38,7 @@
       </JFXButton>
       <AnchorPane fx:id="UserManualPane" layoutX="50.0" layoutY="50.0" prefHeight="650.0" prefWidth="750.0">
          <children>
-            <DialogPane fx:id="UserManual" contentText="- Write  2x+y+5z=3b         as   2 1 5 3&#10;&#9;       x+y+3z=2b               1 1 3 2&#10;&#9;     3x+4y+z=b&#9;  &#9;        3 4 1 1&#10;&#10;- Number of variables must equal the number of equations.&#10;&#10;- Coefficients must be numbers (0 or non-existing is allowed)." expanded="true" headerText="Manual Usage" layoutX="166.0" layoutY="191.0" prefHeight="209.0" prefWidth="418.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="191.0">
+            <DialogPane fx:id="UserManual" contentText="- Number of variables must equal the number of equations.&#10;&#10;- Coefficients must be numbers (0 or non-existing is allowed).&#10;&#10;- Writing Significant figures is optional" headerText="Manual Usage" layoutX="166.0" layoutY="191.0" prefHeight="209.0" prefWidth="418.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="191.0">
                <buttonTypes>
                   <ButtonType fx:constant="OK" />
                </buttonTypes>
