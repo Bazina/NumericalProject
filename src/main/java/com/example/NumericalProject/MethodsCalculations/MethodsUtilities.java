@@ -100,6 +100,8 @@ public class MethodsUtilities {
         String newPrinter = initGauss.print.getPrinter();
         initGauss.A = initGauss.L.clone();
         String checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+        String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
+        initGauss.print.setPrinter(newPrinter2);
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
             initGauss.A = tempA;
             return checkConsistency;
@@ -108,12 +110,12 @@ public class MethodsUtilities {
             initGauss.A = initGauss.U.clone();
             initGauss.B = initGauss.y.clone();
             checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+            newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
+            initGauss.print.setPrinter(newPrinter2);
             initGauss.A = tempA;
             initGauss.B = tempB;
             if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return checkConsistency;
         }
-        String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-        initGauss.print.setPrinter(newPrinter2);
         return "Unique Solution";
     }
 
