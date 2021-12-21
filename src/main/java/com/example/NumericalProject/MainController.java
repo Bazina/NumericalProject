@@ -40,7 +40,6 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Scroll.resize(Scroll.getWidth(),1000000);
 
         CurrentMethodPane = MakePane("/Methods/NaiveGauss.fxml");
         MethodPane.getChildren().add(CurrentMethodPane) ;
