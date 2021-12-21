@@ -25,24 +25,35 @@ public class JacobiCalc {
     }
 
     public void JacobiIterations() {
-        int iterations = 0, MAX_ITERATIONS = 3;
+        int iterations = 0;
         BigDecimal[] previousX = initGauss.x.clone(); // Prev
+        String newPrinter = initGauss.print.getPrinter();
         while (true) {
             for (int i = 1; i <= initGauss.n; i++) {
                 BigDecimal sum = initGauss.B[i]; // b_n
+                newPrinter = newPrinter.concat("Sum = " + "B(" + i + ")" + " - ");
                 for (int j = 1; j <= initGauss.n; j++) {
-                    if (j != i) sum = sum.subtract(initGauss.A[i][j].multiply(previousX[j]))
-                            .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    if (j != i) {
+                        sum = sum.subtract(initGauss.A[i][j].multiply(previousX[j]))
+                                .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        if (initGauss.n != j)
+                            newPrinter = newPrinter.concat("A(" + i + j + ")" + " * " + "X(" + j + ")" + " - ");
+                        else
+                            newPrinter = newPrinter.concat("A(" + i + j + ")" + " * " + "X(" + j + ")" + "\n");
+                    }
                 }
                 // Update xi to use in the next
                 // row calculation
                 initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN)
                         .multiply(sum).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                newPrinter = newPrinter.concat("X(" + i + ") = " + sum + " / " + initGauss.A[i][i] + "\n");
             }
 
+            iterations++;
+            newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
+            initGauss.print.setPrinter(newPrinter);
             initGauss.print.VectorToString(initGauss, initGauss.x);
 
-            iterations++;
             previousX = initGauss.x.clone();
             if (iterations == 1) continue;
 
@@ -54,7 +65,7 @@ public class JacobiCalc {
                 }
             }
 
-            if (stop || iterations == MAX_ITERATIONS) break;
+            if (stop || iterations == initGauss.Iterations - 1) break;
         }
     }
 }
