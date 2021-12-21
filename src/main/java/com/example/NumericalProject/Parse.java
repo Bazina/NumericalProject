@@ -5,6 +5,9 @@ import java.util.*;
 
 public class Parse {
     public static Map<String, ArrayList<BigDecimal>> ToEquations(String[] Input) {
+        for (int i = 0; i < Input.length ; i++) {
+            Input[i] = Input[i].strip() ;
+        }
 
         Map<String, ArrayList<BigDecimal>> linearEqn = new HashMap<>();
         Set<String> variablesSet = new HashSet<>();
