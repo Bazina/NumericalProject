@@ -39,7 +39,7 @@ public class NaiveGauss implements Initializable {
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
         try {
-            dummy = Parse.ToEquations(Equations.getText().split("\n"));
+            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;

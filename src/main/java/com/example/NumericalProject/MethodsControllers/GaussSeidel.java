@@ -52,16 +52,16 @@ public class GaussSeidel implements Initializable {
         double ConditionNum = Double.parseDouble(ConditionValue.getText().strip());
 
 
-        BigDecimal[] Guess = new BigDecimal[Equations.getText().split("\n").length+1];
+        BigDecimal[] Guess = new BigDecimal[Equations.getText().strip().split("\n").length+1];
         if(InputHandler.InitialGuess(InitialGuess ,Guess)) return;
 
         try{
-            dummy = Parse.ToEquations(Equations.getText().split("\n"));
+            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
         InitGauss initGauss;
         try {
@@ -69,7 +69,7 @@ public class GaussSeidel implements Initializable {
             initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
             initGauss.setX(Guess.clone());
 
-            if(!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
+            if(!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
 
             if(ChosenCondition.getValue().equalsIgnoreCase("iterations")){
                 initGauss.setIterations((int)ConditionNum);

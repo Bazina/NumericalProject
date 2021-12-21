@@ -40,17 +40,17 @@ public class GaussJordan implements Initializable {
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
         try {
-            dummy = Parse.ToEquations(Equations.getText().split("\n"));
+            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
         InitGauss initGauss;
         try {
             initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
+            if (!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
             GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {

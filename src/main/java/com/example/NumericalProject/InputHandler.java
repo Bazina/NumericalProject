@@ -18,7 +18,7 @@ public class InputHandler {
     }
 
     public static Boolean TextArea(TextArea Equations){
-        if(Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().split("\n").length == 1){
+        if(Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().strip().split("\n").length == 1){
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true ;
         }
@@ -69,7 +69,7 @@ public class InputHandler {
     }
 
     public static Boolean InitialGuess(TextField InitialGuess , BigDecimal[] Guess){
-        if(InitialGuess.getText().split(" ").length < Guess.length-1){
+        if(InitialGuess.getText().strip().split(" ").length < Guess.length-1){
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true ;
         }
