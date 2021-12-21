@@ -50,8 +50,10 @@ public class MethodsUtilities {
     private boolean transformToDominant(int r, boolean[] V, int[] R, InitGauss initGauss) {
         if (r == initGauss.A.length) {
             BigDecimal[][] T = new BigDecimal[initGauss.n + 1][initGauss.n + 1];
-            for (int i = 1; i <= R.length; i++) {
-                if (initGauss.n + 1 >= 0) System.arraycopy(initGauss.A[R[i]], 1, T[i], 1, initGauss.n + 1);
+            for (int i = 1; i < R.length; i++) {
+                for (int j = 1; j <= initGauss.n; j++) {
+                    T[i][j] = initGauss.A[R[i]][j];
+                }
             }
             initGauss.A = T;
             return true;
@@ -78,7 +80,7 @@ public class MethodsUtilities {
         boolean[] visited = new boolean[initGauss.A.length];
         int[] rows = new int[initGauss.A.length];
         Arrays.fill(visited, false);
-        return !transformToDominant(0, visited, rows, initGauss);
+        return !transformToDominant(1, visited, rows, initGauss);
     }
 
     public String CheckConsistency(InitGauss initGauss) {
@@ -86,8 +88,10 @@ public class MethodsUtilities {
         for (int i = 1; i <= initGauss.n; i++) {
             Zeros = 0;
             for (int j = 1; j <= initGauss.n; j++) {
-                if (initGauss.A[i][j].abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0) Zeros++;
-                if (Zeros == initGauss.n && initGauss.B[i].abs().compareTo(BigDecimal.ZERO) == 0) return "Infinity Solutions";
+                if (initGauss.A[i][j].abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0)
+                    Zeros++;
+                if (Zeros == initGauss.n && initGauss.B[i].abs().compareTo(BigDecimal.ZERO) == 0)
+                    return "Infinity Solutions";
                 else if (Zeros == initGauss.n) return "No Solution";
             }
         }
@@ -105,8 +109,7 @@ public class MethodsUtilities {
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
             initGauss.A = tempA;
             return checkConsistency;
-        }
-        else {
+        } else {
             initGauss.A = initGauss.U.clone();
             initGauss.B = initGauss.y.clone();
             checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
@@ -114,7 +117,8 @@ public class MethodsUtilities {
             initGauss.print.setPrinter(newPrinter2);
             initGauss.A = tempA;
             initGauss.B = tempB;
-            if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return checkConsistency;
+            if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions"))
+                return checkConsistency;
         }
         return "Unique Solution";
     }

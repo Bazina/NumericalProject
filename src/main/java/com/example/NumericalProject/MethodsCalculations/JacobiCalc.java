@@ -12,6 +12,12 @@ public class JacobiCalc {
 
     public void JacobiInit() {
         initGauss.gauss();
+        if (initGauss.methodsUtilities.makeDominant(initGauss)) {
+            initGauss.print.setPrinter(
+                    "The system isn't diagonally dominant: "
+                            + "The method cannot guarantee convergence.");
+            return;
+        }
         JacobiIterations();
     }
 
@@ -50,7 +56,8 @@ public class JacobiCalc {
 
             boolean stop = true;
             for (int i = 1; i <= initGauss.n; i++) {
-                if (initGauss.x[i].subtract(previousX[i]).abs().compareTo(initGauss.tol) > 0) {
+                if (initGauss.x[i].subtract(previousX[i]).divide(initGauss.x[i],
+                        initGauss.SigFigs, RoundingMode.DOWN).abs().compareTo(initGauss.tol) > 0) {
                     stop = false;
                     break;
                 }
