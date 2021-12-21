@@ -13,24 +13,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="NaivePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.GaussSeidel">
+<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.GaussSeidel">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="610.0" prefWidth="350.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="594.0" prefWidth="350.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
             <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Gauss Seidel">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Jacobi Iteration">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextArea prefHeight="261.0" prefWidth="350.0">
+            <TextArea fx:id="Equations" prefHeight="261.0" prefWidth="350.0">
                <font>
                   <Font size="20.0" />
-               </font></TextArea>
+               </font>
+            </TextArea>
             <HBox prefHeight="48.0" prefWidth="350.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="140.0" text="Initial Guesses :">
@@ -48,10 +49,11 @@
             <HBox prefHeight="36.0" prefWidth="350.0">
                <children>
                   <JFXComboBox fx:id="ChosenCondition" focusColor="#064663" prefHeight="36.0" prefWidth="140.0" promptText="Stopping Condition" unFocusColor="#064663" viewOrder="1.0" />
-                  <TextField fx:id="Condition" prefHeight="43.0" prefWidth="200.0">
+                  <TextField fx:id="ConditionValue" prefHeight="43.0" prefWidth="200.0">
                      <font>
                         <Font size="20.0" />
-                     </font></TextField>
+                     </font>
+                  </TextField>
                </children>
             </HBox>
             <HBox prefHeight="37.0" prefWidth="350.0">
@@ -81,7 +83,7 @@
             </JFXButton>
          </children>
       </VBox>
-      <Text layoutX="14.0" layoutY="623.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="722.0">
+      <Text fx:id="Output" layoutX="8.0" layoutY="611.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="734.1366996765137" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.863300323486328">
          <font>
             <Font size="15.0" />
          </font>
