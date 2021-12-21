@@ -62,7 +62,6 @@ public class JacobiCalc {
                     break;
                 }
             }
-
             if (stop || iterations == initGauss.Iterations) break;
         }
     }
