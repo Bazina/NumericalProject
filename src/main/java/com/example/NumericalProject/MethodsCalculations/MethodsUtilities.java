@@ -139,7 +139,7 @@ public class MethodsUtilities {
             }
             initGauss.x[i] = (initGauss.y[i].subtract(sum)).divide(initGauss.U[i][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.x);
+        initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
     }
 
     public void LUForwardSubstitute(InitGauss initGauss) {
@@ -151,7 +151,7 @@ public class MethodsUtilities {
             }
             initGauss.y[i] = sum.divide(initGauss.L[i][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.y);
+        initGauss.print.VectorToString(initGauss, initGauss.y, "Vector Y");
     }
 
     public void LUSubstitute(InitGauss initGauss) {
@@ -163,7 +163,7 @@ public class MethodsUtilities {
             }
             initGauss.y[initGauss.o[i].intValue()] = sum;
         }
-        initGauss.print.VectorToString(initGauss, initGauss.y);
+        initGauss.print.VectorToString(initGauss, initGauss.y, "Vector Y");
 
         initGauss.x[initGauss.n] = initGauss.y[initGauss.o[initGauss.n].intValue()].divide(initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n], 20, RoundingMode.DOWN);
         for (int i = initGauss.n - 1; i >= 1; i--) {
@@ -173,6 +173,6 @@ public class MethodsUtilities {
             }
             initGauss.x[i] = (initGauss.y[initGauss.o[i].intValue()].subtract(sum)).divide(initGauss.A[initGauss.o[i].intValue()][i], 20, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.x);
+        initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
     }
 }

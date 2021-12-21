@@ -20,7 +20,7 @@ public class NaiveGaussCalc {
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return;
         if (initGauss.er != -1) {
             initGauss.methodsUtilities.BackwardSubstitute(initGauss);
-            initGauss.print.VectorToString(initGauss, initGauss.x);
+            initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
         }
     }
 
@@ -42,8 +42,8 @@ public class NaiveGaussCalc {
                 }
                 initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]))
                         .setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                initGauss.print.MatrixToString(initGauss, initGauss.A);
-                initGauss.print.VectorToString(initGauss, initGauss.B);
+                initGauss.print.MatrixToString(initGauss, initGauss.A, "Matrix A");
+                initGauss.print.VectorToString(initGauss, initGauss.B, "Vector B");
             }
         }
         if (initGauss.A[initGauss.n][initGauss.n].divide(initGauss.s[initGauss.n], initGauss.SigFigs, RoundingMode.DOWN)

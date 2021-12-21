@@ -31,7 +31,7 @@ public class GaussSeidelCalc {
         while (true) {
             for (int i = 1; i <= initGauss.n; i++) {
                 BigDecimal sum = initGauss.B[i]; // b_n
-                newPrinter = newPrinter.concat("Sum = " + "B(" + i + ")" + " - ");
+                newPrinter = newPrinter.concat("\nSum = " + "B(" + i + ")" + " - ");
                 for (int j = 1; j <= initGauss.n; j++) {
                     if (j != i) sum = sum.subtract(initGauss.A[i][j]
                             .multiply(initGauss.x[j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
@@ -50,7 +50,7 @@ public class GaussSeidelCalc {
             iterations++;
             newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
             initGauss.print.setPrinter(newPrinter);
-            initGauss.print.VectorToString(initGauss, initGauss.x);
+            initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
 
             if (iterations == 1) continue;
 

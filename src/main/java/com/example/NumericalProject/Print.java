@@ -8,8 +8,8 @@ import java.math.RoundingMode;
 public class Print{
     private String printer = "";
 
-    public void MatrixToString(InitGauss initGauss, BigDecimal[][] A) {
-        printer = printer.concat("\n");
+    public void MatrixToString(InitGauss initGauss, BigDecimal[][] A, String name) {
+        printer = printer.concat("\n" + name + "\n");
         for (int i = 1; i <= initGauss.getN(); i++) {
             for (int j = 1; j <= initGauss.getN(); j++) {
                 if (j == 1) printer = printer.concat("|\t");
@@ -24,8 +24,8 @@ public class Print{
         }
     }
 
-    public void VectorToString(InitGauss initGauss, BigDecimal[] B) {
-        printer = printer.concat("\n" + "[");
+    public void VectorToString(InitGauss initGauss, BigDecimal[] B, String name) {
+        printer = printer.concat("\n" + name + "\n" + "[");
         for (int i = 1; i <= initGauss.getN(); i++) {
             if (i != 1) printer = printer.concat(", ");
             if (B[i].abs().compareTo(BigDecimal.valueOf(0.001)) < 0) {

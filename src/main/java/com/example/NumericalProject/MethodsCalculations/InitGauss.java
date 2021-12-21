@@ -90,8 +90,8 @@ public class InitGauss {
                 }
             }
         }
-        print.MatrixToString(this, A);
-        print.VectorToString(this, B);
+        print.MatrixToString(this, A, "Matrix A");
+        print.VectorToString(this, B, "Vector B");
     }
 
     public Print getPrint() {

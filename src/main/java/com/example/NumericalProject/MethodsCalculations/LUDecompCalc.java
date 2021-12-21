@@ -19,9 +19,9 @@ public class LUDecompCalc {
             case "cholesky" -> CholeskyDecompose();
         }
         if (initGauss.er != -1) {
-            initGauss.print.MatrixToString(initGauss, initGauss.L);
-            initGauss.print.MatrixToString(initGauss, initGauss.U);
-            initGauss.print.VectorToString(initGauss, initGauss.x);
+            initGauss.print.MatrixToString(initGauss, initGauss.L, "Matrix L");
+            initGauss.print.MatrixToString(initGauss, initGauss.U, "Matrix U");
+            initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
         }
     }
 
@@ -39,7 +39,7 @@ public class LUDecompCalc {
             initGauss.methodsUtilities.LUPivoting(initGauss, k);
             if (((initGauss.A[initGauss.o[k].intValue()][k].abs())
                     .divide(initGauss.s[initGauss.o[k].intValue()], initGauss.SigFigs, RoundingMode.DOWN))
-                    .compareTo(initGauss.tol) < 0) {
+                    .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
                 initGauss.er = -1;
                 return;
             }
@@ -53,30 +53,30 @@ public class LUDecompCalc {
                             .subtract(factor.multiply(initGauss.A[initGauss.o[k].intValue()][j]))
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
                 }
-                initGauss.print.MatrixToString(initGauss, initGauss.A);
-                initGauss.print.VectorToString(initGauss, initGauss.B);
+                initGauss.print.MatrixToString(initGauss, initGauss.A, "Matrix A");
+                initGauss.print.VectorToString(initGauss, initGauss.B, "Vector B");
             }
         }
+        for (int i = 1; i <= initGauss.n; i++) {
+            for (int j = 1; j <= initGauss.n; j++) {
+                if (j > i) initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                else if (j < i)
+                    initGauss.L[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                else {
+                    initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                    initGauss.L[i][j] = BigDecimal.ONE;
+                }
+            }
+        }
+        String temp = initGauss.methodsUtilities.CheckConsistencyLU(initGauss);
+        if (temp.equals("No Solution") || temp.equals("Infinity Solutions"))
+            return;
         if (((initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n].abs())
                 .divide(initGauss.s[initGauss.o[initGauss.n].intValue()], initGauss.SigFigs, RoundingMode.DOWN))
-                .compareTo(initGauss.tol) < 0) {
+                .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
             initGauss.er = -1;
         }
         if (initGauss.er != -1) {
-            for (int i = 1; i <= initGauss.n; i++) {
-                for (int j = 1; j <= initGauss.n; j++) {
-                    if (j > i) initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                    else if (j < i)
-                        initGauss.L[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                    else {
-                        initGauss.U[i][j] = initGauss.A[i][j].setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                        initGauss.L[i][j] = BigDecimal.ONE;
-                    }
-                }
-            }
-            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
-                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
-                return;
             initGauss.methodsUtilities.LUSubstitute(initGauss);
         }
     }
@@ -91,7 +91,7 @@ public class LUDecompCalc {
             String newPrinter = initGauss.print.getPrinter();
             for (int i = j; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
-                newPrinter = newPrinter.concat("Sum = ");
+                newPrinter = newPrinter.concat("\nSum = ");
                 for (int k = 1; k <= j; k++) {
                     sum = sum.add(initGauss.L[i][k].multiply(initGauss.U[k][j]))
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
@@ -106,7 +106,7 @@ public class LUDecompCalc {
             }
             for (int i = j + 1; i <= initGauss.n; i++) {
                 sum = BigDecimal.ZERO;
-                newPrinter = newPrinter.concat("Sum = ");
+                newPrinter = newPrinter.concat("\nSum = ");
                 for (int k = 1; k <= initGauss.n; k++) {
                     sum = sum.add(initGauss.L[j][k].multiply(initGauss.U[k][i]))
                             .setScale(initGauss.SigFigs, RoundingMode.DOWN);
@@ -125,10 +125,10 @@ public class LUDecompCalc {
                         + " / " + initGauss.L[j][j] + "\n");
             }
         }
+        String temp = initGauss.methodsUtilities.CheckConsistencyLU(initGauss);
+        if (temp.equals("No Solution") || temp.equals("Infinity Solutions"))
+            return;
         if (initGauss.er != -1) {
-            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
-                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
-                return;
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
@@ -149,7 +149,7 @@ public class LUDecompCalc {
             for (int j = 1; j <= i; j++) {
                 BigDecimal sum = BigDecimal.ZERO;
                 if (j == i) {
-                    newPrinter = newPrinter.concat("Sum = ");
+                    newPrinter = newPrinter.concat("\nSumL = ");
                     for (int k = 1; k <= j; k++) {
                         sum = sum.add(initGauss.L[j][k].multiply(initGauss.L[j][k]))
                                 .setScale(initGauss.SigFigs, RoundingMode.DOWN);
@@ -162,6 +162,7 @@ public class LUDecompCalc {
                     newPrinter = newPrinter.concat("L(" + j + j + ") = " + "Sqrt(" +
                             initGauss.A[j][j].toPlainString() + " - " + sum.toPlainString() + ")" + "\n");
                 } else {
+                    newPrinter = newPrinter.concat("\nSumU = ");
                     for (int k = 1; k <= j; k++) {
                         sum = sum.add(initGauss.L[i][k].multiply(initGauss.L[j][k]))
                                 .setScale(initGauss.SigFigs, RoundingMode.DOWN);
@@ -184,10 +185,11 @@ public class LUDecompCalc {
             for (int j = 1; j <= initGauss.n; j++)
                 initGauss.U[i][j] = initGauss.L[j][i].setScale(initGauss.SigFigs, RoundingMode.DOWN);
 
+        String temp = initGauss.methodsUtilities.CheckConsistencyLU(initGauss);
+        if (temp.equals("No Solution") || temp.equals("Infinity Solutions"))
+            return;
         if (initGauss.er != -1) {
-            if (initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("No Solution") ||
-                    initGauss.methodsUtilities.CheckConsistencyLU(initGauss).equals("Infinity Solutions"))
-                return;
+
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }
