@@ -29,7 +29,8 @@ public class Print{
         for (int i = 1; i <= initGauss.getN(); i++) {
             if (i != 1) printer = printer.concat(", ");
             if (B[i].abs().compareTo(BigDecimal.valueOf(0.001)) < 0) {
-                printer = printer.concat(BigDecimal.valueOf(0).toPlainString() + "  ");
+                if (i == initGauss.getN()) printer = printer.concat(BigDecimal.valueOf(0).toPlainString());
+                else printer = printer.concat(BigDecimal.valueOf(0).toPlainString() + "  ");
             } else {
                 printer = printer.concat(B[i].setScale(initGauss.getSigFigs(), RoundingMode.DOWN).stripTrailingZeros().toPlainString());
             }
