@@ -62,7 +62,7 @@ public class LUDecomposition implements Initializable {
             LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(initGauss);
             luDecompDoolittleCalc.LUDecomp(Forms.getValue());
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            InputHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
             return;
         }
         Output.setText(initGauss.getPrint().getPrinter());
