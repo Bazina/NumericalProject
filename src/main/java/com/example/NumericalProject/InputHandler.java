@@ -31,7 +31,7 @@ public class InputHandler {
     /***
      * to handle inputs of text area as writing one equation or not writing at all
      * @param Equations the text area to be handled
-     * @return
+     * @return boolean false if there is no errors
      */
     public static Boolean TextArea(TextArea Equations){
         if(Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().strip().split("\n").length == 1){
@@ -44,7 +44,7 @@ public class InputHandler {
     /***
      * to handle the significant figures input from user
      * @param SigFigs the text field of significant figures to handle its text
-     * @return
+     * @return boolean false if there is no errors
      */
     public static Boolean SigsFigs(TextField SigFigs){
         double num ;
@@ -73,7 +73,7 @@ public class InputHandler {
      * to handle only if the user didn't make a choice in  a combo box
      * @param Select the combo box to handle it
      * @param msg the message to show to user if he didn't make a choice
-     * @return
+     * @return boolean false if there is no errors
      */
     public static Boolean ComboBox(JFXComboBox<String> Select , String msg){
         if(Select.getValue() == null){
@@ -87,7 +87,7 @@ public class InputHandler {
      * to handle the text fields of stopping condition combo boxes
      * @param ConditionValue the value which the user entered for his choice
      * @param Condition the combo box to know the user choice to compare it with the user's input
-     * @return
+     * @return boolean false if there is no errors
      */
     public static Boolean ConditionValue(TextField ConditionValue ,JFXComboBox<String> Condition){
         double num ;
@@ -115,7 +115,7 @@ public class InputHandler {
      * to check from the user's input for initial guesses in jacobi iteration and gauss seidel
      * @param InitialGuess the text field which contains the user's input
      * @param Guess the array which will contain the user's input after parsing if correct
-     * @return
+     * @return boolean false if there is no errors
      */
     public static Boolean InitialGuess(TextField InitialGuess , BigDecimal[] Guess){
 

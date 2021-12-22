@@ -14,7 +14,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample.fxml"));
+        // to load the view to our program
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
         Parent root = loader.load();
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -24,6 +25,7 @@ public class App extends Application {
             y = event.getSceneY();
         });
 
+        //to make the app move on dragging by mouse
         root.setOnMouseDragged(event -> {
             primaryStage.setX(event.getScreenX() - x);
             primaryStage.setY(event.getScreenY() - y);

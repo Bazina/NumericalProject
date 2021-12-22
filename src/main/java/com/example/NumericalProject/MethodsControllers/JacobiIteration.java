@@ -21,9 +21,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/***
+ * class to control the Jacobi Iteration method's view
+ */
 public class JacobiIteration implements Initializable {
     Map<String, ArrayList<BigDecimal>> dummy = null;
 
+    //the reference for the components in the fxml file
     @FXML
     private TextField SigFigs;
     @FXML
@@ -41,9 +45,13 @@ public class JacobiIteration implements Initializable {
         ChosenCondition.setLabelFloat(true);
     }
 
+    /***
+     * to calculate the result for user's input
+     */
     public void Calculate(){
         int figures = 0;
 
+        //to check errors in any of user's inputs then calculate the result
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(ChosenCondition, "Please, Select The Stopping Condition"))
             return;
 
@@ -86,6 +94,7 @@ public class JacobiIteration implements Initializable {
             return ;
         }
 
+        //put the result on the screen
         Output.setText(Init.getPrint().getPrinter());
     }
 }

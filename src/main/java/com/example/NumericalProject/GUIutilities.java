@@ -6,9 +6,20 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/***
+ * collection of transition for the app
+ */
 public class GUIutilities {
+    //flag to prevent overlapping transitions
     static boolean closing = false;
 
+    /***
+     * Fade Transition
+     * @param time the time for transition
+     * @param From value of the transition to start from
+     * @param To value of the transition to end at
+     * @param Node the node to make the transition on
+     */
     public static void FadeTransition(double time, double From, double To, Node Node) {
         if (closing) return;
 
@@ -22,6 +33,12 @@ public class GUIutilities {
         }
     }
 
+    /***
+     * Translate Transition
+     * @param time the time for transition
+     * @param XVal the new value on the X-axis
+     * @param Node the node to make the transition
+     */
     public static void TranslateTransition(double time, double XVal, Node Node) {
         if (closing) return;
 
@@ -30,6 +47,13 @@ public class GUIutilities {
         translateTransition1.play();
     }
 
+    /***
+     * Rotate Transition
+     * @param time the time for transition
+     * @param From value of the transition to start from
+     * @param To value of the transition to end at
+     * @param Node the node to make the transition on
+     */
     public static void RotateTransition(double time, double From, double To, Node Node) {
         if (closing) return;
         closing = true;

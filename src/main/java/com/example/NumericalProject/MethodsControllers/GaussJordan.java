@@ -19,9 +19,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/***
+ * class to control the gauss jordan method's view
+ */
 public class GaussJordan implements Initializable {
 
     Map<String, ArrayList<BigDecimal>> dummy = null;
+
+    //the reference for the components in the fxml file
     @FXML
     private TextField SigFigs;
     @FXML
@@ -34,9 +39,13 @@ public class GaussJordan implements Initializable {
 
     }
 
+    /***
+     * to calculate the result for user's input
+     */
     public void Calculate() {
         int figures = 0;
 
+        //to check errors in any of user's inputs then calculate the result
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
 
         try {
@@ -58,6 +67,7 @@ public class GaussJordan implements Initializable {
             return ;
         }
 
+        //put the result on the screen
         Output.setText(Init.getPrint().getPrinter());
     }
 

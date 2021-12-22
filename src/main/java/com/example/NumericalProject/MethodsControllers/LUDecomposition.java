@@ -21,8 +21,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/***
+ * class to control the LU Decomposition method's view
+ */
 public class LUDecomposition implements Initializable {
     Map<String, ArrayList<BigDecimal>> dummy = null;
+
+    //the reference for the components in the fxml file
     @FXML
     private JFXComboBox<String> Forms;
     @FXML
@@ -39,10 +44,13 @@ public class LUDecomposition implements Initializable {
 
     }
 
+    /***
+     * to calculate the result for user's input
+     */
     public void Calculate() {
-
         int figures = 0;
 
+        //to check errors in any of user's inputs then calculate the result
         if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(Forms, "Please, Select The Output Form"))
             return;
 
@@ -64,6 +72,8 @@ public class LUDecomposition implements Initializable {
             InputHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
             return;
         }
+
+        //put the result on the screen
         Output.setText(Init.getPrint().getPrinter());
     }
 }

@@ -18,8 +18,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * the controller for our main view
+ */
 public class MainController implements Initializable {
 
+    //the reference for the components in the fxml file
     @FXML
     private ImageView exit , menu ;
 
@@ -38,6 +42,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //the scroll pane settings
         Scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
@@ -47,6 +52,7 @@ public class MainController implements Initializable {
         LastButton = NaiveButton ;
         LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
+        //load the method's view based on the user's choice and change the color of pressed button
         NaiveButton.setOnMouseClicked(e -> {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
             LastButton = NaiveButton ;
@@ -93,10 +99,12 @@ public class MainController implements Initializable {
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
 
+        //making the settings for the exit button
         exit.setOnMouseClicked(e -> System.exit(0));
         exit.setOnMouseMoved(e -> exit.setBlendMode(BlendMode.HARD_LIGHT));
         exit.setOnMouseExited(e -> exit.setBlendMode(null));
 
+        //opening the user manual if the user wants it and closing if he pressed OK
         UserManualPane.setVisible(false);
         Node OK = UserManual.lookupButton(ButtonType.OK);
         OK.setOnMouseClicked(e -> UserManualPane.setVisible(false));
@@ -107,6 +115,7 @@ public class MainController implements Initializable {
         GUIutilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
         GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
 
+        //the transitions settings when viewing the menu
         menu.setOnMouseClicked(e ->{
             if(opacityPane.isVisible()){
 
@@ -134,6 +143,11 @@ public class MainController implements Initializable {
         });
     }
 
+    /***
+     * to load the method fxml when calling it
+     * @param Path the path of the method's fxml
+     * @return the view in  an anchor pane
+     */
     private AnchorPane MakePane(String Path){
         Parent root = null;
         FXMLLoader loader = new FXMLLoader(NaiveGauss.class.getResource(Path));
