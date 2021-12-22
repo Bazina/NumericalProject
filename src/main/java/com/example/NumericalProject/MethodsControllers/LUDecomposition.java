@@ -1,10 +1,9 @@
 package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.LUDecompCalc;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
 import com.jfoenix.controls.JFXComboBox;
@@ -55,16 +54,16 @@ public class LUDecomposition implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization Init;
         try {
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
-            LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
+            LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(Init);
             luDecompDoolittleCalc.LUDecomp(Forms.getValue());
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
             return;
         }
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 }

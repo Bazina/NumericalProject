@@ -1,10 +1,9 @@
 package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.JacobiCalc;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
 import com.jfoenix.controls.JFXComboBox;
@@ -63,23 +62,23 @@ public class JacobiIteration implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization Init;
         try {
 
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            initGauss.setX(Guess.clone());
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            Init.setX(Guess.clone());
 
-            if(!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
+            if(!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
 
             if(ChosenCondition.getValue().equalsIgnoreCase("iterations")){
-                initGauss.setIterations((int)ConditionNum);
-                initGauss.setTol(BigDecimal.valueOf(1E-20));
+                Init.setIterations((int)ConditionNum);
+                Init.setTol(BigDecimal.valueOf(1E-20));
             }else{
-                initGauss.setTol(BigDecimal.valueOf(ConditionNum));
-                initGauss.setIterations(1000);
+                Init.setTol(BigDecimal.valueOf(ConditionNum));
+                Init.setIterations(1000);
             }
 
-            JacobiCalc jacobiCalc = new JacobiCalc(initGauss);
+            JacobiCalc jacobiCalc = new JacobiCalc(Init);
             jacobiCalc.JacobiInit();
 
         } catch (Exception e) {
@@ -87,6 +86,6 @@ public class JacobiIteration implements Initializable {
             return ;
         }
 
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 }

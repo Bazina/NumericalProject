@@ -1,7 +1,7 @@
 package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
 import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Parse;
@@ -46,17 +46,17 @@ public class NaiveGauss implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization Init;
         try {
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
-            NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText(), "")) Init.setSigFigs(figures);
+            NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(Init);
             naiveGaussCalc.NaiveGauss();
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 
 }

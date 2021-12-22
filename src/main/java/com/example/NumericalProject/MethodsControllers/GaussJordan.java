@@ -2,7 +2,7 @@ package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
 import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
@@ -47,18 +47,18 @@ public class GaussJordan implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization Init;
         try {
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
-            GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
+            GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(Init);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 
 }
