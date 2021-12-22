@@ -6,7 +6,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-public class Utilities {
+public class GUIutilities {
     static boolean closing = false;
 
     public static void FadeTransition(double time, double From, double To, Node Node) {

@@ -4,13 +4,13 @@ package com.example.NumericalProject.MethodsCalculations;
  * This class calculate Naive Gauss Elimination
  */
 public class NaiveGaussCalc {
-    private final InitGauss initGauss;
+    private final Initialization initGauss;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public NaiveGaussCalc(InitGauss initGauss) {
+    public NaiveGaussCalc(Initialization initGauss) {
         this.initGauss = initGauss;
     }
 
@@ -37,7 +37,7 @@ public class NaiveGaussCalc {
      * Make Gauss elimination on the given matrix
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public void Eliminate(InitGauss initGauss) {
+    public void Eliminate(Initialization initGauss) {
         initGauss.methodsUtilities.GaussElimination(initGauss);
     }
 }

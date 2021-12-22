@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
-public class InitGauss {
+public class Initialization {
 
     protected final Print print;
     protected final MethodsUtilities methodsUtilities;
@@ -21,7 +21,7 @@ public class InitGauss {
     protected BigDecimal[] B, s, o, x, y;
     protected int n;
 
-    public InitGauss(Print print, MethodsUtilities methodsUtilities, Map<String, ArrayList<BigDecimal>> linearEqns) {
+    public Initialization(Print print, MethodsUtilities methodsUtilities, Map<String, ArrayList<BigDecimal>> linearEqns) {
         this.print = print;
         this.methodsUtilities = methodsUtilities;
         this.linearEqns = linearEqns;

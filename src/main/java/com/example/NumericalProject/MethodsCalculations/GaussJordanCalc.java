@@ -7,13 +7,13 @@ import java.math.RoundingMode;
  * This class calculate Gauss-Jordan Elimination
  */
 public class GaussJordanCalc {
-    private final InitGauss initGauss;
+    private final Initialization initGauss;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public GaussJordanCalc(InitGauss initGauss) {
+    public GaussJordanCalc(Initialization initGauss) {
         this.initGauss = initGauss;
     }
 

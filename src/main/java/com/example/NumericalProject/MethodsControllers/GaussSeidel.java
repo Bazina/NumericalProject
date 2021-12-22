@@ -2,8 +2,7 @@ package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.GaussSeidelCalc;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
-import com.example.NumericalProject.MethodsCalculations.JacobiCalc;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
 import com.example.NumericalProject.Parse;
 import com.example.NumericalProject.Print;
@@ -63,10 +62,10 @@ public class GaussSeidel implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization initGauss;
         try {
 
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+            initGauss = new Initialization(new Print(), new MethodsUtilities(), dummy);
             initGauss.setX(Guess.clone());
 
             if(!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);

@@ -7,13 +7,13 @@ import java.math.RoundingMode;
  * This class calculate Gauss-Seidel Method
  */
 public class GaussSeidelCalc {
-    private final InitGauss initGauss;
+    private final Initialization initGauss;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public GaussSeidelCalc(InitGauss initGauss) {
+    public GaussSeidelCalc(Initialization initGauss) {
         this.initGauss = initGauss;
     }
 

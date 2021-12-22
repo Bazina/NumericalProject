@@ -104,32 +104,32 @@ public class MainController implements Initializable {
 
         opacityPane.setVisible(false);
 
-        Utilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
-        Utilities.TranslateTransition(0.5 , -600 , drawerPane);
+        GUIutilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
+        GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
 
         menu.setOnMouseClicked(e ->{
             if(opacityPane.isVisible()){
 
-                Utilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-                Utilities.TranslateTransition(0.5 , -600 , drawerPane);
-                Utilities.RotateTransition(0.4 , 90 , 0 , menu);
+                GUIutilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
+                GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
+                GUIutilities.RotateTransition(0.4 , 90 , 0 , menu);
 
             }else{
 
                 UserManualPane.setVisible(false);
-                Utilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
+                GUIutilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
                 opacityPane.setVisible(true);
-                Utilities.TranslateTransition(0.5 , 600 , drawerPane);
-                Utilities.RotateTransition(0.4 , 0 , 90 , menu);
+                GUIutilities.TranslateTransition(0.5 , 600 , drawerPane);
+                GUIutilities.RotateTransition(0.4 , 0 , 90 , menu);
 
             }
         });
 
         opacityPane.setOnMouseClicked(event -> {
 
-            Utilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-            Utilities.TranslateTransition(0.5 , -600 , drawerPane);
-            Utilities.RotateTransition(0.4 , 90 , 0 , menu);
+            GUIutilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
+            GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
+            GUIutilities.RotateTransition(0.4 , 90 , 0 , menu);
 
         });
     }

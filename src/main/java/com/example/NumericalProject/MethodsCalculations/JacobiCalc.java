@@ -7,13 +7,13 @@ import java.math.RoundingMode;
  * This class calculate Gauss-Jacobi Method
  */
 public class JacobiCalc {
-    private final InitGauss initGauss;
+    private final Initialization initGauss;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public JacobiCalc(InitGauss initGauss) {
+    public JacobiCalc(Initialization initGauss) {
         this.initGauss = initGauss;
     }
 

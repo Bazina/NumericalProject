@@ -1,6 +1,6 @@
 package com.example.NumericalProject;
 
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 public class Print{
     private String printer = "";
 
-    public void MatrixToString(InitGauss initGauss, BigDecimal[][] A, String name) {
+    public void MatrixToString(Initialization initGauss, BigDecimal[][] A, String name) {
         printer = printer.concat("\n" + name + "\n");
         for (int i = 1; i <= initGauss.getN(); i++) {
             for (int j = 1; j <= initGauss.getN(); j++) {
@@ -24,7 +24,7 @@ public class Print{
         }
     }
 
-    public void VectorToString(InitGauss initGauss, BigDecimal[] B, String name) {
+    public void VectorToString(Initialization initGauss, BigDecimal[] B, String name) {
         printer = printer.concat("\n" + name + "\n" + "[");
         for (int i = 1; i <= initGauss.getN(); i++) {
             if (i != 1) printer = printer.concat(", ");

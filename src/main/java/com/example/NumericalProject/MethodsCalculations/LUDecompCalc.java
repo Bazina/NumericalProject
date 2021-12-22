@@ -8,13 +8,13 @@ import java.math.RoundingMode;
  * This class calculate the LU Decomposition with 3 different methods
  */
 public class LUDecompCalc {
-    private final InitGauss initGauss;
+    private final Initialization initGauss;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param initGauss an object that hold all the matrices needed for calculations
      */
-    public LUDecompCalc(InitGauss initGauss) {
+    public LUDecompCalc(Initialization initGauss) {
         this.initGauss = initGauss;
     }
 

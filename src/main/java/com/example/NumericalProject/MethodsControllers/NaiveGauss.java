@@ -1,7 +1,7 @@
 package com.example.NumericalProject.MethodsControllers;
 
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.InitGauss;
+import com.example.NumericalProject.MethodsCalculations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
 import com.example.NumericalProject.MethodsCalculations.NaiveGaussCalc;
 import com.example.NumericalProject.Parse;
@@ -46,9 +46,9 @@ public class NaiveGauss implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        InitGauss initGauss;
+        Initialization initGauss;
         try {
-            initGauss = new InitGauss(new Print(), new MethodsUtilities(), dummy);
+            initGauss = new Initialization(new Print(), new MethodsUtilities(), dummy);
             if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
             NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(initGauss);
             naiveGaussCalc.NaiveGauss();
