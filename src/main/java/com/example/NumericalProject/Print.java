@@ -13,7 +13,7 @@ public class Print{
 
     /***
      * A method to convert matrix into a fancy string
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @param A the matrix to be converted
      * @param name the name of the matrix
      */
@@ -35,7 +35,7 @@ public class Print{
 
     /***
      * A method to convert vector into a fancy string
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @param B the vector to be converted
      * @param name the name of the vector
      */
@@ -53,10 +53,18 @@ public class Print{
         printer = printer.concat("]\n");
     }
 
+    /***
+     * Getter for printer
+     * @return printer string
+     */
     public String getPrinter() {
         return printer;
     }
 
+    /***
+     * Setter for printer
+     * @param printer a string that holds the steps of the calculations
+     */
     public void setPrinter(String printer) {
         this.printer = printer;
     }
