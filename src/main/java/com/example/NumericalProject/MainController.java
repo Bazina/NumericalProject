@@ -112,33 +112,33 @@ public class MainController implements Initializable {
 
         opacityPane.setVisible(false);
 
-        GUIutilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
-        GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
+        GUIUtilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
+        GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
 
         //the transitions settings when viewing the menu
         menu.setOnMouseClicked(e ->{
             if(opacityPane.isVisible()){
 
-                GUIutilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-                GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
-                GUIutilities.RotateTransition(0.4 , 90 , 0 , menu);
+                GUIUtilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
+                GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
+                GUIUtilities.RotateTransition(0.4 , 90 , 0 , menu);
 
             }else{
 
                 UserManualPane.setVisible(false);
-                GUIutilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
+                GUIUtilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
                 opacityPane.setVisible(true);
-                GUIutilities.TranslateTransition(0.5 , 600 , drawerPane);
-                GUIutilities.RotateTransition(0.4 , 0 , 90 , menu);
+                GUIUtilities.TranslateTransition(0.5 , 600 , drawerPane);
+                GUIUtilities.RotateTransition(0.4 , 0 , 90 , menu);
 
             }
         });
 
         opacityPane.setOnMouseClicked(event -> {
 
-            GUIutilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-            GUIutilities.TranslateTransition(0.5 , -600 , drawerPane);
-            GUIutilities.RotateTransition(0.4 , 90 , 0 , menu);
+            GUIUtilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
+            GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
+            GUIUtilities.RotateTransition(0.4 , 90 , 0 , menu);
 
         });
     }

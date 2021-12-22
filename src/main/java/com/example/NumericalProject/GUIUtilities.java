@@ -9,7 +9,7 @@ import javafx.util.Duration;
 /***
  * collection of transition for the app
  */
-public class GUIutilities {
+public class GUIUtilities {
     //flag to prevent overlapping transitions
     static boolean closing = false;
 
