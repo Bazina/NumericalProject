@@ -22,7 +22,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Jacobi Iteration">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Gauss Seidel">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

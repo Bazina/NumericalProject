@@ -26,15 +26,6 @@ public class LUDecompCalc {
     }
 
     public void DoolittleDecompose() {
-        for (int i = 1; i <= initGauss.n; i++) {
-            initGauss.o[i] = BigDecimal.valueOf(i);
-            initGauss.s[i] = initGauss.A[i][1].abs();
-            for (int j = 2; j <= initGauss.n; j++) {
-                if (initGauss.A[i][j].abs().compareTo(initGauss.s[i]) > 0) {
-                    initGauss.s[i] = initGauss.A[i][j].abs();
-                }
-            }
-        }
         for (int k = 1; k <= initGauss.n - 1; k++) {
             initGauss.methodsUtilities.LUPivoting(initGauss, k);
             if (((initGauss.A[initGauss.o[k].intValue()][k].abs())
@@ -117,6 +108,7 @@ public class LUDecompCalc {
                 }
                 if (initGauss.L[j][j].compareTo(BigDecimal.ZERO) == 0) {
                     initGauss.er = -1;
+                    return;
                 }
                 initGauss.U[j][i] = (initGauss.A[j][i].subtract(sum))
                         .divide(initGauss.L[j][j], initGauss.SigFigs, RoundingMode.DOWN)
@@ -189,7 +181,6 @@ public class LUDecompCalc {
         if (temp.equals("No Solution") || temp.equals("Infinity Solutions"))
             return;
         if (initGauss.er != -1) {
-
             initGauss.methodsUtilities.LUForwardSubstitute(initGauss);
             initGauss.methodsUtilities.LUBackwardSubstitute(initGauss);
         }

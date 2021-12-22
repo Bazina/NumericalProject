@@ -28,7 +28,7 @@ public class NaiveGaussCalc {
         for (int k = 1; k <= initGauss.n - 1; k++) {
             initGauss.methodsUtilities.Pivoting(initGauss, k);
             if ((initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs()
-                    .compareTo(initGauss.tol) < 0) {
+                    .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
                 initGauss.er = -1;
                 return;
             }
@@ -47,7 +47,7 @@ public class NaiveGaussCalc {
             }
         }
         if (initGauss.A[initGauss.n][initGauss.n].divide(initGauss.s[initGauss.n], initGauss.SigFigs, RoundingMode.DOWN)
-                .abs().compareTo(initGauss.tol) < 0) {
+                .abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
             initGauss.er = -1;
         }
     }

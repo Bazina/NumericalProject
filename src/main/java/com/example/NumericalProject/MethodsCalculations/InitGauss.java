@@ -84,6 +84,7 @@ public class InitGauss {
         }
 
         for (i = 1; i <= n; i++) {
+            o[i] = BigDecimal.valueOf(i);
             s[i] = A[i][1].abs();
             for (j = 2; j <= n; j++) {
                 if (A[i][j].abs().compareTo(s[i]) > 0) {

@@ -28,7 +28,7 @@ public class GaussJordanCalc {
         for (int k = 1; k <= n; k++) {
             initGauss.methodsUtilities.Pivoting(initGauss, k);
             if ((initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs()
-                    .compareTo(initGauss.tol) < 0) {
+                    .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
                 initGauss.er = -1;
                 return;
             }
@@ -47,7 +47,7 @@ public class GaussJordanCalc {
             }
         }
         if (initGauss.A[n][n].divide(initGauss.s[n], initGauss.SigFigs, RoundingMode.DOWN).abs()
-                .compareTo(initGauss.tol) < 0) {
+                .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
             initGauss.er = -1;
         }
         for (int i = 1; i <= n; i++) {
