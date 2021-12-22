@@ -11,7 +11,7 @@ public class MethodsUtilities {
 
     /***
      * A method to make partial pivoting to the matrix in the gauss-jordan and naive gauss
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @param k the specified row
      */
     public void Pivoting(Initialization Init, int k) {
@@ -42,7 +42,7 @@ public class MethodsUtilities {
 
     /***
      * A method make partial pivoting to the matrix in the lu decomposition
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @param k the specified row
      */
     public void LUPivoting(Initialization Init, int k) {
@@ -66,7 +66,7 @@ public class MethodsUtilities {
      * @param r the row in the check now
      * @param V a visited array for the matrix elements
      * @param R the length of the row
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @return True if the matrix is transformed to dominant matrix or its dominant and false if not
      */
     private boolean transformToDominant(int r, boolean[] V, int[] R, Initialization Init) {
@@ -100,7 +100,7 @@ public class MethodsUtilities {
 
     /***
      * A method that starts the process of checking and converting matrix A to a dominant one
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @return True if the mission is done, false if failed to transform the matrix to a dominant one
      */
     public boolean makeDominant(Initialization Init) {
@@ -112,7 +112,7 @@ public class MethodsUtilities {
 
     /***
      * Do the gauss Elimination
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void GaussElimination(Initialization Init) {
         for (int k = 1; k <= Init.n - 1; k++) {
@@ -144,7 +144,7 @@ public class MethodsUtilities {
 
     /***
      * Check if the matrix A is consistent or not
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @return a string that describes the consistency of the system
      */
     public String CheckConsistency(Initialization Init) {
@@ -164,7 +164,7 @@ public class MethodsUtilities {
 
     /***
      * Check if the L and U are consistent
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      * @return a string that describes the consistency of the system
      */
     public String CheckConsistencyLU(Initialization Init) {
@@ -194,7 +194,7 @@ public class MethodsUtilities {
 
     /***
      * A method that do backward substitution and save the result in X vector
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void BackwardSubstitute(Initialization Init) {
         Init.x[Init.n] = Init.B[Init.n].divide(Init.A[Init.n][Init.n], Init.SigFigs, RoundingMode.DOWN);
@@ -209,7 +209,7 @@ public class MethodsUtilities {
 
     /***
      * A method that do backward substitution for LU Decomposition and save the result in Y vector
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void LUBackwardSubstitute(Initialization Init) {
         Init.x[Init.n] = Init.y[Init.n].divide(Init.U[Init.n][Init.n], Init.SigFigs, RoundingMode.DOWN);
@@ -225,7 +225,7 @@ public class MethodsUtilities {
 
     /***
      * A method that do forward substitution for LU Decomposition and save the result in X vector (Doolittle method)
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void LUForwardSubstitute(Initialization Init) {
         Init.y[1] = Init.B[1].divide(Init.L[1][1], Init.SigFigs, RoundingMode.DOWN);
@@ -242,7 +242,7 @@ public class MethodsUtilities {
     /***
      * A method that do backward and forward substitution for LU Decomposition and save the result in Y and X vectors
      * For crout and cholesky methods
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void LUSubstitute(Initialization Init) {
         // Backward substitution

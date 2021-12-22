@@ -8,7 +8,7 @@ public class NaiveGaussCalc {
 
     /***
      * A constructor for initializing the object with the needed parameters
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public NaiveGaussCalc(Initialization Init) {
         this.Init = Init;
@@ -35,7 +35,7 @@ public class NaiveGaussCalc {
 
     /***
      * Make Gauss elimination on the given matrix
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public void Eliminate(Initialization Init) {
         Init.methodsUtilities.GaussElimination(Init);

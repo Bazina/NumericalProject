@@ -11,7 +11,7 @@ public class GaussSeidelCalc {
 
     /***
      * A constructor for initializing the object with the needed parameters
-     * @param Init an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the information needed for calculations
      */
     public GaussSeidelCalc(Initialization Init) {
         this.Init = Init;
