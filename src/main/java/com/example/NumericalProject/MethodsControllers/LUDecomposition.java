@@ -54,16 +54,16 @@ public class LUDecomposition implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        Initialization initGauss;
+        Initialization Init;
         try {
-            initGauss = new Initialization(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
-            LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
+            LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(Init);
             luDecompDoolittleCalc.LUDecomp(Forms.getValue());
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
             return;
         }
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 }

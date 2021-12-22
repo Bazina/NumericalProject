@@ -11,54 +11,54 @@ public class MethodsUtilities {
 
     /***
      * A method to make partial pivoting to the matrix in the gauss-jordan and naive gauss
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      * @param k the specified row
      */
-    public void Pivoting(Initialization initGauss, int k) {
+    public void Pivoting(Initialization Init, int k) {
         int p = k;
         BigDecimal dummy;
-        BigDecimal z = (initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs();
-        for (int i = k + 1; i <= initGauss.n; i++) {
-            dummy = (initGauss.A[i][k].divide(initGauss.s[i], initGauss.SigFigs, RoundingMode.DOWN)).abs();
+        BigDecimal z = (Init.A[k][k].divide(Init.s[k], Init.SigFigs, RoundingMode.DOWN)).abs();
+        for (int i = k + 1; i <= Init.n; i++) {
+            dummy = (Init.A[i][k].divide(Init.s[i], Init.SigFigs, RoundingMode.DOWN)).abs();
             if (dummy.compareTo(z) > 0) {
                 z = dummy;
                 p = i;
             }
         }
         if (p != k) {
-            for (int i = k; i <= initGauss.n; i++) {
-                dummy = initGauss.A[p][i];
-                initGauss.A[p][i] = initGauss.A[k][i];
-                initGauss.A[k][i] = dummy;
+            for (int i = k; i <= Init.n; i++) {
+                dummy = Init.A[p][i];
+                Init.A[p][i] = Init.A[k][i];
+                Init.A[k][i] = dummy;
             }
-            dummy = initGauss.B[p];
-            initGauss.B[p] = initGauss.B[k];
-            initGauss.B[k] = dummy;
-            dummy = initGauss.s[p];
-            initGauss.s[p] = initGauss.s[k];
-            initGauss.s[k] = dummy;
+            dummy = Init.B[p];
+            Init.B[p] = Init.B[k];
+            Init.B[k] = dummy;
+            dummy = Init.s[p];
+            Init.s[p] = Init.s[k];
+            Init.s[k] = dummy;
         }
     }
 
     /***
      * A method make partial pivoting to the matrix in the lu decomposition
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      * @param k the specified row
      */
-    public void LUPivoting(Initialization initGauss, int k) {
+    public void LUPivoting(Initialization Init, int k) {
         int p = k;
         BigDecimal dummy;
-        BigDecimal z = (initGauss.A[initGauss.o[k].intValue()][k].divide(initGauss.s[initGauss.o[k].intValue()], initGauss.SigFigs, RoundingMode.DOWN)).abs();
-        for (int i = k + 1; i <= initGauss.n; i++) {
-            dummy = (initGauss.A[initGauss.o[i].intValue()][k].divide(initGauss.s[initGauss.o[i].intValue()], initGauss.SigFigs, RoundingMode.DOWN)).abs();
+        BigDecimal z = (Init.A[Init.o[k].intValue()][k].divide(Init.s[Init.o[k].intValue()], Init.SigFigs, RoundingMode.DOWN)).abs();
+        for (int i = k + 1; i <= Init.n; i++) {
+            dummy = (Init.A[Init.o[i].intValue()][k].divide(Init.s[Init.o[i].intValue()], Init.SigFigs, RoundingMode.DOWN)).abs();
             if (dummy.compareTo(z) > 0) {
                 z = dummy;
                 p = i;
             }
         }
-        dummy = initGauss.o[p];
-        initGauss.o[p] = initGauss.o[k];
-        initGauss.o[k] = dummy;
+        dummy = Init.o[p];
+        Init.o[p] = Init.o[k];
+        Init.o[k] = dummy;
     }
 
     /***
@@ -66,31 +66,31 @@ public class MethodsUtilities {
      * @param r the row in the check now
      * @param V a visited array for the matrix elements
      * @param R the length of the row
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      * @return True if the matrix is transformed to dominant matrix or its dominant and false if not
      */
-    private boolean transformToDominant(int r, boolean[] V, int[] R, Initialization initGauss) {
-        if (r == initGauss.A.length) {
-            BigDecimal[][] T = new BigDecimal[initGauss.n + 1][initGauss.n + 1];
+    private boolean transformToDominant(int r, boolean[] V, int[] R, Initialization Init) {
+        if (r == Init.A.length) {
+            BigDecimal[][] T = new BigDecimal[Init.n + 1][Init.n + 1];
             for (int i = 1; i < R.length; i++) {
-                for (int j = 1; j <= initGauss.n; j++) {
-                    T[i][j] = initGauss.A[R[i]][j];
+                for (int j = 1; j <= Init.n; j++) {
+                    T[i][j] = Init.A[R[i]][j];
                 }
             }
-            initGauss.A = T;
+            Init.A = T;
             return true;
         }
-        for (int i = 1; i <= initGauss.n; i++) {
+        for (int i = 1; i <= Init.n; i++) {
             if (V[i])
                 continue;
             BigDecimal sum = BigDecimal.ZERO;
-            for (int j = 1; j <= initGauss.n; j++)
-                sum = sum.add(initGauss.A[i][j].abs());
-            if (initGauss.A[i][r].abs().multiply(BigDecimal.valueOf(2)).compareTo(sum) > 0) {
+            for (int j = 1; j <= Init.n; j++)
+                sum = sum.add(Init.A[i][j].abs());
+            if (Init.A[i][r].abs().multiply(BigDecimal.valueOf(2)).compareTo(sum) > 0) {
                 // diagonally dominant?
                 V[i] = true;
                 R[r] = i;
-                if (transformToDominant(r + 1, V, R, initGauss))
+                if (transformToDominant(r + 1, V, R, Init))
                     return true;
                 V[i] = false;
             }
@@ -100,142 +100,171 @@ public class MethodsUtilities {
 
     /***
      * A method that starts the process of checking and converting matrix A to a dominant one
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      * @return True if the mission is done, false if failed to transform the matrix to a dominant one
      */
-    public boolean makeDominant(Initialization initGauss) {
-        boolean[] visited = new boolean[initGauss.A.length];
-        int[] rows = new int[initGauss.A.length];
+    public boolean makeDominant(Initialization Init) {
+        boolean[] visited = new boolean[Init.A.length];
+        int[] rows = new int[Init.A.length];
         Arrays.fill(visited, false);
-        return !transformToDominant(1, visited, rows, initGauss);
+        return !transformToDominant(1, visited, rows, Init);
     }
 
     /***
      * Do the gauss Elimination
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      */
-    public void GaussElimination(Initialization initGauss) {
-        for (int k = 1; k <= initGauss.n - 1; k++) {
-            initGauss.methodsUtilities.Pivoting(initGauss, k);
-            if ((initGauss.A[k][k].divide(initGauss.s[k], initGauss.SigFigs, RoundingMode.DOWN)).abs()
-                    .compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
-                initGauss.er = -1;
+    public void GaussElimination(Initialization Init) {
+        for (int k = 1; k <= Init.n - 1; k++) {
+            Init.methodsUtilities.Pivoting(Init, k);
+            if ((Init.A[k][k].divide(Init.s[k], Init.SigFigs, RoundingMode.DOWN)).abs()
+                    .compareTo(BigDecimal.valueOf(Math.pow(10, -Init.SigFigs))) < 0) {
+                Init.er = -1;
                 return;
             }
-            for (int i = k + 1; i <= initGauss.n; i++) {
+            for (int i = k + 1; i <= Init.n; i++) {
                 if (i == k) continue;
-                BigDecimal factor = initGauss.A[i][k].divide(initGauss.A[k][k], initGauss.SigFigs, RoundingMode.DOWN)
-                        .setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                for (int j = k; j <= initGauss.n; j++) {
-                    initGauss.A[i][j] = initGauss.A[i][j].subtract(factor.multiply(initGauss.A[k][j]))
-                            .setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                BigDecimal factor = Init.A[i][k].divide(Init.A[k][k], Init.SigFigs, RoundingMode.DOWN)
+                        .setScale(Init.SigFigs, RoundingMode.DOWN);
+                for (int j = k; j <= Init.n; j++) {
+                    Init.A[i][j] = Init.A[i][j].subtract(factor.multiply(Init.A[k][j]))
+                            .setScale(Init.SigFigs, RoundingMode.DOWN);
                 }
-                initGauss.B[i] = initGauss.B[i].subtract(factor.multiply(initGauss.B[k]))
-                        .setScale(initGauss.SigFigs, RoundingMode.DOWN);
-                initGauss.print.MatrixToString(initGauss, initGauss.A, "Matrix A");
-                initGauss.print.VectorToString(initGauss, initGauss.B, "Vector B");
+                Init.B[i] = Init.B[i].subtract(factor.multiply(Init.B[k]))
+                        .setScale(Init.SigFigs, RoundingMode.DOWN);
+                Init.print.MatrixToString(Init, Init.A, "Matrix A");
+                Init.print.VectorToString(Init, Init.B, "Vector B");
             }
         }
-        if (initGauss.A[initGauss.n][initGauss.n].divide(initGauss.s[initGauss.n], initGauss.SigFigs, RoundingMode.DOWN)
-                .abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) < 0) {
-            initGauss.er = -1;
+        if (Init.A[Init.n][Init.n].divide(Init.s[Init.n], Init.SigFigs, RoundingMode.DOWN)
+                .abs().compareTo(BigDecimal.valueOf(Math.pow(10, -Init.SigFigs))) < 0) {
+            Init.er = -1;
         }
     }
 
-    public String CheckConsistency(Initialization initGauss) {
+    /***
+     * Check if the matrix A is consistent or not
+     * @param Init an object that hold all the matrices needed for calculations
+     * @return a string that describes the consistency of the system
+     */
+    public String CheckConsistency(Initialization Init) {
         int Zeros;
-        for (int i = 1; i <= initGauss.n; i++) {
+        for (int i = 1; i <= Init.n; i++) {
             Zeros = 0;
-            for (int j = 1; j <= initGauss.n; j++) {
-                if (initGauss.A[i][j].abs().compareTo(BigDecimal.valueOf(Math.pow(10, -initGauss.SigFigs))) <= 0)
+            for (int j = 1; j <= Init.n; j++) {
+                if (Init.A[i][j].abs().compareTo(BigDecimal.valueOf(Math.pow(10, -Init.SigFigs))) <= 0)
                     Zeros++;
-                if (Zeros == initGauss.n && initGauss.B[i].abs().compareTo(BigDecimal.ZERO) == 0)
+                if (Zeros == Init.n && Init.B[i].abs().compareTo(BigDecimal.ZERO) == 0)
                     return "Infinity Solutions";
-                else if (Zeros == initGauss.n) return "No Solution";
+                else if (Zeros == Init.n) return "No Solution";
             }
         }
         return "Unique Solution";
     }
 
-    public String CheckConsistencyLU(Initialization initGauss) {
-        BigDecimal[][] tempA = initGauss.A.clone();
-        BigDecimal[] tempB = initGauss.B.clone();
-        String newPrinter = initGauss.print.getPrinter();
-        initGauss.A = initGauss.L.clone();
-        String checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+    /***
+     * Check if the L and U are consistent
+     * @param Init an object that hold all the matrices needed for calculations
+     * @return a string that describes the consistency of the system
+     */
+    public String CheckConsistencyLU(Initialization Init) {
+        BigDecimal[][] tempA = Init.A.clone();
+        BigDecimal[] tempB = Init.B.clone();
+        String newPrinter = Init.print.getPrinter();
+        Init.A = Init.L.clone();
+        String checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
         String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-        initGauss.print.setPrinter(newPrinter2);
+        Init.print.setPrinter(newPrinter2);
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
-            initGauss.A = tempA;
+            Init.A = tempA;
             return checkConsistency;
         } else {
-            initGauss.A = initGauss.U.clone();
-            initGauss.B = initGauss.y.clone();
-            checkConsistency = initGauss.methodsUtilities.CheckConsistency(initGauss);
+            Init.A = Init.U.clone();
+            Init.B = Init.y.clone();
+            checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
             newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-            initGauss.print.setPrinter(newPrinter2);
-            initGauss.A = tempA;
-            initGauss.B = tempB;
+            Init.print.setPrinter(newPrinter2);
+            Init.A = tempA;
+            Init.B = tempB;
             if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions"))
                 return checkConsistency;
         }
         return "Unique Solution";
     }
 
-    public void BackwardSubstitute(Initialization initGauss) {
-        initGauss.x[initGauss.n] = initGauss.B[initGauss.n].divide(initGauss.A[initGauss.n][initGauss.n], initGauss.SigFigs, RoundingMode.DOWN);
-        for (int i = initGauss.n - 1; i >= 1; i--) {
+    /***
+     * A method that do backward substitution and save the result in X vector
+     * @param Init an object that hold all the matrices needed for calculations
+     */
+    public void BackwardSubstitute(Initialization Init) {
+        Init.x[Init.n] = Init.B[Init.n].divide(Init.A[Init.n][Init.n], Init.SigFigs, RoundingMode.DOWN);
+        for (int i = Init.n - 1; i >= 1; i--) {
             BigDecimal sum = BigDecimal.ZERO;
-            for (int j = i + 1; j <= initGauss.n; j++) {
-                sum = sum.add(initGauss.A[i][j].multiply(initGauss.x[j]));
+            for (int j = i + 1; j <= Init.n; j++) {
+                sum = sum.add(Init.A[i][j].multiply(Init.x[j]));
             }
-            initGauss.x[i] = (initGauss.B[i].subtract(sum)).divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN);
+            Init.x[i] = (Init.B[i].subtract(sum)).divide(Init.A[i][i], Init.SigFigs, RoundingMode.DOWN);
         }
     }
 
-    public void LUBackwardSubstitute(Initialization initGauss) {
-        initGauss.x[initGauss.n] = initGauss.y[initGauss.n].divide(initGauss.U[initGauss.n][initGauss.n], initGauss.SigFigs, RoundingMode.DOWN);
-        for (int i = initGauss.n - 1; i >= 1; i--) {
+    /***
+     * A method that do backward substitution for LU Decomposition and save the result in Y vector
+     * @param Init an object that hold all the matrices needed for calculations
+     */
+    public void LUBackwardSubstitute(Initialization Init) {
+        Init.x[Init.n] = Init.y[Init.n].divide(Init.U[Init.n][Init.n], Init.SigFigs, RoundingMode.DOWN);
+        for (int i = Init.n - 1; i >= 1; i--) {
             BigDecimal sum = BigDecimal.ZERO;
-            for (int j = i + 1; j <= initGauss.n; j++) {
-                sum = sum.add(initGauss.U[i][j].multiply(initGauss.x[j]));
+            for (int j = i + 1; j <= Init.n; j++) {
+                sum = sum.add(Init.U[i][j].multiply(Init.x[j]));
             }
-            initGauss.x[i] = (initGauss.y[i].subtract(sum)).divide(initGauss.U[i][i], initGauss.SigFigs, RoundingMode.DOWN);
+            Init.x[i] = (Init.y[i].subtract(sum)).divide(Init.U[i][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
+        Init.print.VectorToString(Init, Init.x, "Vector X");
     }
 
-    public void LUForwardSubstitute(Initialization initGauss) {
-        initGauss.y[1] = initGauss.B[1].divide(initGauss.L[1][1], initGauss.SigFigs, RoundingMode.DOWN);
-        for (int i = 2; i <= initGauss.n; i++) {
-            BigDecimal sum = initGauss.B[i];
+    /***
+     * A method that do forward substitution for LU Decomposition and save the result in X vector (Doolittle method)
+     * @param Init an object that hold all the matrices needed for calculations
+     */
+    public void LUForwardSubstitute(Initialization Init) {
+        Init.y[1] = Init.B[1].divide(Init.L[1][1], Init.SigFigs, RoundingMode.DOWN);
+        for (int i = 2; i <= Init.n; i++) {
+            BigDecimal sum = Init.B[i];
             for (int j = 1; j <= i - 1; j++) {
-                sum = sum.subtract(initGauss.L[i][j].multiply(initGauss.y[j]));
+                sum = sum.subtract(Init.L[i][j].multiply(Init.y[j]));
             }
-            initGauss.y[i] = sum.divide(initGauss.L[i][i], initGauss.SigFigs, RoundingMode.DOWN);
+            Init.y[i] = sum.divide(Init.L[i][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.y, "Vector Y");
+        Init.print.VectorToString(Init, Init.y, "Vector Y");
     }
 
-    public void LUSubstitute(Initialization initGauss) {
-        initGauss.y[initGauss.o[1].intValue()] = initGauss.B[initGauss.o[1].intValue()];
-        for (int i = 2; i <= initGauss.n; i++) {
-            BigDecimal sum = initGauss.B[initGauss.o[i].intValue()];
+    /***
+     * A method that do backward and forward substitution for LU Decomposition and save the result in Y and X vectors
+     * For crout and cholesky methods
+     * @param Init an object that hold all the matrices needed for calculations
+     */
+    public void LUSubstitute(Initialization Init) {
+        // Backward substitution
+        Init.y[Init.o[1].intValue()] = Init.B[Init.o[1].intValue()];
+        for (int i = 2; i <= Init.n; i++) {
+            BigDecimal sum = Init.B[Init.o[i].intValue()];
             for (int j = 1; j <= i - 1; j++) {
-                sum = sum.subtract(initGauss.A[initGauss.o[i].intValue()][j].multiply(initGauss.y[initGauss.o[j].intValue()]));
+                sum = sum.subtract(Init.A[Init.o[i].intValue()][j].multiply(Init.y[Init.o[j].intValue()]));
             }
-            initGauss.y[initGauss.o[i].intValue()] = sum;
+            Init.y[Init.o[i].intValue()] = sum;
         }
-        initGauss.print.VectorToString(initGauss, initGauss.y, "Vector Y");
+        Init.print.VectorToString(Init, Init.y, "Vector Y");
 
-        initGauss.x[initGauss.n] = initGauss.y[initGauss.o[initGauss.n].intValue()].divide(initGauss.A[initGauss.o[initGauss.n].intValue()][initGauss.n], initGauss.SigFigs, RoundingMode.DOWN);
-        for (int i = initGauss.n - 1; i >= 1; i--) {
+        // Forward substitution
+        Init.x[Init.n] = Init.y[Init.o[Init.n].intValue()].divide(Init.A[Init.o[Init.n].intValue()][Init.n], Init.SigFigs, RoundingMode.DOWN);
+        for (int i = Init.n - 1; i >= 1; i--) {
             BigDecimal sum = BigDecimal.ZERO;
-            for (int j = i + 1; j <= initGauss.n; j++) {
-                sum = sum.add(initGauss.A[initGauss.o[i].intValue()][j].multiply(initGauss.x[j]));
+            for (int j = i + 1; j <= Init.n; j++) {
+                sum = sum.add(Init.A[Init.o[i].intValue()][j].multiply(Init.x[j]));
             }
-            initGauss.x[i] = (initGauss.y[initGauss.o[i].intValue()].subtract(sum)).divide(initGauss.A[initGauss.o[i].intValue()][i], initGauss.SigFigs, RoundingMode.DOWN);
+            Init.x[i] = (Init.y[Init.o[i].intValue()].subtract(sum)).divide(Init.A[Init.o[i].intValue()][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
+        Init.print.VectorToString(Init, Init.x, "Vector X");
     }
 }

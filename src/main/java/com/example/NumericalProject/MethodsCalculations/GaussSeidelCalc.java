@@ -7,25 +7,25 @@ import java.math.RoundingMode;
  * This class calculate Gauss-Seidel Method
  */
 public class GaussSeidelCalc {
-    private final Initialization initGauss;
+    private final Initialization Init;
 
     /***
      * A constructor for initializing the object with the needed parameters
-     * @param initGauss an object that hold all the matrices needed for calculations
+     * @param Init an object that hold all the matrices needed for calculations
      */
-    public GaussSeidelCalc(Initialization initGauss) {
-        this.initGauss = initGauss;
+    public GaussSeidelCalc(Initialization Init) {
+        this.Init = Init;
     }
 
     /***
      * A method which starts the calculation of Gauss-Seidel Method
      */
     public void GaussSeidelInit() {
-        initGauss.gauss();
+        Init.Initialize();
 
         // Check if the matrix A is dominant or not and transform it to dominant if possible
-        if (initGauss.methodsUtilities.makeDominant(initGauss)) {
-            initGauss.print.setPrinter(
+        if (Init.methodsUtilities.makeDominant(Init)) {
+            Init.print.setPrinter(
                     "The system isn't diagonally dominant: "
                             + "The method cannot guarantee convergence.");
             return;
@@ -38,23 +38,23 @@ public class GaussSeidelCalc {
      */
     public void GaussSeidelIterations() {
         int iterations = 0;
-        BigDecimal[] previousX = initGauss.x.clone(); // Previous
-        String newPrinter = initGauss.print.getPrinter();
+        BigDecimal[] previousX = Init.x.clone(); // Previous
+        String newPrinter = Init.print.getPrinter();
         while (true) {
 
             // Calculate the new X(i)
-            for (int i = 1; i <= initGauss.n; i++) {
-                BigDecimal sum = initGauss.B[i]; // B(n)
+            for (int i = 1; i <= Init.n; i++) {
+                BigDecimal sum = Init.B[i]; // B(n)
                 newPrinter = newPrinter.concat("\nSum = " + "B(" + i + ")" + " - ");
-                for (int j = 1; j <= initGauss.n; j++) {
+                for (int j = 1; j <= Init.n; j++) {
                     if (j != i) {
 
                         // Use the last X(i) in the formula of new X(i)
-                        sum = sum.subtract(initGauss.A[i][j]
-                                .multiply(initGauss.x[j])).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                        sum = sum.subtract(Init.A[i][j]
+                                .multiply(Init.x[j])).setScale(Init.SigFigs, RoundingMode.DOWN);
 
                         // Print the steps
-                        if (initGauss.n != j)
+                        if (Init.n != j)
                             newPrinter = newPrinter.concat("A(" + i + j + ")" + " * " + "X(" + j + ")" + " - ");
                         else
                             newPrinter = newPrinter.concat("A(" + i + j + ")" + " * " + "X(" + j + ")" + "\n");
@@ -63,11 +63,11 @@ public class GaussSeidelCalc {
 
                 // Update X(i) to use in the next
                 // row calculation
-                initGauss.x[i] = BigDecimal.ONE.divide(initGauss.A[i][i], initGauss.SigFigs, RoundingMode.DOWN)
-                        .multiply(sum).setScale(initGauss.SigFigs, RoundingMode.DOWN);
+                Init.x[i] = BigDecimal.ONE.divide(Init.A[i][i], Init.SigFigs, RoundingMode.DOWN)
+                        .multiply(sum).setScale(Init.SigFigs, RoundingMode.DOWN);
 
                 // Print the steps
-                newPrinter = newPrinter.concat("X(" + i + ") = " + sum + " / " + initGauss.A[i][i] + "\n");
+                newPrinter = newPrinter.concat("X(" + i + ") = " + sum + " / " + Init.A[i][i] + "\n");
             }
 
             // increment the iteration
@@ -75,10 +75,10 @@ public class GaussSeidelCalc {
 
             // Printing steps
             if (iterations == 1) newPrinter = "";
-            if (iterations != initGauss.Iterations + 1)
+            if (iterations != Init.Iterations + 1)
                 newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
-            initGauss.print.setPrinter(newPrinter);
-            initGauss.print.VectorToString(initGauss, initGauss.x, "Vector X");
+            Init.print.setPrinter(newPrinter);
+            Init.print.VectorToString(Init, Init.x, "Vector X");
 
             // If it is the first iteration, so absolute approximate error can't be calculated
             if (iterations == 1) continue;
@@ -86,18 +86,18 @@ public class GaussSeidelCalc {
             boolean stop = true;
 
             // Calculate absolute approximate error
-            for (int i = 1; i <= initGauss.n; i++) {
-                if (initGauss.x[i].subtract(previousX[i]).abs().compareTo(initGauss.tol) > 0) {
+            for (int i = 1; i <= Init.n; i++) {
+                if (Init.x[i].subtract(previousX[i]).abs().compareTo(Init.tol) > 0) {
                     stop = false;
                     break;
                 }
             }
 
             // Stop the method if it reached the maximum number of iteration or the required tolerance
-            if (stop || iterations == initGauss.Iterations + 1) break;
+            if (stop || iterations == Init.Iterations + 1) break;
 
             // copy the new X vector to the old one
-            previousX = initGauss.x.clone();
+            previousX = Init.x.clone();
         }
     }
 }

@@ -47,18 +47,18 @@ public class GaussJordan implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        Initialization initGauss;
+        Initialization Init;
         try {
-            initGauss = new Initialization(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText().strip(), "")) initGauss.setSigFigs(figures);
-            GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
+            GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(Init);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 
 }

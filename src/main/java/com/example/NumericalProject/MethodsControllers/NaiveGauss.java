@@ -46,17 +46,17 @@ public class NaiveGauss implements Initializable {
         }
         if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
 
-        Initialization initGauss;
+        Initialization Init;
         try {
-            initGauss = new Initialization(new Print(), new MethodsUtilities(), dummy);
-            if (!Objects.equals(SigFigs.getText(), "")) initGauss.setSigFigs(figures);
-            NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(initGauss);
+            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            if (!Objects.equals(SigFigs.getText(), "")) Init.setSigFigs(figures);
+            NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(Init);
             naiveGaussCalc.NaiveGauss();
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
-        Output.setText(initGauss.getPrint().getPrinter());
+        Output.setText(Init.getPrint().getPrinter());
     }
 
 }
