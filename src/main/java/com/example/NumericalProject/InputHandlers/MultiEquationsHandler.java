@@ -1,4 +1,4 @@
-package com.example.NumericalProject;
+package com.example.NumericalProject.InputHandlers;
 
 import com.jfoenix.controls.JFXComboBox;
 import javafx.scene.control.Alert;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 /***
  * this class to handle all the inputs and data that coming from user
  */
-public class InputHandler {
+public class MultiEquationsHandler {
 
     /***
      *shows a warning message on the screen when called

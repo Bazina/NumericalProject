@@ -1,4 +1,4 @@
-package com.example.NumericalProject.MethodsCalculations;
+package com.example.NumericalProject.MethodsCalculations.LinearEquations;
 
 /***
  * This class calculate Naive Gauss Elimination

@@ -1,10 +1,10 @@
-package com.example.NumericalProject.MethodsControllers;
+package com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.GaussJordanCalc;
-import com.example.NumericalProject.MethodsCalculations.Initialization;
-import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.Parse;
+import com.example.NumericalProject.InputHandlers.MultiEquationsHandler;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.GaussJordanCalc;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.MethodsUtilities;
+import com.example.NumericalProject.EquationsParser.MultiEquationsParser;
 import com.example.NumericalProject.Print;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,12 +46,12 @@ public class GaussJordan implements Initializable {
         int figures = 0;
 
         //to check errors in any of user's inputs then calculate the result
-        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations)) return;
+        if (MultiEquationsHandler.SigsFigs(SigFigs) || MultiEquationsHandler.TextArea(Equations)) return;
 
         try {
-            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
+            dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
@@ -63,7 +63,7 @@ public class GaussJordan implements Initializable {
             GaussJordanCalc gaussJordanCalc = new GaussJordanCalc(Init);
             gaussJordanCalc.GaussJordan();
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 

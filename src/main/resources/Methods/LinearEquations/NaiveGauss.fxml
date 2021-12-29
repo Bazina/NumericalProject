@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -13,16 +12,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.GaussSeidel">
+<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.LinearEquations.NaiveGauss">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="594.0" prefWidth="350.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <VBox alignment="TOP_CENTER" layoutX="183.0" prefHeight="528.0" prefWidth="368.0" spacing="10.0" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="350.0" text="Solving systems of linear equations using" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Gauss Seidel">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="50.0" prefWidth="350.0" text="Naive Gauss">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -32,30 +31,6 @@
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <HBox prefHeight="48.0" prefWidth="350.0">
-               <children>
-                  <Label prefHeight="50.0" prefWidth="140.0" text="Initial Guesses :">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="InitialGuess" prefHeight="43.0" prefWidth="200.0" promptText="eg: 1 2 2">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="36.0" prefWidth="350.0">
-               <children>
-                  <JFXComboBox fx:id="ChosenCondition" focusColor="#064663" prefHeight="36.0" prefWidth="140.0" promptText="Stopping Condition" unFocusColor="#064663" viewOrder="1.0" />
-                  <TextField fx:id="ConditionValue" prefHeight="43.0" prefWidth="200.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
             <HBox prefHeight="37.0" prefWidth="350.0">
                <children>
                   <Label prefHeight="43.0" prefWidth="342.0" text="Significant Figures (Optional)">
@@ -83,7 +58,7 @@
             </JFXButton>
          </children>
       </VBox>
-      <Text fx:id="Output" layoutX="8.0" layoutY="611.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="734.1366996765137" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.863300323486328">
+      <Text fx:id="Output" layoutX="8.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="734.1366996765137">
          <font>
             <Font size="15.0" />
          </font>

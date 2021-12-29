@@ -1,6 +1,6 @@
 package com.example.NumericalProject;
 
-import com.example.NumericalProject.MethodsControllers.NaiveGauss;
+import com.example.NumericalProject.MethodsControllers.LinearEquations.NaiveGauss;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +46,7 @@ public class MainController implements Initializable {
         Scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        CurrentMethodPane = MakePane("/Methods/NaiveGauss.fxml");
+        CurrentMethodPane = MakePane("/Methods/LinearEquations/NaiveGauss.fxml");
         MethodPane.getChildren().add(CurrentMethodPane) ;
 
         LastButton = NaiveButton ;
@@ -59,7 +59,7 @@ public class MainController implements Initializable {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
             MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/NaiveGauss.fxml");
+            CurrentMethodPane = MakePane("/Methods/LinearEquations/NaiveGauss.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
         JordanButton.setOnMouseClicked(e -> {
@@ -68,7 +68,7 @@ public class MainController implements Initializable {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
             MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/GaussJordan.fxml");
+            CurrentMethodPane = MakePane("/Methods/LinearEquations/GaussJordan.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
         LUButton.setOnMouseClicked(e -> {
@@ -77,7 +77,7 @@ public class MainController implements Initializable {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
             MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LUDecomposition.fxml");
+            CurrentMethodPane = MakePane("/Methods/LinearEquations/LUDecomposition.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
         JacobiButton.setOnMouseClicked(e -> {
@@ -86,7 +86,7 @@ public class MainController implements Initializable {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
             MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/JacobiIteration.fxml");
+            CurrentMethodPane = MakePane("/Methods/LinearEquations/JacobiIteration.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
         SeidelButton.setOnMouseClicked(e -> {
@@ -95,7 +95,7 @@ public class MainController implements Initializable {
             LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
             MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/GaussSeidel.fxml");
+            CurrentMethodPane = MakePane("/Methods/LinearEquations/GaussSeidel.fxml");
             MethodPane.getChildren().add(CurrentMethodPane) ;
         });
 

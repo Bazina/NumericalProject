@@ -1,10 +1,10 @@
-package com.example.NumericalProject.MethodsControllers;
+package com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.Initialization;
-import com.example.NumericalProject.MethodsCalculations.LUDecompCalc;
-import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.Parse;
+import com.example.NumericalProject.InputHandlers.MultiEquationsHandler;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.LUDecompCalc;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.MethodsUtilities;
+import com.example.NumericalProject.EquationsParser.MultiEquationsParser;
 import com.example.NumericalProject.Print;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -51,13 +51,13 @@ public class LUDecomposition implements Initializable {
         int figures = 0;
 
         //to check errors in any of user's inputs then calculate the result
-        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(Forms, "Please, Select The Output Form"))
+        if (MultiEquationsHandler.SigsFigs(SigFigs) || MultiEquationsHandler.TextArea(Equations) || MultiEquationsHandler.ComboBox(Forms, "Please, Select The Output Form"))
             return;
 
         try {
-            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
+            dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
@@ -69,7 +69,7 @@ public class LUDecomposition implements Initializable {
             LUDecompCalc luDecompDoolittleCalc = new LUDecompCalc(Init);
             luDecompDoolittleCalc.LUDecomp(Forms.getValue());
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Not Positive Definite Matrix");
             return;
         }
 

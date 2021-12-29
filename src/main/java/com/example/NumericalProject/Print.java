@@ -1,6 +1,6 @@
 package com.example.NumericalProject;
 
-import com.example.NumericalProject.MethodsCalculations.Initialization;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

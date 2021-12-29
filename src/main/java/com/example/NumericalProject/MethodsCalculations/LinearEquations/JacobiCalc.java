@@ -1,42 +1,34 @@
-package com.example.NumericalProject.MethodsCalculations;
+package com.example.NumericalProject.MethodsCalculations.LinearEquations;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /***
- * This class calculate Gauss-Seidel Method
+ * This class calculate Gauss-Jacobi Method
  */
-public class GaussSeidelCalc {
+public class JacobiCalc {
     private final Initialization Init;
 
     /***
      * A constructor for initializing the object with the needed parameters
      * @param Init an object that hold all the information needed for calculations
      */
-    public GaussSeidelCalc(Initialization Init) {
+    public JacobiCalc(Initialization Init) {
         this.Init = Init;
     }
 
     /***
-     * A method which starts the calculation of Gauss-Seidel Method
+     * A method which starts the calculation of Gauss-Jacobi Method
      */
-    public void GaussSeidelInit() {
+    public void JacobiInit() {
         Init.Initialize();
-
-        // Check if the matrix A is dominant or not and transform it to dominant if possible
-        if (Init.methodsUtilities.makeDominant(Init)) {
-            Init.print.setPrinter(
-                    "The system isn't diagonally dominant: "
-                            + "The method cannot guarantee convergence.");
-            return;
-        }
-        GaussSeidelIterations();
+        JacobiIterations();
     }
 
     /***
      * A method that calculates the Gauss-Seidel
      */
-    public void GaussSeidelIterations() {
+    public void JacobiIterations() {
         int iterations = 0;
         BigDecimal[] previousX = Init.x.clone(); // Previous
         String newPrinter = Init.print.getPrinter();
@@ -49,9 +41,9 @@ public class GaussSeidelCalc {
                 for (int j = 1; j <= Init.n; j++) {
                     if (j != i) {
 
-                        // Use the last X(i) in the formula of new X(i)
-                        sum = sum.subtract(Init.A[i][j]
-                                .multiply(Init.x[j])).setScale(Init.SigFigs, RoundingMode.DOWN);
+                        // Use old X(i) in the formula of new X(i)
+                        sum = sum.subtract(Init.A[i][j].multiply(previousX[j]))
+                                .setScale(Init.SigFigs, RoundingMode.DOWN);
 
                         // Print the steps
                         if (Init.n != j)
@@ -87,7 +79,8 @@ public class GaussSeidelCalc {
 
             // Calculate absolute approximate error
             for (int i = 1; i <= Init.n; i++) {
-                if (Init.x[i].subtract(previousX[i]).abs().compareTo(Init.tol) > 0) {
+                if (Init.x[i].subtract(previousX[i]).divide(Init.x[i],
+                        Init.SigFigs, RoundingMode.DOWN).abs().compareTo(Init.tol) > 0) {
                     stop = false;
                     break;
                 }
@@ -95,7 +88,6 @@ public class GaussSeidelCalc {
 
             // Stop the method if it reached the maximum number of iteration or the required tolerance
             if (stop || iterations == Init.Iterations + 1) break;
-
             // copy the new X vector to the old one
             previousX = Init.x.clone();
         }

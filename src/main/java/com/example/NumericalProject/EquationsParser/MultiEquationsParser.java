@@ -1,4 +1,4 @@
-package com.example.NumericalProject;
+package com.example.NumericalProject.EquationsParser;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -6,7 +6,7 @@ import java.util.*;
 /***
  * A class that parse the provided equations from the user
  */
-public class Parse {
+public class MultiEquationsParser {
 
     /***
      * A method that turns the linear equations into coefficients

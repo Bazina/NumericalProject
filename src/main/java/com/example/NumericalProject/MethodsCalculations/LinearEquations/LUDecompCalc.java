@@ -1,4 +1,4 @@
-package com.example.NumericalProject.MethodsCalculations;
+package com.example.NumericalProject.MethodsCalculations.LinearEquations;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

@@ -1,10 +1,10 @@
-package com.example.NumericalProject.MethodsControllers;
+package com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.GaussSeidelCalc;
-import com.example.NumericalProject.MethodsCalculations.Initialization;
-import com.example.NumericalProject.MethodsCalculations.MethodsUtilities;
-import com.example.NumericalProject.Parse;
+import com.example.NumericalProject.InputHandlers.MultiEquationsHandler;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.GaussSeidelCalc;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
+import com.example.NumericalProject.MethodsCalculations.LinearEquations.MethodsUtilities;
+import com.example.NumericalProject.EquationsParser.MultiEquationsParser;
 import com.example.NumericalProject.Print;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -52,20 +52,20 @@ public class GaussSeidel implements Initializable {
         int figures = 0;
 
         //to check errors in any of user's inputs then calculate the result
-        if (InputHandler.SigsFigs(SigFigs) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(ChosenCondition, "Please, Select The Stopping Condition"))
+        if (MultiEquationsHandler.SigsFigs(SigFigs) || MultiEquationsHandler.TextArea(Equations) || MultiEquationsHandler.ComboBox(ChosenCondition, "Please, Select The Stopping Condition"))
             return;
 
-        if(InputHandler.ConditionValue(ConditionValue , ChosenCondition)) return;
+        if(MultiEquationsHandler.ConditionValue(ConditionValue , ChosenCondition)) return;
         double ConditionNum = Double.parseDouble(ConditionValue.getText().strip());
 
 
         BigDecimal[] Guess = new BigDecimal[Equations.getText().strip().split("\n").length+1];
-        if(InputHandler.InitialGuess(InitialGuess ,Guess)) return;
+        if(MultiEquationsHandler.InitialGuess(InitialGuess ,Guess)) return;
 
         try{
-            dummy = Parse.ToEquations(Equations.getText().strip().split("\n"));
+            dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
         if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
@@ -90,7 +90,7 @@ public class GaussSeidel implements Initializable {
             SeidelCalc.GaussSeidelInit();
 
         } catch (Exception e) {
-            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 

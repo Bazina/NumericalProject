@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.JacobiIteration">
+<AnchorPane fx:id="NaivePane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.LinearEquations.GaussSeidel">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="594.0" prefWidth="350.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
@@ -22,7 +22,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Jacobi Iteration">
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Gauss Seidel">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -30,7 +30,8 @@
             <TextArea fx:id="Equations" prefHeight="261.0" prefWidth="350.0">
                <font>
                   <Font size="20.0" />
-               </font></TextArea>
+               </font>
+            </TextArea>
             <HBox prefHeight="48.0" prefWidth="350.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="140.0" text="Initial Guesses :">
@@ -51,7 +52,8 @@
                   <TextField fx:id="ConditionValue" prefHeight="43.0" prefWidth="200.0">
                      <font>
                         <Font size="20.0" />
-                     </font></TextField>
+                     </font>
+                  </TextField>
                </children>
             </HBox>
             <HBox prefHeight="37.0" prefWidth="350.0">
