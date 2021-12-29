@@ -119,7 +119,7 @@ public class MultiEquationsHandler {
      */
     public static Boolean InitialGuess(TextField InitialGuess , BigDecimal[] Guess){
 
-        //check if the number of initial guesses was'nt equal to number of variables
+        //check if the number of initial guesses wasn't equal to number of variables
         if(InitialGuess.getText().strip().split(" ").length != Guess.length-1){
             WrongInput("Missing Data" , "Please Write All Inputs");
             return true ;
