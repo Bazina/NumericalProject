@@ -1,5 +1,6 @@
-package com.example.NumericalProject.InputHandlers;
+package com.example.NumericalProject;
 
+import com.example.NumericalProject.EquationsParser.Numbers;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 /***
  * this class to handle all the inputs and data that coming from user
  */
-public class MultiEquationsHandler {
+public class InputHandler {
 
     /***
      *shows a warning message on the screen when called
@@ -44,9 +45,10 @@ public class MultiEquationsHandler {
     /***
      * to handle the significant figures input from user
      * @param SigFigs the text field of significant figures to handle its text
+     * @param Mode it is true when we want integer values and false if wwante double
      * @return boolean false if there is no errors
      */
-    public static Boolean SigsFigs(TextField SigFigs){
+    public static Boolean TextField(TextField SigFigs,boolean Mode){
         double num ;
 
         //if the user didn't write anything then use the default and there is no error
@@ -54,15 +56,15 @@ public class MultiEquationsHandler {
 
         //if the user entered non-numbers like characters
         try {
-            num = Double.parseDouble(SigFigs.getText().strip()) ;
+            num = Numbers.ParseDouble(SigFigs) ;
         }catch (Exception e){
-            WrongInput("Wrong Data" , "Please Number Of Significant Figures");
+            WrongInput("Wrong Data" , "Please Write all Inputs Correct");
             return true ;
         }
 
-        //if the user entered double-type number then it is an error
-        if(num % 1 != 0){
-            WrongInput("Wrong Data" , "Please Write an Integer in Significant Figures");
+        //if the user entered double-type number then it is an error in case if we want integer
+        if(num % 1 != 0 && Mode){
+            WrongInput("Wrong Data" , "Please Write all Inputs Correct");
             return true;
         }
         return false ;
@@ -94,7 +96,7 @@ public class MultiEquationsHandler {
 
         //to check for entering non-numbers value
         try {
-            num = Double.parseDouble(ConditionValue.getText().strip()) ;
+            num = Numbers.ParseDouble(ConditionValue) ;
         }catch (Exception e){
             WrongInput("Wrong Data" , "Please Write Consistent Data");
             return true ;
@@ -135,7 +137,6 @@ public class MultiEquationsHandler {
                 return true ;
             }
         }
-
         return false ;
     }
 }

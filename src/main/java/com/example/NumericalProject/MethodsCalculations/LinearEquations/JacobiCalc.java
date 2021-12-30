@@ -31,7 +31,7 @@ public class JacobiCalc {
     public void JacobiIterations() {
         int iterations = 0;
         BigDecimal[] previousX = Init.x.clone(); // Previous
-        String newPrinter = Init.print.getPrinter();
+        String newPrinter = Init.linearPrinter.getPrinter();
         while (true) {
 
             // Calculate the new X(i)
@@ -69,8 +69,8 @@ public class JacobiCalc {
             if (iterations == 1) newPrinter = "";
             if (iterations != Init.Iterations + 1)
                 newPrinter = newPrinter.concat("Iteration = " + iterations + "\n");
-            Init.print.setPrinter(newPrinter);
-            Init.print.VectorToString(Init, Init.x, "Vector X");
+            Init.linearPrinter.setPrinter(newPrinter);
+            Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
 
             // If it is the first iteration, so absolute approximate error can't be calculated
             if (iterations == 1) continue;

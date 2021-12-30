@@ -1,11 +1,12 @@
 package com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-import com.example.NumericalProject.InputHandlers.MultiEquationsHandler;
+import com.example.NumericalProject.EquationsParser.Numbers;
+import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.MethodsUtilities;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.NaiveGaussCalc;
 import com.example.NumericalProject.EquationsParser.MultiEquationsParser;
-import com.example.NumericalProject.Print;
+import com.example.NumericalProject.Printers.LinearPrinter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
@@ -45,24 +46,24 @@ public class NaiveGauss implements Initializable {
         int figures = 0;
 
         //to check errors in any of user's inputs then calculate the result
-        if (MultiEquationsHandler.SigsFigs(SigFigs) || MultiEquationsHandler.TextArea(Equations)) return;
+        if (InputHandler.TextField(SigFigs, true) || InputHandler.TextArea(Equations)) return;
 
         try {
             dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
-            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        if (!Objects.equals(SigFigs.getText(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText(), "")) figures = Numbers.ParseInt(SigFigs);
 
         Initialization Init;
         try {
-            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            Init = new Initialization(new LinearPrinter(), new MethodsUtilities(), dummy);
             if (!Objects.equals(SigFigs.getText(), "")) Init.setSigFigs(figures);
             NaiveGaussCalc naiveGaussCalc = new NaiveGaussCalc(Init);
             naiveGaussCalc.NaiveGauss();
         } catch (Exception e) {
-            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 

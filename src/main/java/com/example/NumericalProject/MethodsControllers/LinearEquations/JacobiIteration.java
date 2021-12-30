@@ -1,11 +1,12 @@
 package com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-import com.example.NumericalProject.InputHandlers.MultiEquationsHandler;
+import com.example.NumericalProject.EquationsParser.Numbers;
+import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.JacobiCalc;
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.MethodsUtilities;
 import com.example.NumericalProject.EquationsParser.MultiEquationsParser;
-import com.example.NumericalProject.Print;
+import com.example.NumericalProject.Printers.LinearPrinter;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -52,28 +53,28 @@ public class JacobiIteration implements Initializable {
         int figures = 0;
 
         //to check errors in any of user's inputs then calculate the result
-        if (MultiEquationsHandler.SigsFigs(SigFigs) || MultiEquationsHandler.TextArea(Equations) || MultiEquationsHandler.ComboBox(ChosenCondition, "Please, Select The Stopping Condition"))
+        if (InputHandler.TextField(SigFigs, true) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(ChosenCondition, "Please, Select The Stopping Condition"))
             return;
 
-        if(MultiEquationsHandler.ConditionValue(ConditionValue , ChosenCondition)) return;
-        double ConditionNum = Double.parseDouble(ConditionValue.getText().strip());
+        if(InputHandler.ConditionValue(ConditionValue , ChosenCondition)) return;
+        double ConditionNum = Numbers.ParseDouble(ConditionValue);
 
 
         BigDecimal[] Guess = new BigDecimal[Equations.getText().strip().split("\n").length+1];
-        if(MultiEquationsHandler.InitialGuess(InitialGuess ,Guess)) return;
+        if(InputHandler.InitialGuess(InitialGuess ,Guess)) return;
 
         try{
             dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
-            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return;
         }
-        if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Integer.parseInt((SigFigs.getText().strip()));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) figures = Numbers.ParseInt(SigFigs);
 
         Initialization Init;
         try {
 
-            Init = new Initialization(new Print(), new MethodsUtilities(), dummy);
+            Init = new Initialization(new LinearPrinter(), new MethodsUtilities(), dummy);
             Init.setX(Guess.clone());
 
             if(!Objects.equals(SigFigs.getText().strip(), "")) Init.setSigFigs(figures);
@@ -90,7 +91,7 @@ public class JacobiIteration implements Initializable {
             jacobiCalc.JacobiInit();
 
         } catch (Exception e) {
-            MultiEquationsHandler.WrongInput("Wrong Data", "Please Write Right Equations");
+            InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");
             return ;
         }
 

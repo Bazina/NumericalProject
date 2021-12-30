@@ -17,9 +17,12 @@ module com.example.java_fx_tut {
     opens com.example.NumericalProject.MethodsControllers.LinearEquations to javafx.fxml;
     exports com.example.NumericalProject.MethodsControllers.LinearEquations;
 
-    exports com.example.NumericalProject.EquationsParser;
+    opens com.example.NumericalProject.MethodsControllers.NonLinearEquations to javafx.fxml;
+    exports com.example.NumericalProject.MethodsControllers.NonLinearEquations;
+
     opens com.example.NumericalProject.EquationsParser to javafx.fxml;
-    exports com.example.NumericalProject.InputHandlers;
-    opens com.example.NumericalProject.InputHandlers to javafx.fxml;
+    exports com.example.NumericalProject.EquationsParser;
+    exports com.example.NumericalProject.Printers;
+    opens com.example.NumericalProject.Printers to javafx.fxml;
 
 }

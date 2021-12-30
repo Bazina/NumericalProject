@@ -132,8 +132,8 @@ public class MethodsUtilities {
                 }
                 Init.B[i] = Init.B[i].subtract(factor.multiply(Init.B[k]))
                         .setScale(Init.SigFigs, RoundingMode.DOWN);
-                Init.print.MatrixToString(Init, Init.A, "Matrix A");
-                Init.print.VectorToString(Init, Init.B, "Vector B");
+                Init.linearPrinter.MatrixToString(Init, Init.A, "Matrix A");
+                Init.linearPrinter.VectorToString(Init, Init.B, "Vector B");
             }
         }
         if (Init.A[Init.n][Init.n].divide(Init.s[Init.n], Init.SigFigs, RoundingMode.DOWN)
@@ -170,11 +170,11 @@ public class MethodsUtilities {
     public String CheckConsistencyLU(Initialization Init) {
         BigDecimal[][] tempA = Init.A.clone();
         BigDecimal[] tempB = Init.B.clone();
-        String newPrinter = Init.print.getPrinter();
+        String newPrinter = Init.linearPrinter.getPrinter();
         Init.A = Init.L.clone();
         String checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
         String newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-        Init.print.setPrinter(newPrinter2);
+        Init.linearPrinter.setPrinter(newPrinter2);
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) {
             Init.A = tempA;
             return checkConsistency;
@@ -183,7 +183,7 @@ public class MethodsUtilities {
             Init.B = Init.y.clone();
             checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
             newPrinter2 = newPrinter.concat("\n" + checkConsistency + "\n");
-            Init.print.setPrinter(newPrinter2);
+            Init.linearPrinter.setPrinter(newPrinter2);
             Init.A = tempA;
             Init.B = tempB;
             if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions"))
@@ -220,7 +220,7 @@ public class MethodsUtilities {
             }
             Init.x[i] = (Init.y[i].subtract(sum)).divide(Init.U[i][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        Init.print.VectorToString(Init, Init.x, "Vector X");
+        Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
     }
 
     /***
@@ -236,7 +236,7 @@ public class MethodsUtilities {
             }
             Init.y[i] = sum.divide(Init.L[i][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        Init.print.VectorToString(Init, Init.y, "Vector Y");
+        Init.linearPrinter.VectorToString(Init, Init.y, "Vector Y");
     }
 
     /***
@@ -254,7 +254,7 @@ public class MethodsUtilities {
             }
             Init.y[Init.o[i].intValue()] = sum;
         }
-        Init.print.VectorToString(Init, Init.y, "Vector Y");
+        Init.linearPrinter.VectorToString(Init, Init.y, "Vector Y");
 
         // Forward substitution
         Init.x[Init.n] = Init.y[Init.o[Init.n].intValue()].divide(Init.A[Init.o[Init.n].intValue()][Init.n], Init.SigFigs, RoundingMode.DOWN);
@@ -265,6 +265,6 @@ public class MethodsUtilities {
             }
             Init.x[i] = (Init.y[Init.o[i].intValue()].subtract(sum)).divide(Init.A[Init.o[i].intValue()][i], Init.SigFigs, RoundingMode.DOWN);
         }
-        Init.print.VectorToString(Init, Init.x, "Vector X");
+        Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
     }
 }

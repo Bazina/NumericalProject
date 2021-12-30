@@ -21,15 +21,15 @@ public class NaiveGaussCalc {
         Init.Initialize();
         Eliminate(Init);
         String checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
-        String newPrinter = Init.print.getPrinter().concat("\n" + checkConsistency + "\n");
-        Init.print.setPrinter(newPrinter);
+        String newPrinter = Init.linearPrinter.getPrinter().concat("\n" + checkConsistency + "\n");
+        Init.linearPrinter.setPrinter(newPrinter);
 
         // Check if the system is consistent
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return;
         if (Init.er != -1) {
             // Calculating and printing the final matrices and answer
             Init.methodsUtilities.BackwardSubstitute(Init);
-            Init.print.VectorToString(Init, Init.x, "Vector X");
+            Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
         }
     }
 

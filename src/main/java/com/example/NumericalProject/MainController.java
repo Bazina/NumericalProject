@@ -1,6 +1,7 @@
 package com.example.NumericalProject;
 
 import com.example.NumericalProject.MethodsControllers.LinearEquations.NaiveGauss;
+import com.example.NumericalProject.MethodsControllers.NonLinearEquations.FalsePosition;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,19 +26,19 @@ public class MainController implements Initializable {
 
     //the reference for the components in the fxml file
     @FXML
-    private ImageView exit , menu ;
+    private ImageView exit, menu;
 
     @FXML
-    private AnchorPane opacityPane, drawerPane , MethodPane , UserManualPane , CurrentMethodPane;
+    private AnchorPane opacityPane, drawerPane, MethodPane, UserManualPane, CurrentMethodPane;
 
     @FXML
-    private JFXButton NaiveButton , JordanButton , LUButton ,JacobiButton , SeidelButton , UserButton , LastButton;
+    private JFXButton NaiveButton, JordanButton, LUButton, JacobiButton, SeidelButton,BisectionButton , FalsePositionButton ,UserButton, LastButton;
 
     @FXML
-    private DialogPane UserManual ;
+    private DialogPane UserManual;
 
     @FXML
-    private ScrollPane Scroll ;
+    private ScrollPane Scroll;
 
 
     @Override
@@ -47,57 +48,19 @@ public class MainController implements Initializable {
         Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         CurrentMethodPane = MakePane("/Methods/LinearEquations/NaiveGauss.fxml");
-        MethodPane.getChildren().add(CurrentMethodPane) ;
+        MethodPane.getChildren().add(CurrentMethodPane);
 
-        LastButton = NaiveButton ;
+        LastButton = NaiveButton;
         LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
         //load the method's view based on the user's choice and change the color of pressed button
-        NaiveButton.setOnMouseClicked(e -> {
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
-            LastButton = NaiveButton ;
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
-
-            MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LinearEquations/NaiveGauss.fxml");
-            MethodPane.getChildren().add(CurrentMethodPane) ;
-        });
-        JordanButton.setOnMouseClicked(e -> {
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
-            LastButton = JordanButton ;
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
-
-            MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LinearEquations/GaussJordan.fxml");
-            MethodPane.getChildren().add(CurrentMethodPane) ;
-        });
-        LUButton.setOnMouseClicked(e -> {
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
-            LastButton = LUButton ;
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
-
-            MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LinearEquations/LUDecomposition.fxml");
-            MethodPane.getChildren().add(CurrentMethodPane) ;
-        });
-        JacobiButton.setOnMouseClicked(e -> {
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
-            LastButton = JacobiButton ;
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
-
-            MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LinearEquations/JacobiIteration.fxml");
-            MethodPane.getChildren().add(CurrentMethodPane) ;
-        });
-        SeidelButton.setOnMouseClicked(e -> {
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
-            LastButton = SeidelButton ;
-            LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
-
-            MethodPane.getChildren().remove(0);
-            CurrentMethodPane = MakePane("/Methods/LinearEquations/GaussSeidel.fxml");
-            MethodPane.getChildren().add(CurrentMethodPane) ;
-        });
+        NaiveButton.setOnMouseClicked(e -> ButtonActivity(NaiveButton , "/Methods/LinearEquations/NaiveGauss.fxml"));
+        JordanButton.setOnMouseClicked(e -> ButtonActivity(JordanButton , "/Methods/LinearEquations/GaussJordan.fxml"));
+        LUButton.setOnMouseClicked(e -> ButtonActivity(LUButton , "/Methods/LinearEquations/LUDecomposition.fxml"));
+        JacobiButton.setOnMouseClicked(e -> ButtonActivity(JacobiButton , "/Methods/LinearEquations/JacobiIteration.fxml"));
+        SeidelButton.setOnMouseClicked(e -> ButtonActivity(SeidelButton , "/Methods/LinearEquations/GaussSeidel.fxml"));
+        BisectionButton.setOnMouseClicked(e -> ButtonActivity(BisectionButton , "/Methods/NonLinearEquations/Bisection.fxml"));
+        FalsePositionButton.setOnMouseClicked(e -> ButtonActivity(FalsePositionButton , "/Methods/NonLinearEquations/FalsePosition.fxml"));
 
         //making the settings for the exit button
         exit.setOnMouseClicked(e -> System.exit(0));
@@ -112,33 +75,33 @@ public class MainController implements Initializable {
 
         opacityPane.setVisible(false);
 
-        GUIUtilities.FadeTransition(0.5 , 1 , 0 , opacityPane);
-        GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
+        GUIUtilities.FadeTransition(0.5, 1, 0, opacityPane);
+        GUIUtilities.TranslateTransition(0.5, -600, drawerPane);
 
         //the transitions settings when viewing the menu
-        menu.setOnMouseClicked(e ->{
-            if(opacityPane.isVisible()){
+        menu.setOnMouseClicked(e -> {
+            if (opacityPane.isVisible()) {
 
-                GUIUtilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-                GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
-                GUIUtilities.RotateTransition(0.4 , 90 , 0 , menu);
+                GUIUtilities.FadeTransition(0.5, 0.3, 0, opacityPane);
+                GUIUtilities.TranslateTransition(0.5, -600, drawerPane);
+                GUIUtilities.RotateTransition(0.4, 90, 0, menu);
 
-            }else{
+            } else {
 
                 UserManualPane.setVisible(false);
-                GUIUtilities.FadeTransition(0.5 , 0 , 0.3 , opacityPane);
+                GUIUtilities.FadeTransition(0.5, 0, 0.3, opacityPane);
                 opacityPane.setVisible(true);
-                GUIUtilities.TranslateTransition(0.5 , 600 , drawerPane);
-                GUIUtilities.RotateTransition(0.4 , 0 , 90 , menu);
+                GUIUtilities.TranslateTransition(0.5, 600, drawerPane);
+                GUIUtilities.RotateTransition(0.4, 0, 90, menu);
 
             }
         });
 
         opacityPane.setOnMouseClicked(event -> {
 
-            GUIUtilities.FadeTransition(0.5 , 0.3 , 0 , opacityPane);
-            GUIUtilities.TranslateTransition(0.5 , -600 , drawerPane);
-            GUIUtilities.RotateTransition(0.4 , 90 , 0 , menu);
+            GUIUtilities.FadeTransition(0.5, 0.3, 0, opacityPane);
+            GUIUtilities.TranslateTransition(0.5, -600, drawerPane);
+            GUIUtilities.RotateTransition(0.4, 90, 0, menu);
 
         });
     }
@@ -148,14 +111,24 @@ public class MainController implements Initializable {
      * @param Path the path of the method's fxml
      * @return the view in  an anchor pane
      */
-    private AnchorPane MakePane(String Path){
+    private AnchorPane MakePane(String Path) {
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(NaiveGauss.class.getResource(Path));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Path));
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return (AnchorPane) root ;
+        return (AnchorPane) root;
+    }
+
+    private void ButtonActivity(JFXButton Button , String Path){
+        LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
+        LastButton = Button;
+        LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
+
+        MethodPane.getChildren().remove(0);
+        CurrentMethodPane = MakePane(Path);
+        MethodPane.getChildren().add(CurrentMethodPane);
     }
 }

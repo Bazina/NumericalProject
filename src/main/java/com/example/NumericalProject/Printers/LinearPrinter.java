@@ -1,4 +1,4 @@
-package com.example.NumericalProject;
+package com.example.NumericalProject.Printers;
 
 import com.example.NumericalProject.MethodsCalculations.LinearEquations.Initialization;
 
@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 /***
  * A class that save the steps in a string
  */
-public class Print{
+public class LinearPrinter {
     private String printer = "";
 
     /***

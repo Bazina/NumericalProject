@@ -31,9 +31,9 @@ public class LUDecompCalc {
         }
         if (Init.er != -1) {
             // Printing the final matrices and answer
-            Init.print.MatrixToString(Init, Init.L, "Matrix L");
-            Init.print.MatrixToString(Init, Init.U, "Matrix U");
-            Init.print.VectorToString(Init, Init.x, "Vector X");
+            Init.linearPrinter.MatrixToString(Init, Init.L, "Matrix L");
+            Init.linearPrinter.MatrixToString(Init, Init.U, "Matrix U");
+            Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
         }
     }
 
@@ -61,8 +61,8 @@ public class LUDecompCalc {
                             .subtract(factor.multiply(Init.A[Init.o[k].intValue()][j]))
                             .setScale(Init.SigFigs, RoundingMode.DOWN);
                 }
-                Init.print.MatrixToString(Init, Init.A, "Matrix A");
-                Init.print.VectorToString(Init, Init.B, "Vector B");
+                Init.linearPrinter.MatrixToString(Init, Init.A, "Matrix A");
+                Init.linearPrinter.VectorToString(Init, Init.B, "Vector B");
             }
         }
 
@@ -107,7 +107,7 @@ public class LUDecompCalc {
 
         for (int j = 1; j <= Init.n; j++) {
             // Initialize the steps printer
-            String newPrinter = Init.print.getPrinter();
+            String newPrinter = Init.linearPrinter.getPrinter();
 
             // Calculate the L matrix
             for (int i = j; i <= Init.n; i++) {
@@ -183,7 +183,7 @@ public class LUDecompCalc {
         Init.methodsUtilities.GaussElimination(Init);
         for (int i = 1; i <= Init.n; i++) {
             if (Init.A[i][i].compareTo(BigDecimal.ZERO) < 0) {
-                Init.print.setPrinter("Not Positive Definite");
+                Init.linearPrinter.setPrinter("Not Positive Definite");
                 Init.er = -1;
                 return;
             }
@@ -195,7 +195,7 @@ public class LUDecompCalc {
         for (int i = 1; i <= Init.n; i++) {
             for (int j = 1; j <= Init.n; j++) {
                 if (Init.A[i][j].compareTo(Init.A[j][i]) != 0) {
-                    Init.print.setPrinter("Not Symmetric");
+                    Init.linearPrinter.setPrinter("Not Symmetric");
                     Init.er = -1;
                     return;
                 }
@@ -204,7 +204,7 @@ public class LUDecompCalc {
 
         // Calculate L matrix
         for (int i = 1; i <= Init.n; i++) {
-            String newPrinter = Init.print.getPrinter();
+            String newPrinter = Init.linearPrinter.getPrinter();
             for (int j = 1; j <= i; j++) {
                 BigDecimal sum = BigDecimal.ZERO;
                 if (j == i) {
@@ -245,7 +245,7 @@ public class LUDecompCalc {
                             + sum + " )" + " / " + Init.L[j][j] + "\n");
 
                 }
-                Init.print.setPrinter(newPrinter);
+                Init.linearPrinter.setPrinter(newPrinter);
             }
         }
 

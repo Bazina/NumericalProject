@@ -1,15 +1,18 @@
 package com.example.NumericalProject.EquationsParser;
 
-public class SingleEquationParser {
-    private static String Equation ;
-    private static String Buffer ;
+import java.math.BigDecimal;
 
-    public static void SetEquation(String Input){
-        Equation = Input.replaceAll("e" , String.valueOf(Math.exp(1))) ;
-        Buffer = Equation ;
+public class SingleEquationParser {
+    private static String Equation;
+    private static String Buffer;
+
+    public static void SetEquation(String Input) {
+        Equation = Input.replaceAll("e", String.valueOf(Math.exp(1)));
+        Buffer = Equation;
     }
-    public static double Evaluate(double Value) {
-        Equation = Buffer.replaceAll("x" , String.valueOf(Value));
+
+    public static double Evaluate(BigDecimal Value) {
+        Equation = Buffer.replaceAll("x", "(" + Value +")");
 
         return new Object() {
             int pos = -1, ch;
@@ -30,7 +33,8 @@ public class SingleEquationParser {
             double parse() {
                 nextChar();
                 double x = parseExpression();
-                if (pos < Equation.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                if (pos < Equation.length())
+                    throw new RuntimeException("Unexpected: " + (char) ch);
                 return x;
             }
 
@@ -42,8 +46,8 @@ public class SingleEquationParser {
 
             double parseExpression() {
                 double x = parseTerm();
-                for (;;) {
-                    if      (eat('+')) x += parseTerm(); // addition
+                for (; ; ) {
+                    if (eat('+')) x += parseTerm(); // addition
                     else if (eat('-')) x -= parseTerm(); // subtraction
                     else return x;
                 }
@@ -51,8 +55,8 @@ public class SingleEquationParser {
 
             double parseTerm() {
                 double x = parseFactor();
-                for (;;) {
-                    if      (eat('*')) x *= parseFactor(); // multiplication
+                for (; ; ) {
+                    if (eat('*')) x *= parseFactor(); // multiplication
                     else if (eat('/')) x /= parseFactor(); // division
                     else return x;
                 }
@@ -76,13 +80,13 @@ public class SingleEquationParser {
                     x = parseFactor();
                     x = switch (func) {
                         case "sqrt" -> Math.sqrt(x);
-                        case "sin" -> Math.sin(Math.toRadians(x));
-                        case "cos" -> Math.cos(Math.toRadians(x));
-                        case "tan" -> Math.tan(Math.toRadians(x));
+                        case "sin" -> Math.sin(x);
+                        case "cos" -> Math.cos(x);
+                        case "tan" -> Math.tan(x);
                         default -> throw new RuntimeException("Unknown function: " + func);
                     };
                 } else {
-                    throw new RuntimeException("Unexpected: " + (char)ch);
+                    throw new RuntimeException("Unexpected: " + (char) ch);
                 }
 
                 if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation

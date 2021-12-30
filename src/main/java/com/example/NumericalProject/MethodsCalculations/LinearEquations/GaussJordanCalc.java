@@ -24,8 +24,8 @@ public class GaussJordanCalc {
         Init.Initialize();
         Eliminate(Init.n);
         String checkConsistency = Init.methodsUtilities.CheckConsistency(Init);
-        String newPrinter = Init.print.getPrinter().concat("\n" + checkConsistency + "\n");
-        Init.print.setPrinter(newPrinter);
+        String newPrinter = Init.linearPrinter.getPrinter().concat("\n" + checkConsistency + "\n");
+        Init.linearPrinter.setPrinter(newPrinter);
 
         // Check if the system is consistent
         if (checkConsistency.equals("No Solution") || checkConsistency.equals("Infinity Solutions")) return;
@@ -34,7 +34,7 @@ public class GaussJordanCalc {
         if (Init.er != -1) {
             // Calculating and printing the final matrices and answer
             if (Init.n >= 0) System.arraycopy(Init.B, 1, Init.x, 1, Init.n);
-            Init.print.VectorToString(Init, Init.x, "Vector X");
+            Init.linearPrinter.VectorToString(Init, Init.x, "Vector X");
         }
     }
 
@@ -66,8 +66,8 @@ public class GaussJordanCalc {
                 }
                 Init.B[i] = Init.B[i].subtract(factor.multiply(Init.B[k]))
                         .setScale(Init.SigFigs, RoundingMode.DOWN);
-                Init.print.MatrixToString(Init, Init.A, "Matrix A");
-                Init.print.VectorToString(Init, Init.B, "Vector B");
+                Init.linearPrinter.MatrixToString(Init, Init.A, "Matrix A");
+                Init.linearPrinter.VectorToString(Init, Init.B, "Vector B");
             }
         }
 
@@ -90,7 +90,7 @@ public class GaussJordanCalc {
         }
 
         // Printing steps
-        Init.print.MatrixToString(Init, Init.A, "Matrix A");
-        Init.print.VectorToString(Init, Init.B, "Vector B");
+        Init.linearPrinter.MatrixToString(Init, Init.A, "Matrix A");
+        Init.linearPrinter.VectorToString(Init, Init.B, "Vector B");
     }
 }

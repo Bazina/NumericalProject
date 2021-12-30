@@ -16,7 +16,7 @@
    <children>
       <ScrollPane fx:id="Scroll" layoutX="50.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <content>
-            <AnchorPane fx:id="MethodPane" maxWidth="1.7976931348623157E308" prefHeight="650.0" prefWidth="750.0" />
+            <AnchorPane fx:id="MethodPane" prefHeight="650.0" prefWidth="750.0" />
          </content>
       </ScrollPane>
       <AnchorPane prefHeight="714.0" prefWidth="800.0" style="-fx-background-color: #064663;" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -78,6 +78,16 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="BisectionButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="Bisection">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="FalsePositionButton" alignment="BASELINE_LEFT" lineSpacing="10.0" prefHeight="50.0" prefWidth="200.0" text="False Position">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </JFXButton>
                </children>
                <padding>
                   <Insets top="10.0" />
@@ -117,6 +127,11 @@
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Images/iteration.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/BS.png" />
                      </image>
                   </ImageView>
                </children>

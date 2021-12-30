@@ -1,6 +1,6 @@
 package com.example.NumericalProject.MethodsCalculations.LinearEquations;
 
-import com.example.NumericalProject.Print;
+import com.example.NumericalProject.Printers.LinearPrinter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Initialization {
 
-    protected final Print print;
+    protected final LinearPrinter linearPrinter;
     protected final MethodsUtilities methodsUtilities;
     protected final Map<String, ArrayList<BigDecimal>> linearEqns;
 
@@ -26,12 +26,12 @@ public class Initialization {
 
     /***
      * A constructor to initialize the object with the needed parameters
-     * @param print an object that holds the steps of the calculations
+     * @param linearPrinter an object that holds the steps of the calculations
      * @param methodsUtilities an objects that holds the common methods
      * @param linearEqns a hash map that hold the system variables and coefficients
      */
-    public Initialization(Print print, MethodsUtilities methodsUtilities, Map<String, ArrayList<BigDecimal>> linearEqns) {
-        this.print = print;
+    public Initialization(LinearPrinter linearPrinter, MethodsUtilities methodsUtilities, Map<String, ArrayList<BigDecimal>> linearEqns) {
+        this.linearPrinter = linearPrinter;
         this.methodsUtilities = methodsUtilities;
         this.linearEqns = linearEqns;
     }
@@ -113,16 +113,16 @@ public class Initialization {
         }
 
         // Printing first step
-        print.MatrixToString(this, A, "Matrix A");
-        print.VectorToString(this, B, "Vector B");
+        linearPrinter.MatrixToString(this, A, "Matrix A");
+        linearPrinter.VectorToString(this, B, "Vector B");
     }
 
     /***
      * Getter for print
      * @return print
      */
-    public Print getPrint() {
-        return print;
+    public LinearPrinter getPrint() {
+        return linearPrinter;
     }
 
     /***
