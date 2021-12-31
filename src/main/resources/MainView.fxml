@@ -38,7 +38,7 @@
       </JFXButton>
       <AnchorPane fx:id="UserManualPane" layoutX="50.0" layoutY="50.0" prefHeight="650.0" prefWidth="750.0">
          <children>
-            <DialogPane fx:id="UserManual" contentText="- Number of variables must equal the number of equations.&#10;&#10;- Coefficients must be numbers (0 or non-existing is allowed).&#10;&#10;- Writing Significant figures is optional" headerText="Manual Usage" layoutX="166.0" layoutY="191.0" prefHeight="209.0" prefWidth="418.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="191.0">
+            <DialogPane fx:id="UserManual" contentText="- Number of variables must equal the number of equations.&#10;&#10;- Coefficients must be numbers (0 or non-existing is allowed).&#10;&#10;- Writing Significant figures is optional and default is 4&#10;&#10;-Non-Linear Equations : Write coeffeints as 6*x not 6x&#10;&#10;-Non-Linear Equations : You can use e , Sin , Cos , x^(real number)&#10;&#10;-In Non-Linear Equations : Sin&amp;Cos are in Radian" headerText="Manual Usage" layoutX="166.0" layoutY="191.0" prefHeight="209.0" prefWidth="418.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="191.0">
                <buttonTypes>
                   <ButtonType fx:constant="OK" />
                </buttonTypes>

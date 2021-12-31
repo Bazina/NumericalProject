@@ -75,7 +75,7 @@ public class Bisection implements Initializable {
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
             BisectionCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
         if (!Objects.equals(EPS.getText().strip(), "")) BisectionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
-        if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSignificantFigures(Numbers.ParseInt(SigFigs));
+        if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         BisectionCalculation.BiSection(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), BigDecimal.ZERO, 0);
         Output.setText(NonLinearPrinter.getResult());
