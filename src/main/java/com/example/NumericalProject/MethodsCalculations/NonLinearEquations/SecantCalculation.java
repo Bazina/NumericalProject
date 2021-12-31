@@ -31,27 +31,22 @@ public class SecantCalculation {
                                 valueOf(SingleEquationParser.Evaluate(Xcurr))), MathContext.DECIMAL128))).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
 
         ea = ((Xnew.subtract(Xcurr)).divide(Xnew, MathContext.DECIMAL128)).multiply(BigDecimal.valueOf(100)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
-        loops++;
-        if (BigDecimal.valueOf(SingleEquationParser.Evaluate(Xnew)).compareTo(BigDecimal.ZERO) == 0) {
-            System.out.println("Root of the" +
-                    " given equation=" + Xnew.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)));
-            NonLinearPrinter.Add(Xnew.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)) + "\n" + loops);
-            return;
-        }
+
+        NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\nXi-1 = " + Xold + "\nXi = " +
+                Xcurr+ "\nXi+1 = " + Xnew + "\n");
+        NonLinearPrinter.Add("Relative Error = " + ea+ "\n\n");
+
         if (ea.compareTo(eps) > 0 & loops < MaxIteration) {
             Xold = Xcurr;
             Xcurr = Xnew;
-            Secant(Xold, Xcurr, loops);
+            Secant(Xold, Xcurr, loops+1);
         } else {
-            System.out.println("Root of the" +
-                    " given equation=" + Xnew);
 
-            System.out.println("No. of "
-                    + "iterations = " + loops);
-            NonLinearPrinter.Add(Xnew + " ," + loops + "\n");
+            NonLinearPrinter.Add("The Root = " + Xnew+ "\nThe Relative Error = "
+                    + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
+
             eps = BigDecimal.valueOf(0.00001);
             MaxIteration = 50;
-            return;
         }
 
     }

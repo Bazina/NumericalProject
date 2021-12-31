@@ -24,15 +24,14 @@ public class BisectionCalculation {
 
     public static void BiSection(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
 
-        if (loops != 0 && (SigFigsHandler.getEr().compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) > 0 || loops >= MaxIteration)) {
-            if(SigFigsHandler.getEr().compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) < 0){
+        if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
+            if(eps.compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) > 0){
                 NonLinearPrinter.Add("Total No of Iterations = " + (loops) + "\nThere is no Root in This Interval\n");
 
             }else{
-                NonLinearPrinter.Add("The Root = " + Oldxr.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)) + "\nThe Relative Error = "
+                NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
                         + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
 
-                NonLinearPrinter.Add("\n");
             }
 
             ea = BigDecimal.ONE;
@@ -44,12 +43,12 @@ public class BisectionCalculation {
         BigDecimal xr = (xl.add(xu)).divide(BigDecimal.valueOf(2) , MathContext.DECIMAL128).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
         if(eps.compareTo(xr.abs()) > 0) xr = BigDecimal.ZERO ;
 
-        NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\nXu = " + xu.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP))+ "\nXl = " +
-                xl.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)) + "\nXr = " + xr.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)) + "\n");
+        NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\nXu = " + xu+ "\nXl = " +
+                xl + "\nXr = " + xr+ "\n");
         if (loops > 0) {
             if(xr.compareTo(BigDecimal.ZERO) != 0){
-                ea = (xr.subtract(Oldxr).divide(xr , MathContext.DECIMAL128)).abs();
-                NonLinearPrinter.Add("Relative Error = " + ea.round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP)) + "\n");
+                ea = (xr.subtract(Oldxr).divide(xr , MathContext.DECIMAL128)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
+                NonLinearPrinter.Add("Relative Error = " + ea + "\n");
             }
         }
         NonLinearPrinter.Add("\n");

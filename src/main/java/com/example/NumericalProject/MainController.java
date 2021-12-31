@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     private AnchorPane opacityPane, drawerPane, MethodPane, UserManualPane, CurrentMethodPane;
 
     @FXML
-    private JFXButton NaiveButton, JordanButton, LUButton, JacobiButton, SeidelButton,BisectionButton , FalsePositionButton ,UserButton, LastButton;
+    private JFXButton NaiveButton, JordanButton, LUButton, JacobiButton, SeidelButton,BisectionButton , FalsePositionButton , SecantButton,UserButton, LastButton;
 
     @FXML
     private DialogPane UserManual;
@@ -61,6 +61,8 @@ public class MainController implements Initializable {
         SeidelButton.setOnMouseClicked(e -> ButtonActivity(SeidelButton , "/Methods/LinearEquations/GaussSeidel.fxml"));
         BisectionButton.setOnMouseClicked(e -> ButtonActivity(BisectionButton , "/Methods/NonLinearEquations/Bisection.fxml"));
         FalsePositionButton.setOnMouseClicked(e -> ButtonActivity(FalsePositionButton , "/Methods/NonLinearEquations/FalsePosition.fxml"));
+        SecantButton.setOnMouseClicked(e -> ButtonActivity(SecantButton , "/Methods/NonLinearEquations/Secant.fxml"));
+
 
         //making the settings for the exit button
         exit.setOnMouseClicked(e -> System.exit(0));

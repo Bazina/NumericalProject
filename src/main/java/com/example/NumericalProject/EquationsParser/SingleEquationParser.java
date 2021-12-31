@@ -1,6 +1,7 @@
 package com.example.NumericalProject.EquationsParser;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class SingleEquationParser {
     private static String Equation;
@@ -8,6 +9,7 @@ public class SingleEquationParser {
 
     public static void SetEquation(String Input) {
         Equation = Input.replaceAll("e", String.valueOf(Math.exp(1)));
+        if(Equation.contains("="))Equation = HandleEquals(Equation) ;
         Buffer = Equation;
     }
 
@@ -94,5 +96,18 @@ public class SingleEquationParser {
                 return x;
             }
         }.parse();
+    }
+
+    private static String HandleEquals(String input){
+        input = input.replaceAll("-" , "+ -") ;
+        input = input.replaceAll("\\+" , " + ") ;
+        String[] Equation = input.split("=") ;
+        String Output = Equation[0];
+        String[] ToConcat = Equation[1].split("\\+") ;
+        for(String s : ToConcat) {
+            if (!Objects.equals(s.strip(), "")) Output += '-' + s;
+        }
+
+        return Output ;
     }
 }

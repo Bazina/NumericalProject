@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.NumericalProject.MethodsControllers.NonLinearEquations.SecantController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="242.0" prefHeight="430.0" prefWidth="350.0" spacing="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="34.0" prefWidth="350.0" text="Solving Non-Linear Equation using" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="Name" alignment="CENTER" prefHeight="31.0" prefWidth="350.0" text="Secant Method">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Equation" prefHeight="50.0" prefWidth="350.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </TextField>
+            <HBox prefHeight="50.0" prefWidth="350.0">
+               <children>
+                  <Label prefHeight="47.0" prefWidth="93.0" text="Initials :">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="IntervalFrom" prefHeight="43.0" prefWidth="120.0" promptText="Xi-1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </TextField>
+                  <VBox prefHeight="47.0" prefWidth="26.0" />
+                  <TextField fx:id="IntervalTo" prefHeight="43.0" prefWidth="120.0" promptText="Xi">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="37.0" prefWidth="350.0">
+               <children>
+                  <Label prefHeight="43.0" prefWidth="342.0" text="Significant Figures (Optional)">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="SigFigs" prefHeight="43.0" prefWidth="249.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="37.0" prefWidth="350.0">
+               <children>
+                  <Label prefHeight="43.0" prefWidth="342.0" text="Max Iterations (Optional)">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="MaxIterations" prefHeight="43.0" prefWidth="249.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="37.0" prefWidth="350.0">
+               <children>
+                  <Label prefHeight="43.0" prefWidth="342.0" text="EPS  (Optional)">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="EPS" prefHeight="43.0" prefWidth="249.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <JFXButton fx:id="Calc" onMouseClicked="#Calculate" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #6998AB;" text="Calculate">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="125.0" layoutY="438.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="438.0">
+         <children>
+            <LineChart fx:id="lineGraph" createSymbols="false" legendVisible="false" prefHeight="600.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <xAxis>
+                  <NumberAxis fx:id="XAxis" autoRanging="false" lowerBound="-10" prefHeight="25.0" prefWidth="368.0" tickUnit="1" upperBound="10" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis fx:id="YAxis" autoRanging="false" lowerBound="-10" side="LEFT" tickUnit="1" upperBound="10" />
+               </yAxis>
+               <cursor>
+                  <Cursor fx:constant="CROSSHAIR" />
+               </cursor>
+            </LineChart>
+         </children>
+      </AnchorPane>
+      <Text fx:id="Output" layoutX="8.0" layoutY="1064.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="734.1366996765137" AnchorPane.topAnchor="1047.8134765625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
