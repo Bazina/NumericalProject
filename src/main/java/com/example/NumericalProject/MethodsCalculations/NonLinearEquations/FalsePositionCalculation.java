@@ -24,7 +24,7 @@ public class FalsePositionCalculation {
 
     public static void FalsePosition(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
 
-        if (loops != 0 && (SigFigsHandler.getEr().compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) > 0 ||ea.compareTo(eps) <=0 || loops >= MaxIteration)) {
+        if (loops != 0 && (SigFigsHandler.getEr().compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) > 0 || loops >= MaxIteration)) {
             if(SigFigsHandler.getEr().compareTo(BigDecimal.valueOf(abs(SingleEquationParser.Evaluate(Oldxr)))) < 0){
                 NonLinearPrinter.Add("Total No of Iterations = " + (loops) + "\nThere is no Root in This Interval\n");
 
@@ -34,7 +34,6 @@ public class FalsePositionCalculation {
 
                 NonLinearPrinter.Add("\n");
             }
-
 
             ea = BigDecimal.ONE;
             eps = BigDecimal.valueOf(0.00001);
