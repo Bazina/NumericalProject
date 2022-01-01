@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Objects;
@@ -39,7 +40,7 @@ public class Bisection implements Initializable {
     public void initialize(final URL url, final ResourceBundle rb) {
     }
 
-    public void Calculate() {
+    public void Calculate() throws IOException {
         lineGraph.setVisible(false);
         if (mathsGraph != null) mathsGraph.clear();
         MainPane.setMinHeight(AnchorPane.USE_PREF_SIZE);

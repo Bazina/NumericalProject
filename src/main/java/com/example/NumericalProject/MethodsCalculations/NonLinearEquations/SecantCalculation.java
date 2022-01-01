@@ -41,7 +41,7 @@ public class SecantCalculation {
             Xcurr = Xnew;
             Secant(Xold, Xcurr, loops+1);
         } else {
-            if(ea.compareTo(eps)>0 & loops == 50){
+            if(ea.compareTo(eps)>0 & loops == MaxIteration){
                 NonLinearPrinter.Add("There is no root");
                 return;
             }
