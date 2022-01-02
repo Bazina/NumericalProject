@@ -21,10 +21,9 @@ public class SingleEquationParser {
         // Read the output from the command
         String s;
         while ((s = stdInput.readLine()) != null) {
-            DerivativeBuffer = s.replaceAll("\\*\\*" , "^") ;
+            DerivativeBuffer = s.replaceAll("\\*\\*" , "^").replaceAll("e" , String.valueOf(Math.exp(1))) ;
         }
         RegularBuffer = Input.replaceAll("e" , String.valueOf(Math.exp(1)));
-        DerivativeBuffer = DerivativeBuffer.replaceAll("e" , String.valueOf(Math.exp(1)));
     }
 
     public static double Evaluate(BigDecimal Value) {
