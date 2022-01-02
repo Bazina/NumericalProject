@@ -44,7 +44,7 @@ public class FixedPoint implements Initializable {
         lineGraph.setVisible(false);
         if (mathsGraph != null) mathsGraph.clear();
         MainPane.setMinHeight(AnchorPane.USE_PREF_SIZE);
-        SingleEquationParser.SetEquation("x+"+Equation.getText().strip());
+        SingleEquationParser.SetEquation(Equation.getText().concat("+x"));
 
         try {
             SingleEquationParser.Evaluate(BigDecimal.valueOf(1));

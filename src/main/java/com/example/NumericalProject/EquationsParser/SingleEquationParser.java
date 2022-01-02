@@ -13,7 +13,7 @@ public class SingleEquationParser {
         if(Input.contains("="))Input = HandleEquals(Input).replaceAll(" " , "") ;
 
         Runtime rt = Runtime.getRuntime();
-        String[] commands = {"python", "M:\\CSED\\YEAR 2\\Numerical\\ProjectFX\\src\\main\\java\\com\\example\\NumericalProject\\Derivative.py", Input.replaceAll("\\^", "**")};
+        String[] commands = {"python", "C:\\Users\\Mo'men Gharib\\NumericalProject\\src\\main\\java\\com\\example\\NumericalProject\\Derivative.py", Input.replaceAll("\\^", "**")};
         Process proc = rt.exec(commands);
 
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));

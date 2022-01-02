@@ -4,6 +4,7 @@ import com.example.NumericalProject.EquationsParser.Numbers;
 import com.example.NumericalProject.EquationsParser.SingleEquationParser;
 import com.example.NumericalProject.InputHandler;
 import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.BisectionCalculation;
+import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.SecantCalculation;
 import com.example.NumericalProject.Printers.NonLinearPrinter;
 import com.example.NumericalProject.Printers.SigFigsHandler;
 import javafx.fxml.FXML;
@@ -74,13 +75,13 @@ public class Bisection implements Initializable {
         MainPane.setMinHeight(AnchorPane.USE_COMPUTED_SIZE);
 
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
-            BisectionCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
-        if (!Objects.equals(EPS.getText().strip(), "")) BisectionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
+            SecantCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
+        if (!Objects.equals(EPS.getText().strip(), "")) SecantCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom));
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo));
-        BisectionCalculation.BiSection(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), BigDecimal.ZERO, 0);
+        SecantCalculation.Secant(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), 0);
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();
