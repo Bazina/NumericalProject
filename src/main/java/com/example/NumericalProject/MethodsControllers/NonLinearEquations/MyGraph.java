@@ -16,7 +16,7 @@ public class MyGraph {
         this.range = range;
     }
 
-    public void plotLine() {
+    public void plotFunction() {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
         for (int x = 0; x <= 2000; x+=1) {
             plotPoint(-range + x*0.1, SingleEquationParser.Evaluate(BigDecimal.valueOf(-range + x*0.1) ), series);
@@ -24,10 +24,29 @@ public class MyGraph {
         graph.getData().add(series);
     }
 
+    public void plotDerivative() {
+        final XYChart.Series<Double, Double> series = new XYChart.Series<>();
+        for (int x = 0; x <= 2000; x+=1) {
+            plotPoint(-range + x*0.1, SingleEquationParser.EvaluateDerivative(BigDecimal.valueOf(-range + x*0.1) ), series);
+        }
+        graph.getData().add(series);
+    }
+
+    public void plotLine(double X) {
+        final XYChart.Series<Double, Double> series = new XYChart.Series<>();
+
+        plotPoint(X, -10, series);
+        plotPoint(X, 10, series);
+
+        graph.getData().add(series);
+    }
+
     private void plotPoint(final double x, final double y,
                            final XYChart.Series<Double, Double> series) {
         series.getData().add(new XYChart.Data<>(x, y));
     }
+
+
 
     public void clear() {
         graph.getData().clear();

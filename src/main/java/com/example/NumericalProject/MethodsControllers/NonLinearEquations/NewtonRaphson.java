@@ -3,7 +3,6 @@ package com.example.NumericalProject.MethodsControllers.NonLinearEquations;
 import com.example.NumericalProject.EquationsParser.Numbers;
 import com.example.NumericalProject.EquationsParser.SingleEquationParser;
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.FalsePositionCalculation;
 import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.NewtonCalculation;
 import com.example.NumericalProject.Printers.NonLinearPrinter;
 import com.example.NumericalProject.Printers.SigFigsHandler;
@@ -66,7 +65,7 @@ public class NewtonRaphson implements Initializable {
         lineGraph.setVisible(true);
         try {
             mathsGraph = new MyGraph(lineGraph, 10);
-            mathsGraph.plotLine();
+            mathsGraph.plotFunction();
         } catch (Exception e) {
             InputHandler.WrongInput("Missing Data", "Please Write Interval Boundaries");
         }
@@ -77,6 +76,7 @@ public class NewtonRaphson implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) NewtonCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
+        mathsGraph.plotDerivative();
         NewtonCalculation.Newton(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
         Output.setText(NonLinearPrinter.getResult());
 

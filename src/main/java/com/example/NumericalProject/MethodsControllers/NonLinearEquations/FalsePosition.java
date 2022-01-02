@@ -67,7 +67,7 @@ public class FalsePosition implements Initializable {
         lineGraph.setVisible(true);
         try {
             mathsGraph = new MyGraph(lineGraph, 10);
-            mathsGraph.plotLine();
+            mathsGraph.plotFunction();
         } catch (Exception e) {
             InputHandler.WrongInput("Missing Data", "Please Write Interval Boundaries");
         }
@@ -78,6 +78,8 @@ public class FalsePosition implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) FalsePositionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
+        mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom));
+        mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo));
         FalsePositionCalculation.FalsePosition(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), BigDecimal.ZERO, 0);
         Output.setText(NonLinearPrinter.getResult());
 

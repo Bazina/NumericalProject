@@ -67,7 +67,7 @@ public class Secant implements Initializable {
         lineGraph.setVisible(true);
         try {
             mathsGraph = new MyGraph(lineGraph, 10);
-            mathsGraph.plotLine();
+            mathsGraph.plotFunction();
         } catch (Exception e) {
             InputHandler.WrongInput("Missing Data", "Please Write Interval Boundaries");
         }
@@ -78,6 +78,7 @@ public class Secant implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) SecantCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
+        mathsGraph.plotDerivative();
         SecantCalculation.Secant(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), 0);
         Output.setText(NonLinearPrinter.getResult());
 

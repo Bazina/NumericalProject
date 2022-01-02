@@ -65,7 +65,7 @@ public class FixedPoint implements Initializable {
         lineGraph.setVisible(true);
         try {
             mathsGraph = new MyGraph(lineGraph, 10);
-            mathsGraph.plotLine();
+            mathsGraph.plotFunction();
         } catch (Exception e) {
             InputHandler.WrongInput("Missing Data", "Please Write Interval Boundaries");
         }
@@ -76,6 +76,7 @@ public class FixedPoint implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) FixedPointCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
+        mathsGraph.plotDerivative();
         FixedPointCalculation.FixedPoint(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
         Output.setText(NonLinearPrinter.getResult());
 
