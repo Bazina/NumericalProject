@@ -24,7 +24,7 @@ public class FalsePositionCalculation {
 
     public static void FalsePosition(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
 
-        if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
+        if (loops != 0 && (SigFigsHandler.getEr().compareTo(ea) > 0|| loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
                     + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
 
@@ -51,10 +51,10 @@ public class FalsePositionCalculation {
 
         if (SingleEquationParser.Evaluate(xr) * SingleEquationParser.Evaluate(xl) <= 0) {
             FalsePosition(xl, xr, xr, loops + 1);
-        } else if (SingleEquationParser.Evaluate(xr) * SingleEquationParser.Evaluate(xu) < 0) {
+        } else if (SingleEquationParser.Evaluate(xr) * SingleEquationParser.Evaluate(xu) <= 0) {
             FalsePosition(xr, xu, xr, loops + 1);
         }else{
-            NonLinearPrinter.Add("Total No of Iterations = " + (loops+1) + "\nThere is no Root in This Interval\n");
+            NonLinearPrinter.Add("Total No of Iterations = " + (loops+1) + "\nThere is no Root in This Interval or There is Multiple Roots\n");
         }
     }
 }
