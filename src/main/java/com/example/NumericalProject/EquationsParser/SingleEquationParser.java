@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class SingleEquationParser {
     private static String Equation;
@@ -38,8 +37,8 @@ public class SingleEquationParser {
 
 
     private static double Evaluate(BigDecimal Value , boolean Regular) {
-        if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value +")");
-        else Equation = DerivativeBuffer.replaceAll("x", "(" + Value +")");
+        if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value.toPlainString() +")");
+        else Equation = DerivativeBuffer.replaceAll("x", "(" + Value.toPlainString() +")");
 
         return new Object() {
             int pos = -1, ch;

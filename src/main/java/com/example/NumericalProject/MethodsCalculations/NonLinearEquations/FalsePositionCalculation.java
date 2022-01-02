@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import static java.lang.Math.abs;
-
 public class FalsePositionCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -24,7 +22,7 @@ public class FalsePositionCalculation {
 
     public static void FalsePosition(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
 
-        if (loops != 0 && (SigFigsHandler.getEr().compareTo(ea) > 0|| loops >= MaxIteration)) {
+        if (loops != 0 && (eps.compareTo(ea) > 0|| loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
                     + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
 

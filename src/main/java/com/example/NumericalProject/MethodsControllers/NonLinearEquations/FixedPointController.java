@@ -3,7 +3,7 @@ package com.example.NumericalProject.MethodsControllers.NonLinearEquations;
 import com.example.NumericalProject.EquationsParser.Numbers;
 import com.example.NumericalProject.EquationsParser.SingleEquationParser;
 import com.example.NumericalProject.InputHandler;
-import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.SecantCalculation;
+import com.example.NumericalProject.MethodsCalculations.NonLinearEquations.FixedPointCalculation;
 import com.example.NumericalProject.Printers.NonLinearPrinter;
 import com.example.NumericalProject.Printers.SigFigsHandler;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SecantController implements Initializable {
+public class FixedPointController implements Initializable {
 
 
     @FXML
@@ -29,7 +29,7 @@ public class SecantController implements Initializable {
     private Text Output;
 
     @FXML
-    private TextField SigFigs, MaxIterations, EPS, Equation, IntervalFrom, IntervalTo;
+    private TextField SigFigs, MaxIterations, EPS, Equation, IntervalFrom;
 
     @FXML
     private AnchorPane MainPane;
@@ -54,12 +54,10 @@ public class SecantController implements Initializable {
         }
 
         if (InputHandler.TextField(SigFigs, true) || InputHandler.TextField(MaxIterations, true)
-                || InputHandler.TextField(EPS, false) || InputHandler.TextField(IntervalFrom, false)
-                || InputHandler.TextField(IntervalTo, false))
+                || InputHandler.TextField(EPS, false) || InputHandler.TextField(IntervalFrom, false))
             return;
 
-        if (Objects.equals(Equation.getText().strip(), "") || Objects.equals(IntervalFrom.getText().strip(), "")
-                || Objects.equals(IntervalTo.getText().strip(), "")) {
+        if (Objects.equals(Equation.getText().strip(), "") || Objects.equals(IntervalFrom.getText().strip(), "")) {
             InputHandler.WrongInput("Missing Data", "Please Write all Inputs");
             return;
         }
@@ -74,11 +72,11 @@ public class SecantController implements Initializable {
         MainPane.setMinHeight(AnchorPane.USE_COMPUTED_SIZE);
 
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
-            SecantCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
-        if (!Objects.equals(EPS.getText().strip(), "")) SecantCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
+            FixedPointCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
+        if (!Objects.equals(EPS.getText().strip(), "")) FixedPointCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
-        SecantCalculation.Secant(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), 0);
+        FixedPointCalculation.FixedPoint(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();

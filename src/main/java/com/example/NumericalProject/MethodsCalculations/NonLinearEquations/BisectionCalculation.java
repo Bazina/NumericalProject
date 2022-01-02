@@ -24,7 +24,7 @@ public class BisectionCalculation {
 
     public static void BiSection(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
 
-        if (loops != 0 && (SigFigsHandler.getEr().compareTo(ea) > 0 || loops >= MaxIteration)) {
+        if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
                     + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
 

@@ -1,7 +1,5 @@
 package com.example.NumericalProject;
 
-import com.example.NumericalProject.MethodsControllers.LinearEquations.NaiveGauss;
-import com.example.NumericalProject.MethodsControllers.NonLinearEquations.FalsePosition;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +30,8 @@ public class MainController implements Initializable {
     private AnchorPane opacityPane, drawerPane, MethodPane, UserManualPane, CurrentMethodPane;
 
     @FXML
-    private JFXButton NaiveButton, JordanButton, LUButton, JacobiButton, SeidelButton,BisectionButton , FalsePositionButton , SecantButton,UserButton, LastButton;
+    private JFXButton NaiveButton, JordanButton, LUButton, JacobiButton, SeidelButton, BisectionButton,
+            FalsePositionButton, SecantButton, NewtonButton, FixedPointButton, UserButton, LastButton;
 
     @FXML
     private DialogPane UserManual;
@@ -54,14 +53,16 @@ public class MainController implements Initializable {
         LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
 
         //load the method's view based on the user's choice and change the color of pressed button
-        NaiveButton.setOnMouseClicked(e -> ButtonActivity(NaiveButton , "/Methods/LinearEquations/NaiveGauss.fxml"));
-        JordanButton.setOnMouseClicked(e -> ButtonActivity(JordanButton , "/Methods/LinearEquations/GaussJordan.fxml"));
-        LUButton.setOnMouseClicked(e -> ButtonActivity(LUButton , "/Methods/LinearEquations/LUDecomposition.fxml"));
-        JacobiButton.setOnMouseClicked(e -> ButtonActivity(JacobiButton , "/Methods/LinearEquations/JacobiIteration.fxml"));
-        SeidelButton.setOnMouseClicked(e -> ButtonActivity(SeidelButton , "/Methods/LinearEquations/GaussSeidel.fxml"));
-        BisectionButton.setOnMouseClicked(e -> ButtonActivity(BisectionButton , "/Methods/NonLinearEquations/Bisection.fxml"));
-        FalsePositionButton.setOnMouseClicked(e -> ButtonActivity(FalsePositionButton , "/Methods/NonLinearEquations/FalsePosition.fxml"));
-        SecantButton.setOnMouseClicked(e -> ButtonActivity(SecantButton , "/Methods/NonLinearEquations/Secant.fxml"));
+        NaiveButton.setOnMouseClicked(e -> ButtonActivity(NaiveButton, "/Methods/LinearEquations/NaiveGauss.fxml"));
+        JordanButton.setOnMouseClicked(e -> ButtonActivity(JordanButton, "/Methods/LinearEquations/GaussJordan.fxml"));
+        LUButton.setOnMouseClicked(e -> ButtonActivity(LUButton, "/Methods/LinearEquations/LUDecomposition.fxml"));
+        JacobiButton.setOnMouseClicked(e -> ButtonActivity(JacobiButton, "/Methods/LinearEquations/JacobiIteration.fxml"));
+        SeidelButton.setOnMouseClicked(e -> ButtonActivity(SeidelButton, "/Methods/LinearEquations/GaussSeidel.fxml"));
+        BisectionButton.setOnMouseClicked(e -> ButtonActivity(BisectionButton, "/Methods/NonLinearEquations/Bisection.fxml"));
+        FalsePositionButton.setOnMouseClicked(e -> ButtonActivity(FalsePositionButton, "/Methods/NonLinearEquations/FalsePosition.fxml"));
+        SecantButton.setOnMouseClicked(e -> ButtonActivity(SecantButton, "/Methods/NonLinearEquations/Secant.fxml"));
+        FixedPointButton.setOnMouseClicked(e -> ButtonActivity(FixedPointButton, "/Methods/NonLinearEquations/FixedPoint.fxml"));
+        NewtonButton.setOnMouseClicked(e -> ButtonActivity(NewtonButton, "/Methods/NonLinearEquations/NewtonRaphson.fxml"));
 
 
         //making the settings for the exit button
@@ -124,7 +125,7 @@ public class MainController implements Initializable {
         return (AnchorPane) root;
     }
 
-    private void ButtonActivity(JFXButton Button , String Path){
+    private void ButtonActivity(JFXButton Button, String Path) {
         LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,0)");
         LastButton = Button;
         LastButton.setStyle("-fx-background-color:rgba(105, 152, 171,1)");
