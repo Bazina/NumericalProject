@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class FixedPointController implements Initializable {
+public class FixedPoint implements Initializable {
 
 
     @FXML
@@ -44,7 +44,7 @@ public class FixedPointController implements Initializable {
         lineGraph.setVisible(false);
         if (mathsGraph != null) mathsGraph.clear();
         MainPane.setMinHeight(AnchorPane.USE_PREF_SIZE);
-        SingleEquationParser.SetEquation(Equation.getText().strip());
+        SingleEquationParser.SetEquation("x+"+Equation.getText().strip());
 
         try {
             SingleEquationParser.Evaluate(BigDecimal.valueOf(1));

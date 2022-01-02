@@ -22,6 +22,7 @@ public class FixedPointCalculation {
     public static void FixedPoint(BigDecimal Xcurr, int loops) {
 
         BigDecimal Xnew;
+        System.out.println(Xcurr);
         Xnew = BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr));
 
         ea = ((Xnew.subtract(Xcurr)).divide(Xnew, MathContext.DECIMAL128)).multiply(BigDecimal.valueOf(100)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
