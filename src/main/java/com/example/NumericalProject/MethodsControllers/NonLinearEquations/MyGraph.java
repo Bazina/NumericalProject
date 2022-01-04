@@ -32,11 +32,11 @@ public class MyGraph {
         graph.getData().add(series);
     }
 
-    public void plotLine(double X) {
+    public void plotLine(double X1 , double X2 , double Y1 , double Y2) {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
 
-        plotPoint(X, -10, series);
-        plotPoint(X, 10, series);
+        plotPoint(X1, Y1, series);
+        plotPoint(X2, Y2, series);
 
         graph.getData().add(series);
     }

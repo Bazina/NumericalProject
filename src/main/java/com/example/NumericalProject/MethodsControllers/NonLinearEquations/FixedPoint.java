@@ -76,7 +76,8 @@ public class FixedPoint implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) FixedPointCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
-        mathsGraph.plotDerivative();
+        mathsGraph.plotLine(-10, 10, -10, 10);
+
         FixedPointCalculation.FixedPoint(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
         Output.setText(NonLinearPrinter.getResult());
 

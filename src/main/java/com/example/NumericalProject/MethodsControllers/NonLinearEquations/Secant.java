@@ -79,6 +79,7 @@ public class Secant implements Initializable {
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotDerivative();
+
         SecantCalculation.Secant(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), 0);
         Output.setText(NonLinearPrinter.getResult());
 

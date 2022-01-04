@@ -55,6 +55,7 @@ public class LUDecomposition implements Initializable {
         if (InputHandler.TextField(SigFigs, true) || InputHandler.TextArea(Equations) || InputHandler.ComboBox(Forms, "Please, Select The Output Form"))
             return;
 
+
         try{
             dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {

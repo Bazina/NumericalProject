@@ -78,8 +78,8 @@ public class FalsePosition implements Initializable {
         if (!Objects.equals(EPS.getText().strip(), "")) FalsePositionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
-        mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom));
-        mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo));
+        mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom), Numbers.ParseDouble(IntervalFrom), 10, -10);
+        mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo), Numbers.ParseDouble(IntervalTo), 10, -10);
         FalsePositionCalculation.FalsePosition(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), BigDecimal.ZERO, 0);
         Output.setText(NonLinearPrinter.getResult());
 

@@ -77,6 +77,7 @@ public class NewtonRaphson implements Initializable {
         if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotDerivative();
+
         NewtonCalculation.Newton(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
         Output.setText(NonLinearPrinter.getResult());
 
