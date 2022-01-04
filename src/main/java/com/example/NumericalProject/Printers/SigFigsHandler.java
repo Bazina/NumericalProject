@@ -9,6 +9,7 @@ public class SigFigsHandler {
     private static BigDecimal er = BigDecimal.valueOf(0.005);
 
     public static void setSigFigs(int num){
+
         SigFigs = num ;
         ChangeError();
     }

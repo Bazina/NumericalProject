@@ -20,7 +20,7 @@ public class NewtonCalculation {
     public static void Newton(BigDecimal Xcurr, int loops) {
         BigDecimal Xnew;
         Xnew = Xcurr.subtract(BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr)).
-                divide(BigDecimal.valueOf(SingleEquationParser.EvaluateDerivative(Xcurr))));
+                divide(BigDecimal.valueOf(SingleEquationParser.EvaluateDerivative(Xcurr)),MathContext.DECIMAL128 )).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
 
         ea = ((Xnew.subtract(Xcurr)).divide(Xnew, MathContext.DECIMAL128)).multiply(BigDecimal.valueOf(100)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
 
