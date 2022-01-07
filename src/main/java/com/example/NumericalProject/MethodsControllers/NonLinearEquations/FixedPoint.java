@@ -78,7 +78,9 @@ public class FixedPoint implements Initializable {
 
         mathsGraph.plotLine(-10, 10, -10, 10);
 
+        long time = System.currentTimeMillis();
         FixedPointCalculation.FixedPoint(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
+        NonLinearPrinter.Add("\nCalculation Time: " + (System.currentTimeMillis() - time) + " ms");
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();

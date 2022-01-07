@@ -82,7 +82,9 @@ public class Bisection implements Initializable {
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom), Numbers.ParseDouble(IntervalFrom), 10, -10);
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo), Numbers.ParseDouble(IntervalTo), 10, -10);
 
+        long time = System.currentTimeMillis();
         BisectionCalculation.BiSection(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), BigDecimal.ZERO, 0);
+        NonLinearPrinter.Add("\nCalculation Time: " + (System.currentTimeMillis() - time) + " ms");
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();

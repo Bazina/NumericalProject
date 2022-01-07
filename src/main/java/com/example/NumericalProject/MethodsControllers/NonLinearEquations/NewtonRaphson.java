@@ -78,7 +78,9 @@ public class NewtonRaphson implements Initializable {
 
         mathsGraph.plotDerivative();
 
+        long time = System.currentTimeMillis();
         NewtonCalculation.Newton(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), 0);
+        NonLinearPrinter.Add("\nCalculation Time: " + (System.currentTimeMillis() - time) + " ms");
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();

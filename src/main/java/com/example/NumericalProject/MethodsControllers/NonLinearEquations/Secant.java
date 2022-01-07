@@ -80,7 +80,9 @@ public class Secant implements Initializable {
 
         mathsGraph.plotDerivative();
 
+        long time = System.currentTimeMillis();
         SecantCalculation.Secant(BigDecimal.valueOf(Numbers.ParseDouble(IntervalFrom)), BigDecimal.valueOf(Numbers.ParseDouble(IntervalTo)), 0);
+        NonLinearPrinter.Add("\nCalculation Time: " + (System.currentTimeMillis() - time) + " ms");
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();
