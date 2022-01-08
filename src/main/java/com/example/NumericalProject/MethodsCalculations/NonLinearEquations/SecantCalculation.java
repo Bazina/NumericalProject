@@ -21,7 +21,12 @@ public class SecantCalculation {
     }
 
     public static void Secant(BigDecimal Xold, BigDecimal Xcurr, int loops) {
-
+        if(BigDecimal.valueOf(SingleEquationParser.
+                Evaluate(Xcurr)).equals(BigDecimal.valueOf(SingleEquationParser.
+                Evaluate(Xold)))){
+            Xcurr = Xcurr.add(BigDecimal.ONE);
+            Secant(Xold ,  Xcurr , loops) ;
+        }
         BigDecimal Xnew;
         Xnew = (Xcurr.
                 subtract((BigDecimal.valueOf(SingleEquationParser.
