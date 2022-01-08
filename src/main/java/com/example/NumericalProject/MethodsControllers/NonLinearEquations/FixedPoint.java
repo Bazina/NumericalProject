@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/***
+ * class to control the fixed point method's view
+ */
 public class FixedPoint implements Initializable {
 
 
@@ -40,6 +43,9 @@ public class FixedPoint implements Initializable {
     public void initialize(final URL url, final ResourceBundle rb) {
     }
 
+    /***
+     * to calculate the result for user's input
+     */
     public void Calculate() throws IOException {
         lineGraph.setVisible(false);
         if (mathsGraph != null) mathsGraph.clear();

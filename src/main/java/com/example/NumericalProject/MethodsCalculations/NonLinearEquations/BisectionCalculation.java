@@ -22,6 +22,7 @@ public class BisectionCalculation {
     public static void setMaxIteration(int value) {
         MaxIteration = value;
     }
+
     /***
      * Calculating the root using bisection.
      * @param xl this is the lower bound.
@@ -30,7 +31,7 @@ public class BisectionCalculation {
      * @param loops num. of current iteration.
      */
     public static void BiSection(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
-        if (loops == MaxIteration){
+        if (loops == MaxIteration) {
             return;
         }
 

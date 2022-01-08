@@ -7,6 +7,7 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+
 /***
  * This class calculate Secant method for non-linear equations.
  */
@@ -25,17 +26,17 @@ public class SecantCalculation {
 
     /***
      * Calculating the root using secant method.
-      * @param Xold this is Xi-1
+     * @param Xold this is Xi-1
      * @param Xcurr this is Xi
      * @param loops num. of current iteration
      */
     public static void Secant(BigDecimal Xold, BigDecimal Xcurr, int loops) {
         if (loops == MaxIteration) return;
-        if(BigDecimal.valueOf(SingleEquationParser.
+        if (BigDecimal.valueOf(SingleEquationParser.
                 Evaluate(Xcurr)).equals(BigDecimal.valueOf(SingleEquationParser.
-                Evaluate(Xold)))){
+                Evaluate(Xold)))) {
             Xcurr = Xcurr.add(BigDecimal.ONE);
-            Secant(Xold ,  Xcurr , loops) ;
+            Secant(Xold, Xcurr, loops);
         }
         BigDecimal Xnew;
         Xnew = (Xcurr.

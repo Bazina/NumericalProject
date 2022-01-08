@@ -8,6 +8,7 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+
 /***
  * This class calculate fixed point method for non-linear equations.
  */

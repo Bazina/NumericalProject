@@ -7,6 +7,7 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+
 /***
  * This class calculate false position method for non-linear equations.
  */
