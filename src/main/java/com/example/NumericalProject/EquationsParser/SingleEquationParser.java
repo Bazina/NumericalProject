@@ -5,15 +5,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 
+/**
+ * Class to parse input equations and get its derivative
+ */
 public class SingleEquationParser {
     private static String Equation;
     private static String RegularBuffer, DerivativeBuffer;
 
+    /**
+     * to set the function to be evaluated later and get its derivative
+     * @param Input The desired Equation
+     * @throws IOException In case of any errors when getting the derivative from th python program
+     */
     public static void SetEquation(String Input) throws IOException {
         if (Input.contains("=")) Input = HandleEquals(Input).replaceAll(" ", "");
 
         Runtime rt = Runtime.getRuntime();
-        String[] commands = {"python", "C:\\Derivative.py", Input.replaceAll("\\^", "**")};
+        String[] commands = {"python", "M:\\CSED\\YEAR 2\\Numerical\\ProjectFX\\src\\main\\java\\com\\example\\NumericalProject\\Derivative.py", Input.replaceAll("\\^", "**")};
         Process proc = rt.exec(commands);
 
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
@@ -26,15 +34,30 @@ public class SingleEquationParser {
         RegularBuffer = Input.replaceAll("e", String.valueOf(Math.exp(1)));
     }
 
+    /**
+     * function that calls the actual function that evaluate
+     * @param Value the value to evaluate the original function with
+     * @return the evaluation value
+     */
     public static double Evaluate(BigDecimal Value) {
         return Evaluate(Value, true);
     }
 
+    /**
+     * function that calls the actual function that evaluate
+     * @param Value the value to evaluate the derivative function with
+     * @return the evaluation value
+     */
     public static double EvaluateDerivative(BigDecimal Value) {
         return Evaluate(Value, false);
     }
 
 
+    /**
+     * @param Value the value to evaluate with
+     * @param Regular if false then evaluate the derivative
+     * @return
+     */
     private static double Evaluate(BigDecimal Value, boolean Regular) {
         if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value.toPlainString() + ")");
         else Equation = DerivativeBuffer.replaceAll("x", "(" + Value.toPlainString() + ")");
@@ -122,6 +145,10 @@ public class SingleEquationParser {
         }.parse();
     }
 
+    /**
+     * to handle the '=' sign
+     * @param input the equation
+     */
     private static String HandleEquals(String input) {
         String[] Equation = input.split("=");
 

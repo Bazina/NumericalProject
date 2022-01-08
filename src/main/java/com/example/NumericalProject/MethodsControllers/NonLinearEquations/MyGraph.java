@@ -6,6 +6,9 @@ import javafx.scene.chart.XYChart;
 import java.math.BigDecimal;
 
 
+/**
+ * Class for the graph plotting
+ */
 public class MyGraph {
 
     private XYChart<Double, Double> graph;
@@ -16,6 +19,9 @@ public class MyGraph {
         this.range = range;
     }
 
+    /**
+     * to plot the original function in the single parser class
+     */
     public void plotFunction() {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
         for (int x = 0; x <= 2000; x += 1) {
@@ -24,6 +30,9 @@ public class MyGraph {
         graph.getData().add(series);
     }
 
+    /**
+     * to plot the derivative of the function in the single parser class
+     */
     public void plotDerivative() {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
         for (int x = 0; x <= 2000; x += 1) {
@@ -32,6 +41,11 @@ public class MyGraph {
         graph.getData().add(series);
     }
 
+    /**
+     * to plot the desired line
+     * @param X1,Y1 Co-ordinates for the first point
+     * @param X2,Y2 Coordinates for the second point
+     */
     public void plotLine(double X1, double X2, double Y1, double Y2) {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
 
@@ -41,12 +55,20 @@ public class MyGraph {
         graph.getData().add(series);
     }
 
+    /**
+     * to plot single point
+     * @param x,y Coordinates of the point
+     * @param series The series to put the point in
+     */
     private void plotPoint(final double x, final double y,
                            final XYChart.Series<Double, Double> series) {
         series.getData().add(new XYChart.Data<>(x, y));
     }
 
 
+    /**
+     * clear any plotting in the graph
+     */
     public void clear() {
         graph.getData().clear();
     }
