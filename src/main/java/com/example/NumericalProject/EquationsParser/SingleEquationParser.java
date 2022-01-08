@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Class to parse input equations and get its derivative
@@ -21,7 +23,8 @@ public class SingleEquationParser {
         if (Input.contains("=")) Input = HandleEquals(Input).replaceAll(" ", "");
 
         Runtime rt = Runtime.getRuntime();
-        String[] commands = {"python", "M:\\CSED\\YEAR 2\\Numerical\\ProjectFX\\src\\main\\java\\com\\example\\NumericalProject\\Derivative.py", Input.replaceAll("\\^", "**")};
+        Path filePath = Paths.get("src/main/java/com/example/NumericalProject/Derivative.py");
+        String[] commands = {"python", filePath.toAbsolutePath().toString(), Input.replaceAll("\\^", "**")};
         Process proc = rt.exec(commands);
 
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
@@ -56,7 +59,7 @@ public class SingleEquationParser {
     /**
      * @param Value the value to evaluate with
      * @param Regular if false then evaluate the derivative
-     * @return
+     * @return the result of the evaluation
      */
     private static double Evaluate(BigDecimal Value, boolean Regular) {
         if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value.toPlainString() + ")");
