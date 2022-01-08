@@ -7,7 +7,9 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-
+/***
+ * This class calculate false position method for non-linear equations.
+ */
 public class FalsePositionCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -20,7 +22,15 @@ public class FalsePositionCalculation {
         MaxIteration = value;
     }
 
+    /***
+     * Calculating the root using false position.
+     * @param xl this is the lower bound.
+     * @param xu this is the upper bound.
+     * @param Oldxr this is Xi-1
+     * @param loops num. of current iteration.
+     */
     public static void FalsePosition(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
+        if (loops == MaxIteration) return;
 
         if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "

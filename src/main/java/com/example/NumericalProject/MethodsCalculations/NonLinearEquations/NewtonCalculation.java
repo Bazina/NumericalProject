@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+/***
+ * This class calculate Newton Raphson method for non-linear equations.
+ */
 public class NewtonCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -20,7 +23,14 @@ public class NewtonCalculation {
         MaxIteration = value;
     }
 
+    /***
+     * Calculating the root using Newton Raphson method.
+     * @param Xcurr this is Xi
+     * @param loops num. of current iteration.
+     */
     public static void Newton(BigDecimal Xcurr, int loops) {
+        if (loops == MaxIteration) return;
+
         BigDecimal Xnew;
         Xnew = Xcurr.subtract(BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr)).
                 divide(BigDecimal.valueOf(SingleEquationParser.EvaluateDerivative(Xcurr)), MathContext.DECIMAL128)).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
@@ -30,11 +40,11 @@ public class NewtonCalculation {
         NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\n" + "\nXi = " +
                 Xcurr + "\nXi+1 = " + Xnew + "\n");
         NonLinearPrinter.Add("Relative Error = " + ea + "\n\n");
-        if (ea.compareTo(eps) > 0 & loops < MaxIteration) {
+        if (ea.compareTo(eps) > 0 && loops < MaxIteration) {
             Xcurr = Xnew;
             Newton(Xcurr, loops + 1);
         } else {
-            if (ea.compareTo(eps) > 0 & loops == MaxIteration) {
+            if (ea.compareTo(eps) > 0 && loops == MaxIteration) {
                 NonLinearPrinter.Add("There is no root");
                 return;
             }

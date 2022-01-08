@@ -7,7 +7,9 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-
+/***
+ * This class calculate Secant method for non-linear equations.
+ */
 public class SecantCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -20,7 +22,15 @@ public class SecantCalculation {
         MaxIteration = value;
     }
 
+
+    /***
+     * Calculating the root using secant method.
+      * @param Xold this is Xi-1
+     * @param Xcurr this is Xi
+     * @param loops num. of current iteration
+     */
     public static void Secant(BigDecimal Xold, BigDecimal Xcurr, int loops) {
+        if (loops == MaxIteration) return;
         if(BigDecimal.valueOf(SingleEquationParser.
                 Evaluate(Xcurr)).equals(BigDecimal.valueOf(SingleEquationParser.
                 Evaluate(Xold)))){
@@ -41,12 +51,12 @@ public class SecantCalculation {
                 Xcurr + "\nXi+1 = " + Xnew + "\n");
         NonLinearPrinter.Add("Relative Error = " + ea + "\n\n");
 
-        if (ea.compareTo(eps) > 0 & loops < MaxIteration) {
+        if (ea.compareTo(eps) > 0 && loops < MaxIteration) {
             Xold = Xcurr;
             Xcurr = Xnew;
             Secant(Xold, Xcurr, loops + 1);
         } else {
-            if (ea.compareTo(eps) > 0 & loops == MaxIteration) {
+            if (ea.compareTo(eps) > 0 && loops == MaxIteration) {
                 NonLinearPrinter.Add("There is no root");
                 return;
             }

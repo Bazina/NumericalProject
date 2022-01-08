@@ -8,7 +8,9 @@ import com.example.NumericalProject.Printers.SigFigsHandler;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-
+/***
+ * This class calculate fixed point method for non-linear equations.
+ */
 public class FixedPointCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -21,10 +23,15 @@ public class FixedPointCalculation {
         MaxIteration = value;
     }
 
+    /***
+     * Calculating the root using fixed point method.
+     * @param Xcurr this is Xi.
+     * @param loops num. of current iteration.
+     */
     public static void FixedPoint(BigDecimal Xcurr, int loops) {
+        if (loops == MaxIteration) return;
 
         BigDecimal Xnew;
-        System.out.println(Xcurr);
         Xnew = BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr));
 
         ea = ((Xnew.subtract(Xcurr)).divide(Xnew, MathContext.DECIMAL128)).multiply(BigDecimal.valueOf(100)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));

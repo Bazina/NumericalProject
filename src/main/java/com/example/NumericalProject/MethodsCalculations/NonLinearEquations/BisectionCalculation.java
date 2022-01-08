@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import static java.lang.Math.abs;
-
+/***
+ * This class calculate bisection method for non-linear equations.
+ */
 public class BisectionCalculation {
     public static BigDecimal ea = BigDecimal.ONE, eps = BigDecimal.valueOf(0.00001);
     public static int MaxIteration = 50;
@@ -21,8 +22,17 @@ public class BisectionCalculation {
     public static void setMaxIteration(int value) {
         MaxIteration = value;
     }
-
+    /***
+     * Calculating the root using bisection.
+     * @param xl this is the lower bound.
+     * @param xu this is the upper bound.
+     * @param Oldxr this is Xi-1
+     * @param loops num. of current iteration.
+     */
     public static void BiSection(BigDecimal xl, BigDecimal xu, BigDecimal Oldxr, int loops) {
+        if (loops == MaxIteration){
+            return;
+        }
 
         if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
