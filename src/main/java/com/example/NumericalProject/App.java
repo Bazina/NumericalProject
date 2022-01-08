@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class App extends Application {
-    double x,y = 0;
+    double x, y = 0;
 
     @Override
     public void start(Stage primaryStage) throws IOException {

@@ -73,8 +73,9 @@ public class FixedPoint implements Initializable {
 
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
             FixedPointCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
-        if (!Objects.equals(EPS.getText().strip(), "")) FixedPointCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
-        if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
+        if (!Objects.equals(EPS.getText().strip(), ""))
+            FixedPointCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotLine(-10, 10, -10, 10);
 
@@ -84,6 +85,6 @@ public class FixedPoint implements Initializable {
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();
-        SigFigsHandler.Reset() ;
+        SigFigsHandler.Reset();
     }
 }

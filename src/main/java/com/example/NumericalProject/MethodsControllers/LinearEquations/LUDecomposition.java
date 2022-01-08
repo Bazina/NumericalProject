@@ -56,7 +56,7 @@ public class LUDecomposition implements Initializable {
             return;
 
 
-        try{
+        try {
             dummy = MultiEquationsParser.ToEquations(Equations.getText().strip().split("\n"));
         } catch (Exception e) {
             InputHandler.WrongInput("Wrong Data", "Please Write Right Equations");

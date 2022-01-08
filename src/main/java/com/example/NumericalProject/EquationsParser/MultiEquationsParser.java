@@ -15,8 +15,8 @@ public class MultiEquationsParser {
      */
     public static Map<String, ArrayList<BigDecimal>> ToEquations(String[] Input) {
         // Strip all the spaces in the start and end of the string
-        for (int i = 0; i < Input.length ; i++) {
-            Input[i] = Input[i].strip() ;
+        for (int i = 0; i < Input.length; i++) {
+            Input[i] = Input[i].strip();
         }
 
         Map<String, ArrayList<BigDecimal>> linearEqn = new HashMap<>();

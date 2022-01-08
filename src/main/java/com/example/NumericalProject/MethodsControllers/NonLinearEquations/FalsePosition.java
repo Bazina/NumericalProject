@@ -75,8 +75,9 @@ public class FalsePosition implements Initializable {
 
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
             FalsePositionCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
-        if (!Objects.equals(EPS.getText().strip(), "")) FalsePositionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
-        if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
+        if (!Objects.equals(EPS.getText().strip(), ""))
+            FalsePositionCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalFrom), Numbers.ParseDouble(IntervalFrom), 10, -10);
         mathsGraph.plotLine(Numbers.ParseDouble(IntervalTo), Numbers.ParseDouble(IntervalTo), 10, -10);
@@ -86,6 +87,6 @@ public class FalsePosition implements Initializable {
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();
-        SigFigsHandler.Reset() ;
+        SigFigsHandler.Reset();
     }
 }

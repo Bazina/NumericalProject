@@ -75,8 +75,9 @@ public class Secant implements Initializable {
 
         if (!Objects.equals(MaxIterations.getText().strip(), ""))
             SecantCalculation.setMaxIteration(Numbers.ParseInt(MaxIterations));
-        if (!Objects.equals(EPS.getText().strip(), "")) SecantCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
-        if(!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
+        if (!Objects.equals(EPS.getText().strip(), ""))
+            SecantCalculation.setEps(BigDecimal.valueOf(Numbers.ParseDouble(EPS)));
+        if (!Objects.equals(SigFigs.getText().strip(), "")) SigFigsHandler.setSigFigs(Numbers.ParseInt(SigFigs));
 
         mathsGraph.plotDerivative();
 
@@ -86,6 +87,6 @@ public class Secant implements Initializable {
         Output.setText(NonLinearPrinter.getResult());
 
         NonLinearPrinter.Reset();
-        SigFigsHandler.Reset() ;
+        SigFigsHandler.Reset();
     }
 }

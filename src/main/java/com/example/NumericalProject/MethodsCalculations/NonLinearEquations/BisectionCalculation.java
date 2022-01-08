@@ -26,7 +26,7 @@ public class BisectionCalculation {
 
         if (loops != 0 && (eps.compareTo(ea) > 0 || loops >= MaxIteration)) {
             NonLinearPrinter.Add("The Root = " + Oldxr + "\nThe Relative Error = "
-                    + ea +"\nSignificant Figures = " + SigFigsHandler.getSigFigs() +"\nTotal No of Iterations = " + (loops) + "\n");
+                    + ea + "\nSignificant Figures = " + SigFigsHandler.getSigFigs() + "\nTotal No of Iterations = " + (loops) + "\n");
 
             ea = BigDecimal.ONE;
             eps = BigDecimal.valueOf(0.00001);
@@ -34,17 +34,17 @@ public class BisectionCalculation {
             return;
         }
 
-        BigDecimal xr = (xl.add(xu)).divide(BigDecimal.valueOf(2) , MathContext.DECIMAL128).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
-        if(eps.compareTo(xr.abs()) > 0) xr = BigDecimal.ZERO ;
+        BigDecimal xr = (xl.add(xu)).divide(BigDecimal.valueOf(2), MathContext.DECIMAL128).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
+        if (eps.compareTo(xr.abs()) > 0) xr = BigDecimal.ZERO;
 
-        NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\nXu = " + xu+ "\nXl = " +
-                xl + "\nXr = " + xr+ "\n");
+        NonLinearPrinter.Add("#" + (loops + 1) + " Iteration\nXu = " + xu + "\nXl = " +
+                xl + "\nXr = " + xr + "\n");
         if (loops > 0) {
-            if(xr.compareTo(BigDecimal.ZERO) != 0){
-                ea = (xr.subtract(Oldxr).divide(xr , MathContext.DECIMAL128)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
+            if (xr.compareTo(BigDecimal.ZERO) != 0) {
+                ea = (xr.subtract(Oldxr).divide(xr, MathContext.DECIMAL128)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
                 NonLinearPrinter.Add("Relative Error = " + ea + "\n");
-            }else if(xr.subtract(Oldxr).abs().compareTo(eps) < 0){
-                ea = BigDecimal.ZERO ;
+            } else if (xr.subtract(Oldxr).abs().compareTo(eps) < 0) {
+                ea = BigDecimal.ZERO;
                 NonLinearPrinter.Add("Relative Error = " + ea + "\n");
             }
         }
@@ -54,8 +54,8 @@ public class BisectionCalculation {
             BiSection(xl, xr, xr, loops + 1);
         } else if (SingleEquationParser.Evaluate(xr) * SingleEquationParser.Evaluate(xu) <= 0) {
             BiSection(xr, xu, xr, loops + 1);
-        }else {
-            NonLinearPrinter.Add("Total No of Iterations = " + (loops+1) + "\nThere is no Root in This Interval or There is Multiple Roots\n");
+        } else {
+            NonLinearPrinter.Add("Total No of Iterations = " + (loops + 1) + "\nThere is no Root in This Interval or There is Multiple Roots\n");
         }
     }
 }

@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 
 public class SingleEquationParser {
     private static String Equation;
-    private static String RegularBuffer , DerivativeBuffer;
+    private static String RegularBuffer, DerivativeBuffer;
 
     public static void SetEquation(String Input) throws IOException {
-        if(Input.contains("="))Input = HandleEquals(Input).replaceAll(" " , "") ;
+        if (Input.contains("=")) Input = HandleEquals(Input).replaceAll(" ", "");
 
         Runtime rt = Runtime.getRuntime();
         String[] commands = {"python", "C:\\Derivative.py", Input.replaceAll("\\^", "**")};
@@ -21,23 +21,23 @@ public class SingleEquationParser {
         // Read the output from the command
         String s;
         while ((s = stdInput.readLine()) != null) {
-            DerivativeBuffer = s.replaceAll("\\*\\*" , "^").replaceAll("e" , String.valueOf(Math.exp(1))) ;
+            DerivativeBuffer = s.replaceAll("\\*\\*", "^").replaceAll("e", String.valueOf(Math.exp(1)));
         }
-        RegularBuffer = Input.replaceAll("e" , String.valueOf(Math.exp(1)));
+        RegularBuffer = Input.replaceAll("e", String.valueOf(Math.exp(1)));
     }
 
     public static double Evaluate(BigDecimal Value) {
-        return Evaluate(Value , true) ;
+        return Evaluate(Value, true);
     }
 
     public static double EvaluateDerivative(BigDecimal Value) {
-        return Evaluate(Value , false) ;
+        return Evaluate(Value, false);
     }
 
 
-    private static double Evaluate(BigDecimal Value , boolean Regular) {
-        if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value.toPlainString() +")");
-        else Equation = DerivativeBuffer.replaceAll("x", "(" + Value.toPlainString() +")");
+    private static double Evaluate(BigDecimal Value, boolean Regular) {
+        if (Regular) Equation = RegularBuffer.replaceAll("x", "(" + Value.toPlainString() + ")");
+        else Equation = DerivativeBuffer.replaceAll("x", "(" + Value.toPlainString() + ")");
 
         return new Object() {
             int pos = -1, ch;
@@ -104,7 +104,7 @@ public class SingleEquationParser {
                     String func = Equation.substring(startPos, this.pos);
                     x = parseFactor();
                     x = switch (func) {
-                        case "log" -> Math.log(x) ;
+                        case "log" -> Math.log(x);
                         case "sqrt" -> Math.sqrt(x);
                         case "sin" -> Math.sin(x);
                         case "cos" -> Math.cos(x);
@@ -122,9 +122,9 @@ public class SingleEquationParser {
         }.parse();
     }
 
-    private static String HandleEquals(String input){
-        String[] Equation = input.split("=") ;
+    private static String HandleEquals(String input) {
+        String[] Equation = input.split("=");
 
-        return Equation[0]+"-(" +Equation[1]+")"  ;
+        return Equation[0] + "-(" + Equation[1] + ")";
     }
 }

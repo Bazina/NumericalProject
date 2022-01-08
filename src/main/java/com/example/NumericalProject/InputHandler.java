@@ -19,9 +19,9 @@ public class InputHandler {
      * @param title the title of the warning
      * @param msg any instruction to put in the body of the message
      */
-    public static void WrongInput(String title ,String msg){
-        Alert.AlertType type = Alert.AlertType.WARNING ;
-        Alert alert = new Alert(type , msg) ;
+    public static void WrongInput(String title, String msg) {
+        Alert.AlertType type = Alert.AlertType.WARNING;
+        Alert alert = new Alert(type, msg);
 
         //to prevent user's default actions like mouse right-click
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -34,12 +34,12 @@ public class InputHandler {
      * @param Equations the text area to be handled
      * @return boolean false if there is no errors
      */
-    public static Boolean TextArea(TextArea Equations){
-        if(Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().strip().split("\n").length == 1){
-            WrongInput("Missing Data" , "Please Write All Inputs");
-            return true ;
+    public static Boolean TextArea(TextArea Equations) {
+        if (Equations.getText().strip().equalsIgnoreCase("") || Equations.getText().strip().split("\n").length == 1) {
+            WrongInput("Missing Data", "Please Write All Inputs");
+            return true;
         }
-        return false ;
+        return false;
     }
 
     /***
@@ -48,26 +48,26 @@ public class InputHandler {
      * @param Mode it is true when we want integer values and false if wwante double
      * @return boolean false if there is no errors
      */
-    public static Boolean TextField(TextField SigFigs,boolean Mode){
-        double num ;
+    public static Boolean TextField(TextField SigFigs, boolean Mode) {
+        double num;
 
         //if the user didn't write anything then use the default and there is no error
         if (SigFigs.getText().equals("")) return false;
 
         //if the user entered non-numbers like characters
         try {
-            num = Numbers.ParseDouble(SigFigs) ;
-        }catch (Exception e){
-            WrongInput("Wrong Data" , "Please Write all Inputs Correct");
-            return true ;
+            num = Numbers.ParseDouble(SigFigs);
+        } catch (Exception e) {
+            WrongInput("Wrong Data", "Please Write all Inputs Correct");
+            return true;
         }
 
         //if the user entered double-type number then it is an error in case if we want integer
-        if(num % 1 != 0 && Mode){
-            WrongInput("Wrong Data" , "Please Write all Inputs Correct");
+        if (num % 1 != 0 && Mode) {
+            WrongInput("Wrong Data", "Please Write all Inputs Correct");
             return true;
         }
-        return false ;
+        return false;
     }
 
 
@@ -77,9 +77,9 @@ public class InputHandler {
      * @param msg the message to show to user if he didn't make a choice
      * @return boolean false if there is no errors
      */
-    public static Boolean ComboBox(JFXComboBox<String> Select , String msg){
-        if(Select.getValue() == null){
-            WrongInput("Missing Data" , msg);
+    public static Boolean ComboBox(JFXComboBox<String> Select, String msg) {
+        if (Select.getValue() == null) {
+            WrongInput("Missing Data", msg);
             return true;
         }
         return false;
@@ -91,21 +91,21 @@ public class InputHandler {
      * @param Condition the combo box to know the user choice to compare it with the user's input
      * @return boolean false if there is no errors
      */
-    public static Boolean ConditionValue(TextField ConditionValue ,JFXComboBox<String> Condition){
-        double num ;
+    public static Boolean ConditionValue(TextField ConditionValue, JFXComboBox<String> Condition) {
+        double num;
 
         //to check for entering non-numbers value
         try {
-            num = Numbers.ParseDouble(ConditionValue) ;
-        }catch (Exception e){
-            WrongInput("Wrong Data" , "Please Write Consistent Data");
-            return true ;
+            num = Numbers.ParseDouble(ConditionValue);
+        } catch (Exception e) {
+            WrongInput("Wrong Data", "Please Write Consistent Data");
+            return true;
         }
 
         //if the user's choice was iteration then the user should write an integer otherwise is an error
-        if(Condition.getValue().equalsIgnoreCase("iterations")){
-            if(num % 1 != 0){
-                WrongInput("Wrong Data" , "Please Write an Integer in Condition of Iterations");
+        if (Condition.getValue().equalsIgnoreCase("iterations")) {
+            if (num % 1 != 0) {
+                WrongInput("Wrong Data", "Please Write an Integer in Condition of Iterations");
                 return true;
             }
         }
@@ -119,25 +119,25 @@ public class InputHandler {
      * @param Guess the array which will contain the user's input after parsing if correct
      * @return boolean false if there is no errors
      */
-    public static Boolean InitialGuess(TextField InitialGuess , BigDecimal[] Guess){
+    public static Boolean InitialGuess(TextField InitialGuess, BigDecimal[] Guess) {
 
         //check if the number of initial guesses wasn't equal to number of variables
-        if(InitialGuess.getText().strip().split(" ").length != Guess.length-1){
-            WrongInput("Missing Data" , "Please Write All Inputs");
-            return true ;
+        if (InitialGuess.getText().strip().split(" ").length != Guess.length - 1) {
+            WrongInput("Missing Data", "Please Write All Inputs");
+            return true;
         }
 
         //check for entering non-numbers value
-        Guess[0] = BigDecimal.ZERO ;
+        Guess[0] = BigDecimal.ZERO;
         for (int i = 1; i < Guess.length; i++) {
             try {
-                Guess[i] = BigDecimal.valueOf(Double.parseDouble(InitialGuess.getText().strip().split(" ")[i-1])) ;
-            }catch (Exception e){
-                WrongInput("Wrong Data" , "Please Write Consistent Data");
-                return true ;
+                Guess[i] = BigDecimal.valueOf(Double.parseDouble(InitialGuess.getText().strip().split(" ")[i - 1]));
+            } catch (Exception e) {
+                WrongInput("Wrong Data", "Please Write Consistent Data");
+                return true;
             }
         }
 
-        return false ;
+        return false;
     }
 }

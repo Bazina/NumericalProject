@@ -18,21 +18,21 @@ public class MyGraph {
 
     public void plotFunction() {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
-        for (int x = 0; x <= 2000; x+=1) {
-            plotPoint(-range + x*0.1, SingleEquationParser.Evaluate(BigDecimal.valueOf(-range + x*0.1) ), series);
+        for (int x = 0; x <= 2000; x += 1) {
+            plotPoint(-range + x * 0.1, SingleEquationParser.Evaluate(BigDecimal.valueOf(-range + x * 0.1)), series);
         }
         graph.getData().add(series);
     }
 
     public void plotDerivative() {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
-        for (int x = 0; x <= 2000; x+=1) {
-            plotPoint(-range + x*0.1, SingleEquationParser.EvaluateDerivative(BigDecimal.valueOf(-range + x*0.1) ), series);
+        for (int x = 0; x <= 2000; x += 1) {
+            plotPoint(-range + x * 0.1, SingleEquationParser.EvaluateDerivative(BigDecimal.valueOf(-range + x * 0.1)), series);
         }
         graph.getData().add(series);
     }
 
-    public void plotLine(double X1 , double X2 , double Y1 , double Y2) {
+    public void plotLine(double X1, double X2, double Y1, double Y2) {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
 
         plotPoint(X1, Y1, series);
@@ -45,7 +45,6 @@ public class MyGraph {
                            final XYChart.Series<Double, Double> series) {
         series.getData().add(new XYChart.Data<>(x, y));
     }
-
 
 
     public void clear() {
