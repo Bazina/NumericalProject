@@ -33,7 +33,7 @@ public class FixedPointCalculation {
         if (loops == MaxIteration) return;
 
         BigDecimal Xnew;
-        Xnew = BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr));
+        Xnew = BigDecimal.valueOf(SingleEquationParser.Evaluate(Xcurr)).round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
 
         ea = ((Xnew.subtract(Xcurr)).divide(Xnew, MathContext.DECIMAL128)).multiply(BigDecimal.valueOf(100)).abs().round(new MathContext(SigFigsHandler.getSigFigs(), RoundingMode.HALF_UP));
 
